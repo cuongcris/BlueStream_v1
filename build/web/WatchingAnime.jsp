@@ -39,8 +39,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="anime__video__player">
+                        <c:set var="list" value ="${requestScope.Ep}" />
+
                         <video id="player" playsinline controls data-poster="./videos/anime-watch.jpg">
-                            <source src="videos/1.mp4" type="video/mp4" />
+                            <source src="${list.movieLink}" type="video/mp4" />
                             <!-- Captions are optional -->
                             <track kind="captions" label="English captions" src="#" srclang="en" default />
                         </video>

@@ -68,7 +68,7 @@
         items: 1,
         dots: true,
         nav: true,
-        navText: ["<span class='arrow_carrot-left'></span>", "<span class='arrow_carrot-right'></span>"],
+        navText: [ "<i class='fa-solid fa-chevron-left' style='transform: rotate(-45deg);'></i>",  "<i class='fa-solid fa-chevron-right' style='transform: rotate(-45deg);'></i>"],
         animateOut: 'fadeOut',
         animateIn: 'fadeIn',
         smartSpeed: 1200,

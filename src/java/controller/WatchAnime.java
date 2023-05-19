@@ -19,22 +19,16 @@ import java.util.List;
  *
  * @author Admin
  */
-public class HomeServlet extends HttpServlet {
+public class WatchAnime extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         MovieDAO dao = new MovieDAO();
-        List<Movie> result = dao.getAllMovie();
-        req.setAttribute("TrendingMovie", result);
-        req.getRequestDispatcher("Home.jsp").forward(req, resp);
-        
+        String id = req.getParameter("id");
+        req.setAttribute("Ep", dao.getEpbyID(id));
+        req.getRequestDispatcher("WatchingAnime.jsp").forward(req, resp);
     }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-    }
-    
-    
    
+   
+
 }

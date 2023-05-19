@@ -4,9 +4,25 @@
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>controller.HomeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DetailAnime</servlet-name>
+        <servlet-class>controller.DetailAnime</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>WatchAnime</servlet-name>
+        <servlet-class>controller.WatchAnime</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailAnime</servlet-name>
+        <url-pattern>/DetailAnime</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WatchAnime</servlet-name>
+        <url-pattern>/WatchAnime</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
