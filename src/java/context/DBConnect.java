@@ -13,22 +13,20 @@ import java.sql.SQLException;
  * @author Admin
  */
 public class DBConnect {
-    
-    public static Connection makeConnection() throws ClassNotFoundException {
 
+      public static Connection makeConnection() throws ClassNotFoundException, SQLException {
         try {
-            String serverName = "localhost";
-            String databaseName = "QL_BlueStream";
-            String url = "jdbc:sqlserver://" + serverName + ";databaseName=" + databaseName + ";encrypt=false";
-            String username = "sa";
-            String password = "sa";
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con = (Connection) DriverManager.getConnection(url, username, password);
-            return con;
-        } catch (SQLException e) {
-            e.getMessage();
-            return null;
-        }
+            String url = "jdbc:postgresql://db.fncwirfhmyudeqvocfyh.supabase.co:5432/postgres";
+            String username = "postgres";
+            String password = "Bluestream123@";
 
+            Class.forName("org.postgresql.Driver");
+            Connection con = DriverManager.getConnection(url, username, password);
+            System.out.println("Connect Successful.");
+            return con;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

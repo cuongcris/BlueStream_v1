@@ -12,12 +12,11 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/BlueFashion/web/Home.jsp</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/BlueFashion/src/java/controller/WatchAnime.java</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/BlueFashion/src/java/entity/Movie.java</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/BlueFashion/src/java/dao/MovieDAO.java</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/BlueFashion/web/DetailAnime.jsp</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/BlueFashion/src/java/controller/HomeServlet.java</file>
+            <file>file:/C:/Users/Admin/Desktop/test/BlueStream_v1/src/java/controller/DetailAnime.java</file>
+            <file>file:/C:/Users/Admin/Desktop/test/BlueStream_v1/src/java/dao/AccountDAO.java</file>
+            <file>file:/C:/Users/Admin/Desktop/test/BlueStream_v1/src/java/context/DBConnect.java</file>
+            <file>file:/C:/Users/Admin/Desktop/test/BlueStream_v1/web/WatchingAnime.jsp</file>
+            <file>file:/C:/Users/Admin/Desktop/test/BlueStream_v1/src/java/controller/ChangeProfileServlet.java</file>
         </group>
     </open-files>
 </project-private>

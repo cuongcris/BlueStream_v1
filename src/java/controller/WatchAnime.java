@@ -6,6 +6,7 @@
 package controller;
 
 import dao.MovieDAO;
+import entity.Episodes;
 import entity.Movie;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,11 +25,16 @@ public class WatchAnime extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         MovieDAO dao = new MovieDAO();
-        String id = req.getParameter("id");
-        req.setAttribute("Ep", dao.getEpbyID(id));
+        String movieID = req.getParameter("id");
+        String epNumString = req.getParameter("epNum");
+        int epNum = Integer.parseInt(epNumString);
+        Episodes episode = dao.getEpisodes(movieID,epNum);
+        req.setAttribute("episode", episode);
+        req.setAttribute("totalEp", dao.getEpisodeCountByMovieId(movieID));
         req.getRequestDispatcher("WatchingAnime.jsp").forward(req, resp);
+    
     }
-   
+  
    
 
 }

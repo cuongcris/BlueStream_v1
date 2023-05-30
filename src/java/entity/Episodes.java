@@ -9,13 +9,13 @@ package entity;
  * @author Admin
  */
 public class Episodes {
-    private int epId;
+    private String epId;
     private String movieId;
     private int epNum;
     private int duration;
     private String movieLink;
 
-    public Episodes(int epId, String movieId, int epNum, int duration, String movieLink) {
+    public Episodes(String epId, String movieId, int epNum, int duration, String movieLink) {
         this.epId = epId;
         this.movieId = movieId;
         this.epNum = epNum;
@@ -23,11 +23,11 @@ public class Episodes {
         this.movieLink = movieLink;
     }
 
-    public int getEpId() {
+    public String getEpId() {
         return epId;
     }
 
-    public void setEpId(int epId) {
+    public void setEpId(String epId) {
         this.epId = epId;
     }
 

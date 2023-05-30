@@ -24,8 +24,12 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         MovieDAO dao = new MovieDAO();
-        List<Movie> result = dao.getAllMovie();
-        req.setAttribute("TrendingMovie", result);
+        req.setAttribute("TrendingMovie",  dao.getAllMovie());
+        req.setAttribute("newReleaseMovie",  dao.getListNewReleaseMovie());
+        req.setAttribute("popularMovie",  dao.getListPopularMovie());
+        req.setAttribute("LiveActionMovie",  dao.getListLiveActionMovie());
+        req.setAttribute("randomMovie",  dao.getListRandomMovie());
+
         req.getRequestDispatcher("Home.jsp").forward(req, resp);
         
     }
