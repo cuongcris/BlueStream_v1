@@ -10,6 +10,10 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -32,6 +36,9 @@ public class AccountDAO {
             while (rs.next()) {
                 return true;
             }
+            conn.close();
+            ps.close();
+            rs.close();
         } catch (Exception e) {
         }
 
@@ -58,13 +65,16 @@ public class AccountDAO {
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
-                        rs.getDate(6),
+                        rs.getString(6),
                         rs.getString(7),
                         rs.getString(8),
                         rs.getInt(9),
                         rs.getString(10));
                 return a;
             }
+            conn.close();
+            ps.close();
+            rs.close();
         } catch (Exception e) {
         }
         return null;
@@ -81,6 +91,9 @@ public class AccountDAO {
             while (rs.next()) {
                 return false;
             }
+            conn.close();
+            ps.close();
+            rs.close();
         } catch (Exception e) {
         }
 
@@ -89,19 +102,21 @@ public class AccountDAO {
 
     public void addNewAccount(Account acc) {
         try {
-            String query = "insert into \"tbAccount\" ( \"UserName\", \"Password\", \"Email\", \"FullName\",\"DateOfBirth\",\"Phone\", \"Image\", \"Role\") values (?, ?, ?, ?, ?, ?,?,?)";
+            String query = "insert into \"tbAccount\" ( \"UserName\", \"Password\", \"Email\", \"FullName\",\"YearOfBirth\",\"Phone\", \"Image\", \"Role\") values (?, ?, ?, ?, ?, ?,?,?)";
             conn = new DBConnect().makeConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, acc.getUserName());
             ps.setString(2, acc.getPassword());
             ps.setString(3, acc.getEmail());
             ps.setString(4, null);
-            ps.setDate(5, (Date) acc.getDateOfBirth());
+            ps.setString(5, null);
             ps.setString(6, null);
             ps.setString(7, "https://nhadepso.com/wp-content/uploads/2023/03/cap-nhat-50-hinh-anh-dai-dien-facebook-mac-dinh-dep-doc-la_17.jpg");
             ps.setInt(8, 2);
             rs = ps.executeQuery();
-
+            conn.close();
+            ps.close();
+            rs.close();
         } catch (Exception e) {
             System.err.println(e);
         }
@@ -117,50 +132,56 @@ public class AccountDAO {
             while (rs.next()) {
                 return false;
             }
+            conn.close();
+            ps.close();
+            rs.close();
         } catch (Exception e) {
             System.err.println(e);
         }
         return true;
     }
 
-    public void updateInfor(String userName, String fName, String phone, Date dateOfBith, String avatar) {
+    public void updateInfor(String userName, String fName, String phone, String yearOfBirth, String avatar) {
         try {
             String query = "UPDATE \"tbAccount\" "
                     + " SET \"FullName\" = ?,"
-                    + " \"dateOfBith\" = ?,"
+                    + " \"YearOfBirth\" = ?,"
                     + "\"Image\" = ?,"
                     + " \"Phone\" = ? "
                     + " WHERE \"UserName\" = ?";
-            
+
             conn = new DBConnect().makeConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, fName);
-            ps.setDate(2, dateOfBith);
+            ps.setString(2, yearOfBirth);
             ps.setString(3, avatar);
             ps.setString(4, phone);
             ps.setString(5, userName);
-            
+
             rs = ps.executeQuery();
-            
+            conn.close();
+            ps.close();
+            rs.close();
         } catch (Exception e) {
 
         }
     }
-    
+
     public void updatePass(String userName, String password) {
         try {
             String query = "UPDATE \"tbAccount\" "
                     + " SET \"Password\" = ?"
                     + " WHERE \"UserName\" = ?";
-            
+
             conn = new DBConnect().makeConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, password);
             ps.setString(2, userName);
 
-            
             rs = ps.executeQuery();
-            
+            conn.close();
+            ps.close();
+            rs.close();
         } catch (Exception e) {
 
         }
@@ -168,10 +189,9 @@ public class AccountDAO {
 
     public static void main(String[] args) {
         AccountDAO ac = new AccountDAO();
- 
-        Account a = new Account("Admin", "123a","Cuongnmde160269@fpt.edu.vn");
-        ac.addNewAccount(a);
- 
+
+        Account a = new Account("Admin", "123a", "Cuongnmde160269@fpt.edu.vn");
+
     }
 
 }

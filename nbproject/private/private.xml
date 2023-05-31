@@ -12,11 +12,9 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Admin/Desktop/test/BlueStream_v1/src/java/controller/DetailAnime.java</file>
-            <file>file:/C:/Users/Admin/Desktop/test/BlueStream_v1/src/java/dao/AccountDAO.java</file>
             <file>file:/C:/Users/Admin/Desktop/test/BlueStream_v1/src/java/context/DBConnect.java</file>
-            <file>file:/C:/Users/Admin/Desktop/test/BlueStream_v1/web/WatchingAnime.jsp</file>
-            <file>file:/C:/Users/Admin/Desktop/test/BlueStream_v1/src/java/controller/ChangeProfileServlet.java</file>
+            <file>file:/C:/Users/Admin/Desktop/test/BlueStream_v1/web/Home.jsp</file>
+            <file>file:/C:/Users/Admin/Desktop/test/BlueStream_v1/web/img/slideshow/yourname.jpg</file>
         </group>
     </open-files>
 </project-private>

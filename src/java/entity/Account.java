@@ -16,7 +16,7 @@ public class Account {
     private String userName;
     private String password;
     private String email;
-    private Date dateOfBirth;
+    private String yearOfBirth;
     private String phone;
     private String fullName;
     private String image;
@@ -32,11 +32,11 @@ public class Account {
         this.email = email;
     }
 
-    public Account(String userName, String password, String email, Date dateOfBirth, String phone, String fullName, String image, int role, String user_id_google) {
+    public Account(String userName, String password, String email, String yearOfBirth, String phone, String fullName, String image, int role, String user_id_google) {
         this.userName = userName;
         this.password = password;
         this.email = email;
-        this.dateOfBirth = dateOfBirth;
+        this.yearOfBirth = yearOfBirth;
         this.phone = phone;
         this.fullName = fullName;
         this.image = image;
@@ -44,13 +44,13 @@ public class Account {
         this.user_id_google = user_id_google;
     }
 
-    public Account(String userID, String userName, String password, String email, String fullName, Date dateOfBirth, String phone, String image, int role, String user_id_google) {
+    public Account(String userID, String userName, String password, String email, String fullName, String yearOfBirth, String phone, String image, int role, String user_id_google) {
         this.userID = userID;
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.fullName = fullName;
-        this.dateOfBirth = dateOfBirth;
+        this.yearOfBirth = yearOfBirth;
         this.phone = phone;
         this.image = image;
         this.role = role;
@@ -89,13 +89,15 @@ public class Account {
         this.email = email;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    public String getYearOfBirth() {
+        return yearOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setYearOfBirth(String yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
     }
+
+    
 
    
 
@@ -141,7 +143,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" + "userID=" + userID + ", userName=" + userName + ", password=" + password + ", email=" + email + ", dateOfBirth=" + dateOfBirth + ", phone=" + phone + ", fullName=" + fullName + ", image=" + image + ", role=" + role + ", user_id_google=" + user_id_google + '}';
+        return "Account{" + "userID=" + userID + ", userName=" + userName + ", password=" + password + ", email=" + email + ", yearOfBirth=" + yearOfBirth + ", phone=" + phone + ", fullName=" + fullName + ", image=" + image + ", role=" + role + ", user_id_google=" + user_id_google + '}';
     }
 
 }

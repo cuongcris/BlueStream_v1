@@ -8,9 +8,9 @@
 
     <body>
         <!-- Page Preloder -->
-        <div id="preloder">
+<!--        <div id="preloder">
             <div class="loader"></div>
-        </div>
+        </div>-->
         <header class="header">
             <div class="container">
                 <div class="row">
@@ -117,9 +117,9 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                        <label class="profile_details_text">Age:</label>
-                                                        <input type="text" name="age" class="form-control" value="${account.age}"
-                                                               pattern="^[1-9]\d*$" title="Please enter a number bigger than 0" >
+                                                        <label class="profile_details_text">Date Of Birth</label>
+                                                        <input type="text" name="yearOfBirth" class="form-control" value="${account.yearOfBirth}"
+                                                                pattern="^(19[0-9]{2}|20[0-2][0-3])$" title="Invalid year" >
                                                     </div>
                                                 </div>
 

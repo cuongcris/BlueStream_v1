@@ -56,12 +56,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="hero__items set-bg" data-setbg="img/slideshow/dbs.jpg">
+                    <div class="hero__items set-bg" data-setbg="img/slideshow/yourname1.jpg">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="hero__text">
                                     <div class="label">Fantasy</div>
-                                    <h2>Dragon Ball Supper 2018</h2>
+                                    <h2>Your Name</h2>
                                     <p>After 30 days of travel across the world...</p>
                                     <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
                                 </div>
