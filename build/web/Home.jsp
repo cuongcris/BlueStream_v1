@@ -4,7 +4,7 @@
     <head>
         <%@include file="Head.jsp" %>
         <title>Blue Stream - Home</title>
-        
+        <%@include file="Advertisement.jsp" %>
     </head>
 
     <body>
@@ -261,6 +261,17 @@
                     <!------------------------------------------------top view------------------->
 
                     <div class="col-lg-4 col-md-6 col-sm-8">
+                        
+                        <c:if test="${account == null || sessionScope.account.role == 2}">
+                                <div id="overlay" onclick="redirectToPage()"></div>
+                                
+                                <div class="product__sidebar__view">
+                                    <a href="https://www.honda.com.vn/xe-may/san-pham" target="_blank"> 
+                                        <img src="https://media.giphy.com/media/26ybwfWJf8qovbRkY/source.gif" alt="alt"/>
+                                    <a>
+                                </div>
+                            </c:if>
+                        
                         <div class="product__sidebar">
                             <div class="product__sidebar__view">
                                 <div class="section-title">
@@ -406,7 +417,27 @@
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
 
-
+        <style>
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.00001);
+            z-index: 9998;
+            cursor: pointer;
+        }
+        </style>
+        
+        <script>
+            function redirectToPage() {
+                var overlay = document.getElementById("overlay");
+                overlay.style.display = "none";
+                var newTab = window.open("https://b88-game-danh-bai-online.softonic.vn/iphone", "_blank");
+                newTab.focus();
+            }
+        </script>
     </body>
 
 </html>

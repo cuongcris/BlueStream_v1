@@ -6,7 +6,6 @@ package controller;
 
 import dao.AccountDAO;
 import entity.Account;
-import entity.OTP;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -19,7 +18,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author ADMIN
  */
-public class ChangePassServlet extends HttpServlet {
+public class CheckOTPChangePass extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +37,10 @@ public class ChangePassServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ChangePassServlet</title>");
+            out.println("<title>Servlet CheckOTPChangePass</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ChangePassServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CheckOTPChangePass at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -73,51 +72,45 @@ public class ChangePassServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        PrintWriter pr = response.getWriter();
+        
+        String otp1_get = request.getParameter("otp1");
+        String otp2_get = request.getParameter("otp2");
+        String otp3_get = request.getParameter("otp3");
+        String otp4_get = request.getParameter("otp4");
+        String otp5_get = request.getParameter("otp5");
+        String otp6_get = request.getParameter("otp6");
 
-        try {
-            Encode en = new Encode();
-            String cur_pass = en.encode(request.getParameter("cur_pass"));
-            String new_pass = request.getParameter("new_pass");
-            String new_pass1 = request.getParameter("new_pass1");
+        String otp_get = "" + otp1_get + otp2_get + otp3_get + otp4_get + otp5_get + otp6_get;
 
-            Account ac = new Account();
-            HttpSession session = request.getSession();
-            ac = (Account) session.getAttribute("account");
-            String old_pass_sess = ac.getPassword();
-            String username = ac.getUserName();
+        HttpSession session = request.getSession();
+        String otp_send = (String) session.getAttribute("otp_session");
 
-            if (cur_pass.equals(old_pass_sess) == false) {
-                request.setAttribute("error_mess1", "<div class=\"Error\">\n"
-                        + "                                                    <p>Wrong current Password</p>\n"
-                        + "                                                </div>");
-                request.getRequestDispatcher("ChangePass.jsp").forward(request, response);
-            } else {
-                if (new_pass.equals(new_pass1) == false) {
-                    request.setAttribute("error_mess", "<div class=\"Error\">\n"
-                            + "                                                    <p>New Password and Confirm Password are different!!</p>\n"
-                            + "                                                </div>");
+        if (otp_send.equals(otp_get)) {
+            
+            String pass = (String) session.getAttribute("newPass");
+            String username = (String) session.getAttribute("username");
+
+            AccountDAO dao = new AccountDAO();
+            
+            dao.updatePass(username, pass);
+
+            Account a = dao.CheckLogin(username, pass);
+
+            session.setAttribute("account", a);
+
+            request.setAttribute("finish_messe", "<div class=\"col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-12 col-xs-12 finish_mess\">\n"
+                            + "                                    <Center>\n"
+                            + "                                        <h4>Change Password successfully!!</h4>\n"
+                            + "                                    </Center>\n"
+                            + "                                </div>");
+
                     request.getRequestDispatcher("ChangePass.jsp").forward(request, response);
-                } else {
-                    String email = ac.getEmail();
-
-                    OTP otp = new OTP();
-                    String otp_send = otp.getOTP();
-
-                    SendMail sm = new SendMail();
-                    sm.sendMailOTP(email, otp_send);
-
-                    String pass_encode = en.encode(new_pass);
-                    session.setAttribute("otp_session", otp_send);
-                    session.setAttribute("newPass", pass_encode);
-                    session.setAttribute("username", username);
-
-                    request.getRequestDispatcher("CheckOTPChangePass.jsp").forward(request, response);
-                }
-            }
-        } catch (Exception e) {
-
+        }else{
+            request.setAttribute("error_Code", "<div class=\"error-text\">Error!!Wrong OTP code.</div>");
+            request.getRequestDispatcher("CheckOTP.jsp").forward(request, response);
         }
-
     }
 
     /**

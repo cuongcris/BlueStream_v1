@@ -40,7 +40,7 @@
                     <div class="col-lg-3">
                         <div class="anime__details__pic set-bg" data-setbg="${M.movieBanner}">
                             <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                            <div class="view"><i class="fa fa-eye"></i> ${M.movieView}</div>
+                            <div class="view"><i class="fa fa-eye"></i> ${format.formatNumber(M.movieView)}</div>
                         </div>
                     </div>
                     <div class="col-lg-9">
@@ -76,7 +76,7 @@
                                             
                                             <li><span>Duration:</span> 24 min/ep</li>
                                             <li><span>Quality:</span> HD</li>
-                                            <li><span>Views:</span> ${M.movieView}</li>
+                                            <li><span>Views:</span> ${format.formatNumber(M.movieView)}</li>
                                         </ul>
                                     </div>
                                 </div>

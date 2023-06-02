@@ -5,7 +5,7 @@
         <%@include file="Head.jsp" %>
         <title>Blue Stream | Watching Anime</title>
 
-
+        <%@include file="Advertisement.jsp" %>
     </head>
 
     <body>
@@ -46,15 +46,25 @@
 
                         <div class="anime__details__episodes">
                             <div class="section-title">
-                                <h5>${episode.epNum}</h5>
+                                <h5>Episode:</h5>
                             </div>
-                            
-                                <c:forEach var="i" begin="1" end="${totalEp}">
-                                        <a href="WatchAnime?id=${episode.movieId}&epNum=${i}">
-                                            ${i}
-                                        </a>
-                                </c:forEach>
-                           
+
+                            <c:forEach var="i" begin="1" end="${totalEp}">
+
+
+                                <c:if test="${Integer.parseInt(epNumShow) == i}">
+                                    <a href="WatchAnime?id=${episode.movieId}&epNum=${i}" style="background: #e61b1b; font-weight: 900;">
+                                        ${i}
+                                    </a>
+                                </c:if>
+                                
+                                <c:if test="${Integer.parseInt(epNumShow) != i}">
+                                    <a href="WatchAnime?id=${episode.movieId}&epNum=${i}" style="font-weight: 900;">
+                                        ${i}
+                                    </a>
+                                </c:if>
+                            </c:forEach>
+
                         </div>
 
                     </div>

@@ -59,6 +59,7 @@
                         <div class="breadcrumb__links">
                             <a href="home"><i class="fa fa-home"></i> Home</a>
                             <a href="profile.jsp">Profile</a>
+                                <a href="ChangePass.jsp">Change Password</a>
                         </div>
                     </div>
                 </div>
@@ -71,10 +72,15 @@
                         <div class="col-lg-3">
 
                             <div class="anime__details__pic set-bg">
-                                <img style="width: 400px; height: 250px; border-radius: 1000px" src="${account.image}" alt="${account.image}"/>
+                                <img style="width: 400px; height: 250px; border-radius: 1000px" src="${account.image}" alt="avatar"
+                                     onerror="this.src = 'https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061131_1280.png';"
+                                     />
                                 <div class="infor_button">
                                     <form action="logout" method="post">
                                         <span><button type="submit" class="btn btn-primary btn-logout">Logout</button></span>
+                                    </form>
+                                    <form action="" method="post">
+                                        <span><button type="submit" class="btn btn-primary btn-logout"><a href="profile.jsp" >Profile</a></button></span>
                                     </form>
                                 </div>
                             </div>
@@ -85,6 +91,9 @@
                                 <div class="anime__details__title">
                                     <h3>Change Password:</h3>
                                 </div>
+                                
+                                ${finish_messe}
+                                
                                 <form action="changepass" method="Post">
                                     <div class="anime__details__widget">
                                         <div class="container">
@@ -175,7 +184,7 @@
 
         .infor_button{
             margin-top: 30px;
-            margin-left: 96px;
+            margin-left: 10px;
         }
 
         .infor_button .btn-logout:hover{
@@ -191,6 +200,11 @@
             margin-left: 200px;
             border: 2px solid white;
         }
+        
+        .finish_mess h4{
+            color: #16f716;
+            font-weight: 800;
+        }
 
         .Save_btn:hover{
             background: blue;
@@ -198,6 +212,10 @@
 
         .profile_details_text{
             margin-top: 10px;
+        }
+        
+        .infor_button a{
+            color: white;
         }
 
         .Error{

@@ -29,6 +29,7 @@ public class WatchAnime extends HttpServlet {
         String epNumString = req.getParameter("epNum");
         int epNum = Integer.parseInt(epNumString);
         Episodes episode = dao.getEpisodes(movieID,epNum);
+        req.setAttribute("epNumShow", epNum);
         req.setAttribute("episode", episode);
         req.setAttribute("totalEp", dao.getEpisodeCountByMovieId(movieID));
         req.getRequestDispatcher("WatchingAnime.jsp").forward(req, resp);

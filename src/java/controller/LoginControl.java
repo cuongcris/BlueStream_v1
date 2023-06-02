@@ -66,16 +66,11 @@ public class LoginControl extends HttpServlet {
                 response.addCookie(passwordCookie);
             }
 
-            if (a.getRole() == 1) {
-                HttpSession session = request.getSession();
-                session.setAttribute("account", a);
-                response.sendRedirect("admin");
-            } else {
                 HttpSession session = request.getSession();
                 session.setAttribute("account", a);
                 response.sendRedirect("home");
-            }
-        } catch (Exception e) {
+          
+    } catch (Exception e) {
         }
     }
 }

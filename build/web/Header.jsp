@@ -1,13 +1,13 @@
 <!-- Header Section Begin -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="controller.Format" %>
-    <jsp:useBean id="format" class="controller.Format" />
+<jsp:useBean id="format" class="controller.Format" />
 <header class="header">
     <div class="container">
         <div class="row" style="width: 100%;">
             <div class="col-lg-2">
                 <div class="header__logo">
-                    <a href="home">
+                    <a href="./Home.jsp">
                         <img src="img/blueIcon.png" alt="" >
                     </a>
                 </div>
@@ -39,26 +39,45 @@
                     <span>
                         <a href="#" class="search-switc h"><i class="fa-solid fa-magnifying-glass"></i></a>
                     </span>
-                        <c:if test="${account == null}">
+                    <c:if test="${account == null}">
                         <span class="infor"> 
                             <a href="Login.jsp"><i class="fa-regular fa-user"></i> Login</a>
-                            
+
                         </span>
 
                     </c:if>
+
                     <c:if test="${account != null}">
-                        <span class="infor">
-                            <a href="profile.jsp"><i class="fa-regular fa-user"></i>  ${sessionScope.account.userName.toUpperCase()}</a>
-                            
-                        </span>              
+
+                        <c:choose>
+                            <c:when test="${sessionScope.account.role == 0}">
+                                <span class="infor">
+                                    <a href="profile.jsp" style="color: red;">  ${sessionScope.account.userName.toUpperCase()}</a>      
+                                </span> 
+                            </c:when>
+
+                            <c:when test="${sessionScope.account.role == 1}">
+                                <span class="infor">
+                                    <a href="profile.jsp" style="color: yellow;">  ${sessionScope.account.userName.toUpperCase()}</a>      
+                                </span> 
+                            </c:when>
+
+                            <c:otherwise>
+                                <span class="infor">
+                                    <a href="profile.jsp">  ${sessionScope.account.userName.toUpperCase()}</a>      
+                                </span>  
+                            </c:otherwise>
+                        </c:choose>
+
+
                     </c:if>
                 </div>
             </div>
         </div>
-        
+
     </div>
-    
-    <style> 
+
+    <style>
         .infor{
             color: white;
             margin-left: 30px;

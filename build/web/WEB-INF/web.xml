@@ -40,6 +40,10 @@
         <servlet-name>ChangePassServlet</servlet-name>
         <servlet-class>controller.ChangePassServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckOTPChangePass</servlet-name>
+        <servlet-class>controller.CheckOTPChangePass</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>ChangePassServlet</servlet-name>
         <url-pattern>/changepass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckOTPChangePass</servlet-name>
+        <url-pattern>/checkotpchangepass</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
