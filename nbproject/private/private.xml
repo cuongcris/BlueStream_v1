@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
+        <file>
+            <url>src/java/controller/CommentServlet.java</url>
+            <bookmark id="2">
+                <name/>
+                <line>50</line>
+                <key/>
+            </bookmark>
+        </file>
         <file>
             <url>web/DetailAnime.jsp</url>
             <bookmark id="1">
@@ -12,11 +20,15 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/SWP/BlueStream_v1/src/java/controller/WatchAnime.java</file>
-            <file>file:/D:/SWP/BlueStream_v1/src/java/entity/Movie.java</file>
-            <file>file:/D:/SWP/BlueStream_v1/web/WatchingAnime.jsp</file>
-            <file>file:/D:/SWP/BlueStream_v1/src/java/dao/MovieDAO.java</file>
-            <file>file:/D:/SWP/BlueStream_v1/src/java/entity/Episodes.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/FA23/SWP391/BlueStream/BlueStream_v1/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/ADMIN/Desktop/FA23/SWP391/BlueStream/BlueStream_v1/src/java/controller/addCommentServlet.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/FA23/SWP391/BlueStream/BlueStream_v1/src/java/dao/AccountDAO.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/FA23/SWP391/BlueStream/BlueStream_v1/src/java/google/GoogleUtils.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/FA23/SWP391/BlueStream/BlueStream_v1/web/WatchingAnime.jsp</file>
+            <file>file:/C:/Users/ADMIN/Desktop/FA23/SWP391/BlueStream/BlueStream_v1/src/java/entity/Episodes.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/FA23/SWP391/BlueStream/BlueStream_v1/src/java/dao/CommentDAO.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/FA23/SWP391/BlueStream/BlueStream_v1/src/java/dao/MovieDAO.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/FA23/SWP391/BlueStream/BlueStream_v1/web/DetailAnime.jsp</file>
         </group>
     </open-files>
 </project-private>

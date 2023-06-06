@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="controller.Format" %>
 <jsp:useBean id="format" class="controller.Format" />
+<jsp:useBean id="dao" class="dao.AccountDAO" />
 <header class="header">
     <div class="container">
         <div class="row" style="width: 100%;">
@@ -12,7 +13,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-7">
+            <div class="col-lg-7">s
                 <div class="header__nav">
                     <nav class="header__menu mobile-menu">
                         <ul>

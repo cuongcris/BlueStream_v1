@@ -1,4 +1,7 @@
+<%@page import="java.util.*"%>
+<%@ page import="java.time.LocalDate" %>
 <!DOCTYPE html>
+
 <html lang="zxx">
 
     <head>
@@ -57,7 +60,7 @@
                                         ${i}
                                     </a>
                                 </c:if>
-                                
+
                                 <c:if test="${Integer.parseInt(epNumShow) != i}">
                                     <a href="WatchAnime?id=${episode.movieId}&epNum=${i}" style="font-weight: 900;">
                                         ${i}
@@ -75,69 +78,65 @@
                             <div class="section-title">
                                 <h5>Reviews ${totalEp}</h5>
                             </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-1.jpg" alt="">
+
+                            <c:set var="list" value ="${commentList}" />
+                            <c:forEach var="dto" items ="${commentList}" >
+                                <div class="anime__review__item">
+                                    <div class="anime__review__item__pic">
+                                        <c:if test="${dao.getAvatarByID(dto.useID) == null}">
+                                            <img src="https://nhadepso.com/wp-content/uploads/2023/03/cap-nhat-50-hinh-anh-dai-dien-facebook-mac-dinh-dep-doc-la_17.jpg" alt="">
+                                        </c:if>
+
+                                        <c:if test="${dao.getAvatarByID(dto.useID) != null}">
+                                            <img src="${dao.getAvatarByID(dto.useID)}" alt="">
+                                        </c:if>
+                                    </div>
+                                    <div class="anime__review__item__text">
+                                        <h6>${dao.getUseNameByID(dto.useID)} - <span>${dto.time}</span>
+                                        </h6>
+                                        <p> ${dto.commentContent}</p>
+                                    </div>
                                 </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Chris Curry - <span>1 Hour ago</span></h6>
-                                    <p> hello</p>
-                                </div>
-                            </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-2.jpg" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-                                    <p>Finally it came out ages ago</p>
-                                </div>
-                            </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-3.jpg" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Admin - <span>20 Hour ago</span></h6>
-                                    <p>Where is the episode 15 ? Slow update! Tch</p>
-                                </div>
-                            </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-4.jpg" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Chris Curry - <span>1 Hour ago</span></h6>
-                                    <p>whachikan Just noticed that someone categorized this as belonging to the genre
-                                        "demons" LOL</p>
-                                </div>
-                            </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-5.jpg" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-                                    <p>Finally it came out ages ago</p>
-                                </div>
-                            </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-6.jpg" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Louis Tyler - <span>20 Hour ago</span></h6>
-                                    <p>Where is the episode 15 ? Slow update! Tch</p>
-                                </div>
-                            </div>
+                            </c:forEach>
+
+                            <c:if test="${commentList == null}">
+                                <h2>No record is matched!!!</h2>
+                            </c:if>
                         </div>
                         <div class="anime__details__form">
                             <div class="section-title">
                                 <h5>Your Comment</h5>
                             </div>
-                            <form action="#">
-                                <textarea placeholder="Your Comment"></textarea>
-                                <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
+                            <form action="addComment" method="post">
+                                <input hidden name="id" value="${sessionScope.movieID}"/>
+                                <input hidden name="epNum" value="${sessionScope.epNum}"/>
+                                <c:if test="${sessionScope.account!=null }"> 
+
+                                    <textarea placeholder="Your Comment" name="content"></textarea>
+                                    <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
+                                </c:if>
+
+                                <c:if test="${sessionScope.account == null }"> 
+
+                                    <textarea placeholder="Your Comment"></textarea>
+                                    <button type="button" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-location-arrow"></i> Review</button>
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Error</h5>                                            
+                                                </div>
+                                                <div class="modal-body">
+                                                    You need to be logged in to comment!
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button onclick="window.location = 'Login.jsp'" type="button" class="btn btn-primary">Login</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:if>                              
                             </form>
                         </div>
                     </div>

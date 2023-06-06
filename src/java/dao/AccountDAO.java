@@ -36,13 +36,101 @@ public class AccountDAO {
             while (rs.next()) {
                 return true;
             }
+          
+        } catch (Exception e) {
+        }finally{
+           
+            try {
+                  conn.close();
+                ps.close();
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+
+        return false;
+    }
+
+    public String getUseNameByID(String id) {
+        try {
+            String query = "select \"UserName\" from \"tbAccount\" where \"UserID\" = '" + id + "'";
+            
+            conn = new DBConnect().makeConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+            conn.close();
+            ps.close();
+            rs.close();
+        } catch (Exception e) {
+        }finally{
+           
+            try {
+                  conn.close();
+                ps.close();
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+
+        return null;
+    }
+    
+    public String getAvatarByID(String id) {
+        try {
+            String query = "select \"Image\" from \"tbAccount\" where \"UserID\" = '" + id + "'";
+            
+            conn = new DBConnect().makeConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+            conn.close();
+            ps.close();
+            rs.close();
+        } catch (Exception e) {
+        }finally{
+           
+            try {
+                  conn.close();
+                ps.close();
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+
+        return null;
+    }
+    
+    public String getRoleByID(String id) {
+        try {
+            String query = "select \"Role\" from \"tbAccount\" where \"UserID\" = '" + id + "'";
+            
+            conn = new DBConnect().makeConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                return rs.getString(1);
+            }
             conn.close();
             ps.close();
             rs.close();
         } catch (Exception e) {
         }
 
-        return false;
+        return null;
     }
 
     public Account CheckLogin(String username, String password) {
@@ -76,6 +164,16 @@ public class AccountDAO {
             ps.close();
             rs.close();
         } catch (Exception e) {
+        }finally{
+           
+            try {
+                  conn.close();
+                ps.close();
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
         return null;
     }
@@ -95,6 +193,16 @@ public class AccountDAO {
             ps.close();
             rs.close();
         } catch (Exception e) {
+        }finally{
+           
+            try {
+                  conn.close();
+                ps.close();
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
 
         return true;
@@ -119,6 +227,16 @@ public class AccountDAO {
             rs.close();
         } catch (Exception e) {
             System.err.println(e);
+        }finally{
+           
+            try {
+                  conn.close();
+                ps.close();
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
     }
 
@@ -137,6 +255,16 @@ public class AccountDAO {
             rs.close();
         } catch (Exception e) {
             System.err.println(e);
+        }finally{
+           
+            try {
+                  conn.close();
+                ps.close();
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
         return true;
     }
@@ -164,6 +292,16 @@ public class AccountDAO {
             rs.close();
         } catch (Exception e) {
 
+        }finally{
+           
+            try {
+                  conn.close();
+                ps.close();
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
     }
 
@@ -184,6 +322,16 @@ public class AccountDAO {
             rs.close();
         } catch (Exception e) {
 
+        }finally{
+           
+            try {
+                  conn.close();
+                ps.close();
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
     }
 
@@ -191,6 +339,8 @@ public class AccountDAO {
         AccountDAO ac = new AccountDAO();
 
         Account a = new Account("Admin", "123a", "Cuongnmde160269@fpt.edu.vn");
+
+        System.out.println(ac.getAvatarByID("e0457766-39cd-4bda-b7b8-1d2cb3bae9d0"));
 
     }
 

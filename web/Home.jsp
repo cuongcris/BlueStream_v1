@@ -95,7 +95,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <c:set var="list" value ="${requestScope.TrendingMovie}" />
+                                <c:set var="list" value ="${requestScope.commentList}" />
                                 <c:forEach var="dto" items ="${list}" begin="0" end="5" >
 
                                     <div class="col-lg-4 col-md-6 col-sm-6">
