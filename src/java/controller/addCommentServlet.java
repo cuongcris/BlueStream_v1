@@ -69,6 +69,9 @@ public class addCommentServlet extends HttpServlet {
 
         req.setAttribute("totalEp", dao.getEpisodeCountByMovieId(movieID));
         req.getRequestDispatcher("WatchingAnime.jsp").forward(req, resp);
+        
+        
+        //Xin chao
     }
    
    
