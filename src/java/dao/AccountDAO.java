@@ -5,13 +5,15 @@
 package dao;
 
 import context.DBConnect;
+import controller.Encode;
 import entity.Account;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -184,6 +186,68 @@ public class AccountDAO {
             rs.close();
         } catch (Exception e) {
 
+        }
+    }
+    //check login google
+
+    public ArrayList checkLogin(String userIDGoogle) {
+        ArrayList<Account> ul = new ArrayList<>();
+        String query = "select * from \"tbAccount\" where \"user_id_google\"= ?";
+
+        try {
+            conn = new DBConnect().makeConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, userIDGoogle);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Account a = new Account();
+                a.setUserID(rs.getString("userID"));
+                a.setUserName(rs.getString("userName"));
+                a.setPassword(rs.getString("password"));
+                a.setEmail(rs.getString("email"));
+                a.setYearOfBirth(rs.getString("yearOfBirth"));
+                a.setPhone(rs.getString("phone"));
+                a.setImage(rs.getString("image"));
+                a.setRole(rs.getInt("role"));
+                a.setUser_id_google(rs.getString("user_id_google"));
+                ul.add(a);
+            }
+        } catch (Exception e) {
+            System.out.println("Error user: " + e.getMessage());
+        }
+
+        return ul;
+    }
+
+    //funtion add user with account google
+    public void insertWithIDGoogle(Account a) throws Exception {
+        String query = "INSERT INTO \"tbAccount\"\n"
+                + "           (\"UserName\"\n"
+                + "           ,\"Email\"\n"
+                + "           ,\"user_id_google\",\"Role\", \"Password\", \"Image\")\n"
+                + "           VALUES (?,?,?,?,?,?);";
+        try {
+            Encode ec = new Encode();
+            String pass = ec.encode("Nolove2@123");
+            conn = new DBConnect().makeConnection();
+            ps = conn.prepareStatement(query);
+
+            List<String> listUserName = Arrays.asList(a.getEmail().split("@"));
+            String email = listUserName.get(0);
+            String userName1 = email.substring(0, Math.min(email.length(), 10));
+//            String email = a.getEmail();
+//            String userName = email.substring(0, Math.min(email.length(), 5));
+
+            ps.setString(1, userName1);
+            ps.setString(2, a.getEmail());
+            ps.setString(3, a.getUser_id_google());
+            ps.setInt(4, 2);
+            ps.setString(5, pass);
+            ps.setString(6, "https://nhadepso.com/wp-content/uploads/2023/03/cap-nhat-50-hinh-anh-dai-dien-facebook-mac-dinh-dep-doc-la_17.jpg");
+
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

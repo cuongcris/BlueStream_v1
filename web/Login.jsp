@@ -43,7 +43,7 @@
                     <div class="col-lg-6">
                         <div class="login__form">
                             <h3>Login</h3>
-                                <h3 style="color: red">${requestScope.error}</h3>
+                            <h3 style="color: red">${requestScope.error}</h3>
                             <form action="login" method="post">
                                 <div class="input__item">
                                     <input type="text" name="username" placeholder="User Name">
@@ -74,7 +74,7 @@
                                 <ul>
                                     <li><a href="#" class="facebook"><i class="fa fa-facebook"></i> Sign in With
                                             Facebook</a></li>
-                                    <li><a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/BlueFashion/login-google&response_type=code&client_id=1085960907273-f5tpll8a3qh7i9mg1pv9oq1djo4iqelk.apps.googleusercontent.com&approval_prompt=force" class="google"><i class="fa fa-google"></i> Sign in With Google</a></li>                                </li>
+                                    <li><a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/BlueFashion/login_google&response_type=code&client_id=1085960907273-f5tpll8a3qh7i9mg1pv9oq1djo4iqelk.apps.googleusercontent.com&approval_prompt=force" class="google"><i class="fa fa-google"></i> Sign in With Google</a></li>                                </li>            
                                 </ul>
                             </div>
                         </div>

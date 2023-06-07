@@ -7,7 +7,7 @@
         <div class="row" style="width: 100%;">
             <div class="col-lg-2">
                 <div class="header__logo">
-                    <a href="./Home.jsp">
+                    <a href="home">
                         <img src="img/blueIcon.png" alt="" >
                     </a>
                 </div>
@@ -18,15 +18,13 @@
                         <ul>
                             <!--class="active" n?m trong th? li m?i tab mình ??i qua ?? có background ch? ??nh tab màu ??-->
                             <li ><a href="home">Homepage</a></li>
-                            <li><a href="./Categorys.jsp">Categories </span></a>
-                                <!--                                    <ul class="dropdown">
-                                                                        <li><a href="./Categorys.jsp">Categories</a></li>
-                                                                        <li><a href="./DetailAnime.jsp">Anime Details</a></li>
-                                                                        <li><a href="./WatchingAnime.jsp">Anime Watching</a></li>
-                                                                        <li><a href="./BlogDetail.jsp">Blog Details</a></li>
-                                                                        <li><a href="./SignUp.jsp">Sign Up</a></li>
-                                                                        <li><a href="./Login.jsp">Login</a></li>
-                                                                    </ul>-->
+                            <li><a href="AllMovie">Anime </span></a>
+                                                                  <ul class="dropdown">
+                                                                        <li><a href="AllMovie">All Anime</a></li>
+                                                                        <li><a href="#">Favorite</a></li>
+                                                                        <li><a href="#">History</a></li>
+                                                                        <li><a href="#">Logout</a></li>
+                                                                    </ul>
                             </li>
                             <li><a href="./Blog.jsp">Our Blog</a></li>
                             <li><a href="#">Contacts</a></li>

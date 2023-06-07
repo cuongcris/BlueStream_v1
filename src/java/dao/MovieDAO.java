@@ -14,7 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,7 +47,7 @@ public class MovieDAO {
                 String MovieStatus = re.getBoolean("MovieStatus") ? "Finish" : "Not Yet";
                 String MovieSeason = re.getString("MovieSeason");
                 int View = re.getInt("View");
-                String License = re.getString("License");
+                String License = re.getBoolean("License") == true ? "License" : "No License";
                 result.add(new Movie(MovieID, MovieName, movieBanner, MovieDescription, ReleaseDate, strCategory, Author, MovieStatus, MovieSeason, View, License));
             }
             re.close();
@@ -85,7 +84,7 @@ public class MovieDAO {
                 String MovieStatus = re.getBoolean("MovieStatus") ? "Finish" : "Not Yet";
                 String MovieSeason = re.getString("MovieSeason");
                 int View = re.getInt("View");
-                String License = re.getString("License");
+                String License = re.getBoolean("License") == true ? "License" : "No License";
                 result.add(new Movie(MovieID, MovieName, movieBanner, MovieDescription, ReleaseDate, strCategory, Author, MovieStatus, MovieSeason, View, License));
             }
             con.close();
@@ -122,7 +121,7 @@ public class MovieDAO {
                 String MovieStatus = re.getBoolean("MovieStatus") ? "Finish" : "Not Yet";
                 String MovieSeason = re.getString("MovieSeason");
                 int View = re.getInt("View");
-                String License = re.getString("License");
+                String License = re.getBoolean("License") == true ? "License" : "No License";
                 result.add(new Movie(MovieID, MovieName, movieBanner, MovieDescription, ReleaseDate, strCategory, Author, MovieStatus, MovieSeason, View, License));
             }
             con.close();
@@ -159,7 +158,7 @@ public class MovieDAO {
                 String MovieStatus = re.getBoolean("MovieStatus") ? "Finish" : "Not Yet";
                 String MovieSeason = re.getString("MovieSeason");
                 int View = re.getInt("View");
-                String License = re.getString("License");
+                String License = re.getBoolean("License") == true ? "License" : "No License";
                 result.add(new Movie(MovieID, MovieName, movieBanner, MovieDescription, ReleaseDate, strCategory, Author, MovieStatus, MovieSeason, View, License));
             }
             con.close();
@@ -196,7 +195,7 @@ public class MovieDAO {
                 String MovieStatus = re.getBoolean("MovieStatus") ? "Finish" : "Not Yet";
                 String MovieSeason = re.getString("MovieSeason");
                 int View = re.getInt("View");
-                String License = re.getString("License");
+                String License = re.getBoolean("License") == true ? "License" : "No License";
                 result.add(new Movie(MovieID, MovieName, movieBanner, MovieDescription, ReleaseDate, strCategory, Author, MovieStatus, MovieSeason, View, License));
             }
             con.close();
@@ -232,7 +231,8 @@ public class MovieDAO {
                 String MovieStatus = re.getBoolean("MovieStatus") ? "Finish" : "Not Yet";
                 String MovieSeason = re.getString("MovieSeason");
                 int View = re.getInt("View");
-                return new Movie(MovieID, MovieName, movieBanner, MovieDescription, ReleaseDate, strCategory, Author, MovieStatus, MovieSeason, View, MovieName);
+                String License = re.getBoolean("License") == true ? "License" : "No License";
+                return new Movie(MovieID, MovieName, movieBanner, MovieDescription, ReleaseDate, strCategory, Author, MovieStatus, MovieSeason, View, License);
             }
             con.close();
             p1.close();
@@ -361,10 +361,41 @@ public class MovieDAO {
         return episodeCount;
     }
 
+    //trailer
+    public String getTrailerByMovieID(String movieId) {
+        String trailerLink = null;
+        ResultSet re = null;
+        Connection con = null;
+        PreparedStatement p1 = null;
+        try {
+            con = DBConnect.makeConnection();
+            String stm1 = "select \"TrailerLink\" from  \"tbTrailer\" b where b.\"MovieID\" = ? ";
+            p1 = con.prepareStatement(stm1);
+            p1.setString(1, movieId);
+            re = p1.executeQuery();
+            if (re.next()) {
+                trailerLink = re.getString("TrailerLink");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+            System.out.println("loi r");
+        } finally {
+            try {
+                con.close();
+                p1.close();
+                re.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        return trailerLink;
+    }
+
     public static void main(String[] args) {
         MovieDAO dao = new MovieDAO();
-        Movie m = dao.getMovieById("DBS1809");
-        System.out.println(dao.getEpisodeCountByMovieId("DBS1809"));
+        System.out.println(dao.getTrailerByMovieID("DBS1809"));
+//        System.out.println(m.ge.toString());
 
     }
 

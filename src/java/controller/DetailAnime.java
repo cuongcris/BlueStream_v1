@@ -26,7 +26,8 @@ public class DetailAnime extends HttpServlet {
         
         req.setAttribute("M", dao.getMovieById(id));
         req.setAttribute("totalEp", dao.getEpisodeCountByMovieId(id));
-        
+        req.setAttribute("trailerLink", dao.getTrailerByMovieID(id));
+        System.out.println( dao.getTrailerByMovieID(id));
         req.getRequestDispatcher("DetailAnime.jsp").forward(req, resp);
     }
    

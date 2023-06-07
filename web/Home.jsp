@@ -56,12 +56,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="hero__items set-bg" data-setbg="img/slideshow/yourname1.jpg">
+                    <div class="hero__items set-bg" data-setbg="https://images6.alphacoders.com/130/1304153.jpeg">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="hero__text">
                                     <div class="label">Fantasy</div>
-                                    <h2>Your Name</h2>
+                                    <h2>Alphacoders 2023</h2>
                                     <p>After 30 days of travel across the world...</p>
                                     <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
                                 </div>
@@ -270,7 +270,7 @@
                                         <img src="https://media.giphy.com/media/26ybwfWJf8qovbRkY/source.gif" alt="alt"/>
                                     <a>
                                 </div>
-                            </c:if>
+                        </c:if>
                         
                         <div class="product__sidebar">
                             <div class="product__sidebar__view">
