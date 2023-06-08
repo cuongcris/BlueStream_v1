@@ -119,7 +119,7 @@ public class Movie {
         this.movieView = movieView;
     }
 
-    public String isLicense() {
+    public String getLicense() {
         return license;
     }
 

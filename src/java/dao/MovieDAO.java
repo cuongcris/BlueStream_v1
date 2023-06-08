@@ -364,8 +364,8 @@ public class MovieDAO {
     public static void main(String[] args) {
         MovieDAO dao = new MovieDAO();
         Movie m = dao.getMovieById("DBS1809");
-        System.out.println(dao.getEpisodeCountByMovieId("DBS1809"));
-
+        System.out.println(m.getLicense().equals("!2321"));
+        
     }
 
 }

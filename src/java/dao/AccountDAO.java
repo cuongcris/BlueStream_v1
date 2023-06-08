@@ -192,6 +192,9 @@ public class AccountDAO {
 
         Account a = new Account("Admin", "123a", "Cuongnmde160269@fpt.edu.vn");
 
+        String c = "!@3";
+        String b = "!2321";
+        c.equals(b);
     }
 
 }
