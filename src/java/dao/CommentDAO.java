@@ -44,7 +44,7 @@ public class CommentDAO {
                 list.add(new Comment(rs.getString(1), rs.getString(2), rs.getString(3),
                         rs.getString(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getInt(8)));
             }
-
+            
         } catch (Exception e) {
             System.err.println(e);
         } finally {
@@ -125,7 +125,7 @@ public class CommentDAO {
         return epID;
 
     }
-
+    
     public void addcomment(String epsID, String useID, String content) {
         LocalDate currentDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -154,14 +154,39 @@ public class CommentDAO {
 
         }
     }
+    //Cout all comment each movie
+    public int getCommentCount(String movieID) {
+    int commentCount = 0;
 
+    try {
+        String query = "SELECT COUNT(\"CommentID\") AS \"CommentCount\" FROM \"tbComment\" " +
+                       "INNER JOIN \"tbEpisodes\" ON \"tbComment\".\"EpID\" = \"tbEpisodes\".\"EpID\" " +
+                       "WHERE \"tbEpisodes\".\"MovieID\" = ?";
+        conn = new DBConnect().makeConnection();
+        ps = conn.prepareStatement(query);
+        ps.setString(1, movieID);
+        rs = ps.executeQuery();
+
+        if (rs.next()) {
+            commentCount = rs.getInt("CommentCount");
+        }
+    } catch (Exception e) {
+        System.err.println(e);
+    } finally {
+        try {
+            conn.close();
+            ps.close();
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    return commentCount;
+}
     public static void main(String[] args) {
         CommentDAO cm = new CommentDAO();
-        List<Comment> list = new ArrayList<>();
-        list = cm.GetlistComment("57f9d9d4-f11c-4441-b3b1-0bb436b7c9d9");
-        
-        cm.deleteComment("57b1dfa8-8b94-4613-84a3-04106e015966");
-        System.out.println(list.get(0));
+        System.out.println(cm.getCommentCount("DBS1809"));
     }
 
 }

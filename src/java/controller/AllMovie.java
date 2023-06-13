@@ -7,11 +7,11 @@ package controller;
 import dao.MovieDAO;
 import entity.Movie;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.util.List;
 
 /**
@@ -23,21 +23,78 @@ public class AllMovie extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         MovieDAO dao = new MovieDAO();
-        List<Movie> list = dao.getAllMovie();
-        int size = list.size();
-
-        int totalItems = list.size();
-        int itemsPerPage = 9;
-        int currentPage = (req.getParameter("page") != null) ? Integer.parseInt(req.getParameter("page")) : 1;
-        int offset = (currentPage - 1) * itemsPerPage;
-
-        List<Movie> pageList = list.subList(offset, Math.min(offset + itemsPerPage, totalItems));
-        int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
-        req.setAttribute("totalPages", totalPages);
-        req.setAttribute("currentPage", currentPage);
-
-        req.setAttribute("Category", pageList);
+        req.setAttribute("Category", dao.getAllMovie());
         req.getRequestDispatcher("Categorys.jsp").forward(req, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        MovieDAO dao = new MovieDAO();
+        PrintWriter pw = resp.getWriter();
+
+        String txtSearch = req.getParameter("txtSearch");
+        String nameFilter = req.getParameter("nameFilter");
+        String licenseFilter = req.getParameter("licenseFilter");
+        String viewFilter = req.getParameter("viewFilter");
+        String search = req.getParameter("txtSearch");
+        
+        List<Movie> list = dao.getAllMovie(nameFilter, txtSearch, viewFilter);
+        
+//        req.setAttribute("txtSearch", txtSearch);
+        int totalSize = list.size();
+        int itemOfPage = 12;
+
+        //Lấy tổng số trang dựa trên dữ liệu hiện có rồi truyền lên jsp
+        int totalPage = (int) Math.ceil((double) totalSize / itemOfPage);
+
+        //Lấy page hiện tại và truyền lên jsp
+        String page = req.getParameter("page");
+        int curPage = (page != null) ? Integer.parseInt(page) : 1;
+
+        //Lấy id bắt đầu trang rồi truyền lên jsp
+        int start = (curPage - 1) * itemOfPage;
+
+        //Lấy id kết thúc trang rồi truyền lên jsp
+        int end = Math.min(curPage * itemOfPage, totalSize);
+        
+        String btnPrev = (curPage > 1)?"onclick=\"filter("+ (curPage - 1) +")\"":"disabled";
+        String btnNext = (curPage < totalPage)?"onclick=\"filter("+ (curPage + 1) +")\"":"disabled";
+
+        
+        Format format = new Format();
+        
+        
+        for (int i = start; i < end; i++) {
+            Movie movie = list.get(i);
+            pw.write(" <div class=\"col-lg-4 col-md-6 col-sm-6 \">\n" +
+"                                        <div class=\"product__item\">\n" +
+"                                            <a href=\"DetailAnime?id="+movie.getMovieId()+"\">\n" +
+"                                                <div style=\"cursor: pointer;\" class=\"product__item__pic set-bg\" data-setbg= "+movie.getMovieBanner()+" \n" +
+"                                                    <div class=\"ep\">"+movie.getMovieStatus()+"</div>\n" +
+"                                                    <div class=\"ep\">"+movie.getMovieStatus()+"</div>\n" +
+"                                                    <div class=\"view\"><i class=\"fa fa-eye\"></i> "+format.formatNumber(movie.getMovieView())+" </div>\n" +
+"                                                </div>\n" +
+"                                                <div class=\"product__item__text\">\n" +
+"                                                    <ul>\n" +
+"                                                        <li> "+movie.getCategory().get(0)+"</li>\n" +
+"                                                        <li> "+movie.getCategory().get(1)+"</li>\n" +
+"                                                    </ul>\n" +
+"                                                    <h5 style=\"color:#79797980;\"><a href=\"DetailAnime?id="+movie.getMovieId()+"\">"+format.nameStandardization(movie.getMovieName())+"</a></h5>\n" +
+"                                                </div>\n" +
+"                                            </a>\n" +
+"                                        </div>\n" +
+"                                    </div>");
+        }
+        pw.write("<div class=\"col-md-5 col-12\">\n" +
+"                                            <div class=\"paging\">\n" +
+"                                                <button type=\"button\" class=\"paging-btn\" id=\"paging-prev\" "+ btnPrev +"><i class=\"fas fa-angle-left\"></i></button>\n" +
+"                                                <input type=\"number\" step=\"1\" min=\"1\" class=\"paging-num\" value=\""+ curPage +"\" name=\"page\" readonly>\n" +
+"                                                <span>/ "+ totalPage +"</span>\n" +
+"                                                <button type=\"button\" class=\"paging-btn\" id=\"paging-prev\""+ btnNext +"\"><i class=\"fas fa-angle-right\"></i></button>\n" +
+"                                            </div>\n" +
+"                                        </div>\n");
+       
+    }
+    
 
 }

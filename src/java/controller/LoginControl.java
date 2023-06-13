@@ -51,7 +51,7 @@ public class LoginControl extends HttpServlet {
             }
 
             Account a = loginDAO.CheckLogin(user, pass);
-
+            
             if (a == null) {
                 request.setAttribute("error", "Wrong password");
                 request.getRequestDispatcher("Login.jsp").forward(request, response);

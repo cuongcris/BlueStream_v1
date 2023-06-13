@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zxx">
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ page import="dao.CommentDAO" %>
     <head>
         <%@include file="Head.jsp" %>
         <title>Blue Stream - Home</title>
-        <%@include file="Advertisement.jsp" %>
     </head>
 
     <body>
@@ -14,6 +14,7 @@
         </div>
 
         <%@include file="Header.jsp" %>
+                <%--<%@include file="Advertisement.jsp" %>--%>
 
         <!-- Hero Section Begin -->
         <section class="hero">
@@ -102,8 +103,8 @@
                                         <div class="product__item">
                                             <a href="DetailAnime?id=${dto.movieId}">
                                                 <div style="cursor: pointer;" class="product__item__pic set-bg" data-setbg=${dto.movieBanner}>
-                                                    <div class="ep">18 / 18</div>
-                                                    <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                                    <div class="ep">${dto.movieStatus}</div>
+                                                    <div class="comment"> <i class="fa-brands fa-gratipay"></i>  </div>
                                                     <div class="view"><i class="fa fa-eye"></i> ${format.formatNumber(dto.movieView)} </div>
                                                 </div>
                                                 <div class="product__item__text">
@@ -146,7 +147,7 @@
                                         <div class="product__item">
                                             <a href="DetailAnime?id=${dto.movieId}">
                                                 <div style="cursor: pointer;" class="product__item__pic set-bg" data-setbg=${dto.movieBanner}>
-                                                    <div class="ep">18 / 18</div>
+                                                    <div class="ep">${dto.movieStatus}</div>
                                                     <div class="comment"><i class="fa fa-comments"></i> 11</div>
                                                     <div class="view"><i class="fa fa-eye"></i> ${format.formatNumber(dto.movieView)}</div>
                                                 </div>
@@ -186,13 +187,12 @@
                             <div class="row">
                                 <c:set var="newReleaseMovie" value ="${requestScope.newReleaseMovie}" />
                                 <c:forEach var="dto" items ="${newReleaseMovie}" begin="0" end="5" >
-
                                     <div class="col-lg-4 col-md-6 col-sm-6">
                                         <div class="product__item">
                                             <a href="DetailAnime?id=${dto.movieId}">
                                                 <div style="cursor: pointer;" class="product__item__pic set-bg" data-setbg=${dto.movieBanner}>
-                                                    <div class="ep">18 / 18</div>
-                                                    <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                                    <div class="ep">${dto.movieStatus}</div>
+                                                    <div class="comment"><i class="fa fa-comments"></i> </div>
                                                     <div class="view"><i class="fa fa-eye"></i> ${format.formatNumber(dto.movieView)}</div>
                                                 </div>
                                                 <div class="product__item__text">
@@ -234,7 +234,7 @@
                                         <div class="product__item">
                                             <a href="DetailAnime?id=${dto.movieId}">
                                                 <div style="cursor: pointer;" class="product__item__pic set-bg" data-setbg=${dto.movieBanner}>
-                                                    <div class="ep">18 / 18</div>
+                                                    <div class="ep">${dto.movieStatus}</div>
                                                     <div class="comment"><i class="fa fa-comments"></i> 11</div>
                                                     <div class="view"><i class="fa fa-eye"></i> ${format.formatNumber(dto.movieView)}</div>
                                                 </div>
@@ -263,13 +263,13 @@
                     <div class="col-lg-4 col-md-6 col-sm-8">
                         
                         <c:if test="${account == null || sessionScope.account.role == 2}">
-                                <div id="overlay" onclick="redirectToPage()"></div>
+<!--                                <div id="overlay" onclick="redirectToPage()"></div>
                                 
                                 <div class="product__sidebar__view">
                                     <a href="https://www.honda.com.vn/xe-may/san-pham" target="_blank"> 
                                         <img src="https://media.giphy.com/media/26ybwfWJf8qovbRkY/source.gif" alt="alt"/>
                                     <a>
-                                </div>
+                                </div>-->
                         </c:if>
                         
                         <div class="product__sidebar">
@@ -286,31 +286,31 @@
                                 <div class="filter__gallery">
                                     <div class="product__sidebar__view__item set-bg mix day years"
                                          data-setbg="img/sidebar/tv-1.jpg">
-                                        <div class="ep">18 / ?</div>
+                                         <div class="ep">${dto.movieStatus}</div>
                                         <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                         <h5><a href="#">Boruto: Naruto next generations</a></h5>
                                     </div>
                                     <div class="product__sidebar__view__item set-bg mix month week"
                                          data-setbg="img/sidebar/tv-2.jpg">
-                                        <div class="ep">18 / ?</div>
+                                         <div class="ep">${dto.movieStatus}</div>
                                         <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                         <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
                                     </div>
                                     <div class="product__sidebar__view__item set-bg mix week years"
                                          data-setbg="img/sidebar/tv-3.jpg">
-                                        <div class="ep">18 / ?</div>
+                                         <div class="ep">${dto.movieStatus}</div>
                                         <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                         <h5><a href="#">Sword art online alicization war of underworld</a></h5>
                                     </div>
                                     <div class="product__sidebar__view__item set-bg mix years month"
                                          data-setbg="img/sidebar/tv-4.jpg">
-                                        <div class="ep">18 / ?</div>
+                                         <div class="ep">${dto.movieStatus}</div>
                                         <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                         <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
                                     </div>
                                     <div class="product__sidebar__view__item set-bg mix day"
                                          data-setbg="img/sidebar/tv-5.jpg">
-                                        <div class="ep">18 / ?</div>
+                                         <div class="ep">${dto.movieStatus}</div>
                                         <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                         <h5><a href="#">Fate stay night unlimited blade works</a></h5>
                                     </div>

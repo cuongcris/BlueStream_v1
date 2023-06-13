@@ -251,11 +251,55 @@ public class AccountDAO {
         }
     }
 
+    public void updateRoleToVip(String userID) {
+        try {
+            String query = "UPDATE \"tbAccount\"\n"
+                    + "SET \"Role\" = 1 \n"
+                    + "WHERE \"UserID\" = '"+ userID+"'";
+
+            conn = new DBConnect().makeConnection();
+            ps = conn.prepareStatement(query);
+            ps.executeUpdate();
+            System.out.println("thanh cong");
+             
+        } catch (Exception e) {
+                System.out.println(e);
+        }finally{
+            try {
+                conn.close();
+                ps.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    public void InsertPayment(String userID , int money,int type) {
+        try {
+            String query = "insert into \"tbPayment\" (\"UserID\",\"Money\",\"PaymentDate\",\"PaymentType\") values('"+ userID+"',?,now(),?)" ;
+
+            conn = new DBConnect().makeConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, money);
+            ps.setInt(2, type);
+                        System.out.println("thanh cong");
+
+            ps.executeQuery();
+        } catch (Exception e) {
+               
+        }finally{
+            try {
+                conn.close();
+                ps.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
     public static void main(String[] args) {
         AccountDAO ac = new AccountDAO();
 
-        Account a = new Account("Admin", "123a", "Cuongnmde160269@fpt.edu.vn");
-
+        
+        ac.updateRoleToVip("17a24030-d261-44b0-82d1-1f7005974a81");
     }
 
 }

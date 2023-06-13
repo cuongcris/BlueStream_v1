@@ -129,7 +129,7 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "Movie{" + "movieId=" + movieId + ", movieName=" + movieName + ", movieBanner=" + movieBanner + ", description=" + description + ", releaseDate=" + releaseDate + ", category=" + category + ", author=" + author + ", movieStatus=" + movieStatus + ", movieSeason=" + movieSeason + ", movieView=" + movieView + ", license=" + license + '}';
+        return "Movie{" + "movieId=" + movieId + ", movieName=" + movieName + ", movieBanner=" + movieBanner + ", description=" + description + ", releaseDate=" + releaseDate + ", category=" + category + ", author=" + author + ", movieStatus=" + movieStatus + ", movieSeason=" + movieSeason + ", movieView=" + movieView + ", license=" + license + '}'+"\n";
     }
     
     

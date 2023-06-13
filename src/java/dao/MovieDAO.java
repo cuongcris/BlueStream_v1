@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -134,6 +135,7 @@ public class MovieDAO {
         }
         return result;
     }
+    
 
     //get list live action movie 
     public ArrayList<Movie> getListLiveActionMovie() {
@@ -142,7 +144,7 @@ public class MovieDAO {
         ResultSet re;
         try {
             Connection con = DBConnect.makeConnection();
-            String stm1 = "select *from \"tbMovie\" WHERE \"Category\" LIKE '%Live Action'";
+            String stm1 = "select *from \"tbMovie\" WHERE \"Category\" LIKE '%Live Action%'";
             PreparedStatement p1 = con.prepareStatement(stm1);
             re = p1.executeQuery();
             while (re.next()) {
@@ -243,7 +245,108 @@ public class MovieDAO {
         }
         return null;
     }
-
+    //get list popular movie based view acs
+   public ArrayList<Movie> getSearchList(String txtSearch) {
+    ArrayList<Movie> result = new ArrayList<>();
+    Connection con = null;
+    PreparedStatement p1 = null;
+    ResultSet re = null;
+    try {
+         con = DBConnect.makeConnection();
+        String stm1 = "SELECT * FROM \"tbMovie\" WHERE LOWER(\"MovieName\") LIKE LOWER(?);";
+         p1 = con.prepareStatement(stm1);
+        p1.setString(1, "%" + txtSearch + "%");
+        re = p1.executeQuery();
+        while (re.next()) {
+            String MovieID = re.getString("MovieID");
+            String MovieName = re.getString("MovieName");
+            String movieBanner = re.getString("Banner");
+            String MovieDescription = re.getString("Description");
+            Date ReleaseDate = re.getDate("ReleaseDate");
+            String Category = re.getString("Category");
+            String[] strSplit = Category.trim().split(",");
+            ArrayList<String> strCategory = new ArrayList<String>(Arrays.asList(strSplit));
+            String Author = re.getString("Author");
+            String MovieStatus = re.getBoolean("MovieStatus") ? "Finish" : "Not Yet";
+            String MovieSeason = re.getString("MovieSeason");
+            int View = re.getInt("View");
+            String License = re.getBoolean("License") ? "License" : "No License";
+            result.add(new Movie(MovieID, MovieName, movieBanner, MovieDescription, ReleaseDate, strCategory, Author, MovieStatus, MovieSeason, View, License));
+        }
+       
+    } catch (SQLException e) {
+        System.out.println("Error: " + e);
+    }   catch (ClassNotFoundException ex) {
+            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+        try {
+            con.close();
+            p1.close();
+            re.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    return result;
+}
+   
+   
+    public List<Movie> getAllMovie(String nameFilter, String txtSearch, String viewFilter) {
+    Connection con = null;
+    List<Movie> result = new ArrayList<>();
+    ResultSet re;
+    PreparedStatement p1 = null;
+    try {
+        con = DBConnect.makeConnection();
+        String query = "SELECT * FROM \"tbMovie\"";
+                
+        if (nameFilter != null && !nameFilter.isEmpty()||(nameFilter != null && !nameFilter.isEmpty() && viewFilter != null)) {
+            query = "SELECT * FROM \"tbMovie\" ORDER BY \"MovieName\" " + nameFilter;
+        }
+        if (viewFilter != null && !viewFilter.isEmpty() ) {
+            query = "SELECT * FROM \"tbMovie\" ORDER BY \"View\" " + viewFilter;
+        }
+        if(txtSearch!=null && !txtSearch.isEmpty()){
+            query = "SELECT * FROM \"tbMovie\" WHERE LOWER(\"MovieName\") LIKE LOWER(?);";
+        }
+        if(txtSearch!=null && !txtSearch.isEmpty()){
+            p1 = con.prepareStatement(query);
+            p1.setString(1, "%" + txtSearch + "%");
+            re = p1.executeQuery();
+        }else{
+             p1 = con.prepareStatement(query);
+            re = p1.executeQuery();
+        }
+       
+        while (re.next()) {
+             String MovieID = re.getString("MovieID");
+                String MovieName = re.getString("MovieName");
+                String movieBanner = re.getString("Banner");
+                String MovieDescription = re.getString("Description");
+                Date ReleaseDate = re.getDate("ReleaseDate");
+                String Category = re.getString("Category");
+                String[] strSplit = Category.trim().split(",");
+                ArrayList<String> strCategory = new ArrayList<>(Arrays.asList(strSplit));
+                String Author = re.getString("Author");
+                String MovieStatus = re.getBoolean("MovieStatus") ? "Finish" : "Not Yet";
+                String MovieSeason = re.getString("MovieSeason");
+                int View = re.getInt("View");
+                String License = re.getBoolean("License") == true ? "License" : "No License";
+            result.add(new Movie(MovieID, MovieName, movieBanner, MovieDescription, ReleaseDate, strCategory, Author, MovieStatus, MovieSeason, View, License));
+        }
+        re.close();
+        p1.close();
+    } catch (SQLException e) {
+        System.out.println("Error: " + e);
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        // Close database connection
+        // ...
+    }
+    return result;
+}
     //------------------------------------episodes-----------------------------
     public int numberEP(String id) {
 
@@ -394,9 +497,8 @@ public class MovieDAO {
 
     public static void main(String[] args) {
         MovieDAO dao = new MovieDAO();
-        System.out.println(dao.getTrailerByMovieID("DBS1809"));
-//        System.out.println(m.ge.toString());
-
+        List<Movie> list = dao.getAllMovie("asc","true","asc");
+        System.out.println(list.toString());
     }
 
 }

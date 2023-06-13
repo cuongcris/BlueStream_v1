@@ -35,7 +35,10 @@
             <div class="col-lg-3">
                 <div class="header__right" style="text-align: left;">
                     <span>
-                        <a href="#" class="search-switc h"><i class="fa-solid fa-magnifying-glass"></i></a>
+                        <a href="vnpay_pay.jsp" class="search-switc h"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    </span>
+                    <span>
+                        <a href="vnpay_pay.jsp" class="search-switc h"><i class="fa-solid fa-circle-dollar-to-slot"></i></a>
                     </span>
                     <c:if test="${account == null}">
                         <span class="infor"> 

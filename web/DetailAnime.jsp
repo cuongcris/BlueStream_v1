@@ -74,8 +74,8 @@
                                         <div class="col-lg-6 col-md-6">
                                             <ul>
 
-                                                <li><span>Duration:</span> 24 min/ep</li>
-                                                <li><span>Quality:</span> HD</li>
+                                                <li><span>Author:</span> ${M.author}</li>
+                                                <li><span>Movie Status: </span> ${M.movieStatus}</li>
                                                 <li><span>Views:</span> ${format.formatNumber(M.movieView)}</li>
                                             </ul>
                                         </div>
