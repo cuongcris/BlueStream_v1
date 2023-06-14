@@ -14,12 +14,13 @@ import java.sql.SQLException;
  */
 public class DBConnect {
 
-      public static Connection makeConnection() throws ClassNotFoundException, SQLException {
+    public static Connection makeConnection() throws ClassNotFoundException, SQLException {
         try {
-        //bluestream1
+            //bluestream1
 //       String url = "jdbc:postgresql://db.fncwirfhmyudeqvocfyh.supabase.co:5432/postgres";
-        //bluestseam2            
-        String url = "jdbc:postgresql://db.owsuwykdxwxkmkcrvlvb.supabase.co:5432/postgres";
+
+//bluestseam2            
+            String url = "jdbc:postgresql://db.owsuwykdxwxkmkcrvlvb.supabase.co:5432/postgres";
             String username = "postgres";
             String password = "Bluestream123@";
 

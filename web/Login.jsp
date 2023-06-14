@@ -74,7 +74,10 @@
                                 <ul>
                                     <li><a href="#" class="facebook"><i class="fa fa-facebook"></i> Sign in With
                                             Facebook</a></li>
-                                    <li><a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/BlueFashion/login_google&response_type=code&client_id=1085960907273-f5tpll8a3qh7i9mg1pv9oq1djo4iqelk.apps.googleusercontent.com&approval_prompt=force" class="google"><i class="fa fa-google"></i> Sign in With Google</a></li>                                </li>            
+                                    <li>
+                                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/BlueFashion/login_google&response_type=code&client_id=1085960907273-f5tpll8a3qh7i9mg1pv9oq1djo4iqelk.apps.googleusercontent.com&approval_prompt=force" class="google">
+                                            <i class="fa fa-google"></i> Sign in With Google</a></li>                               
+                                    </li>            
                                 </ul>
                             </div>
                         </div>

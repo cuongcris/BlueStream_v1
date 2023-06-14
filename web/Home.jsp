@@ -24,8 +24,10 @@
                             <div class="col-lg-6">
                                 <div class="hero__text">
                                     <div class="label">Fantasy</div>
-                                    <h2>Gekijouban Jujutsu Kaisen 0 (2021)</h2>
-                                    <p>After 30 days of travel across the world...</p>
+                                    <div class="hero__text_details">
+                                        <h2>Gekijouban Jujutsu Kaisen 0 (2021)</h2>
+                                        <p>After 30 days of travel across the world...</p>
+                                    </div>
                                     <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
                                 </div>
                             </div>
@@ -37,8 +39,10 @@
                             <div class="col-lg-6">
                                 <div class="hero__text">
                                     <div class="label">Adventure</div>
-                                    <h2 >Kimetsu no Yaiba-District Arc Special</h2>
-                                    <p>Prior to the broadcast of Swordsmithing Village</p>
+                                    <div class="hero__text_details">
+                                        <h2 >Kimetsu no Yaiba-District Arc Special</h2>
+                                        <p>Prior to the broadcast of Swordsmithing Village</p>
+                                    </div>
                                     <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
                                 </div>
                             </div>
@@ -49,20 +53,24 @@
                             <div class="col-lg-6">
                                 <div class="hero__text">
                                     <div class="label">Adventure</div>
-                                    <h2>SHINGEKI NO KYOJIN MOVIE 1: GUREN NO YUMIYA</h2>
-                                    <p>The first installment of the film series...</p>
+                                    <div class="hero__text_details">
+                                        <h2>SHINGEKI NO KYOJIN MOVIE 1: GUREN NO YUMIYA</h2>
+                                        <p>The first installment of the film series...</p>
+                                    </div>
                                     <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="hero__items set-bg" data-setbg="https://images6.alphacoders.com/130/1304153.jpeg">
+                    <div class="hero__items set-bg" data-setbg="https://wallpapercave.com/wp/wp11601063.jpg">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="hero__text">
-                                    <div class="label">Fantasy</div>
-                                    <h2>Alphacoders 2023</h2>
-                                    <p>After 30 days of travel across the world...</p>
+                                    <div class="label">Adventure</div>
+                                    <div class="hero__text_details">
+                                        <h2>SHINGEKI NO KYOJIN MOVIE 1: GUREN NO YUMIYA</h2>
+                                        <p>The first installment of the film series...</p>
+                                    </div>
                                     <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
                                 </div>
                             </div>
@@ -263,13 +271,21 @@
                     <div class="col-lg-4 col-md-6 col-sm-8">
                         
                         <c:if test="${account == null || sessionScope.account.role == 2}">
-                                <div id="overlay" onclick="redirectToPage()"></div>
                                 
-                                <div class="product__sidebar__view">
-                                    <a href="https://www.honda.com.vn/xe-may/san-pham" target="_blank"> 
-                                        <img src="https://media.giphy.com/media/26ybwfWJf8qovbRkY/source.gif" alt="alt"/>
-                                    <a>
-                                </div>
+                                <c:forEach var="dto" items ="${sessionScope.ads_show}" >
+                                    
+                                    <c:if test="${dto.type.equals('Invisible')}">
+                                        <div id="overlay" onclick="redirectToPage('${dto.linkTo}')"></div>
+                                    </c:if>
+                                        
+                                    <c:if test="${dto.type.equals('Gif')}">
+                                        <div class="product__sidebar__view">
+                                            <a href="${dto.linkTo}" target="_blank"> 
+                                                <img src="${dto.linkShow}" alt="alt"/>
+                                            <a>
+                                        </div>
+                                    </c:if>
+                                </c:forEach>
                         </c:if>
                         
                         <div class="product__sidebar">
@@ -420,21 +436,30 @@
         <style>
         #overlay {
             position: fixed;
-            top: 0;
+            top: 15%;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 90%;
             background-color: rgba(0, 0, 0, 0.00001);
             z-index: 9998;
             cursor: pointer;
         }
+        
+        .hero__text_details{
+            background-color: rgb(86 86 86 / 40%);
+        }
+        
+        .hero__text_details h2,
+        .hero__text_details p{
+            padding-left: 10px;
+        }
         </style>
         
         <script>
-            function redirectToPage() {
+            function redirectToPage(link) {
                 var overlay = document.getElementById("overlay");
                 overlay.style.display = "none";
-                var newTab = window.open("https://b88-game-danh-bai-online.softonic.vn/iphone", "_blank");
+                var newTab = window.open(link, "_blank");
                 newTab.focus();
             }
         </script>

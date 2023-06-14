@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import dao.AccountDAO;
@@ -21,11 +20,11 @@ import java.io.PrintWriter;
  * @author Admin
  */
 public class LoginControl extends HttpServlet {
-   
-      @Override
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = (HttpSession) request.getSession(false);
         if (session != null && session.getAttribute("account") != null) {
             response.sendRedirect(request.getContextPath());
@@ -39,12 +38,12 @@ public class LoginControl extends HttpServlet {
         try {
             String user = request.getParameter("username");
             String pre_endcode_pass = request.getParameter("password");
-            
+
             AccountDAO loginDAO = new AccountDAO();
-            
+
             Encode en = new Encode();
             String pass = en.encode(pre_endcode_pass);
-            
+
             if (!loginDAO.checkUser(user)) {
                 request.setAttribute("error", "Account not existed");
                 request.getRequestDispatcher("Login.jsp").forward(request, response);
@@ -64,13 +63,13 @@ public class LoginControl extends HttpServlet {
                 //add browser cua nguoi dung
                 response.addCookie(userCookie);
                 response.addCookie(passwordCookie);
-            }
-
+                
                 HttpSession session = request.getSession();
                 session.setAttribute("account", a);
                 response.sendRedirect("home");
-          
-    } catch (Exception e) {
+            }
+
+        } catch (Exception e) {
         }
     }
 }

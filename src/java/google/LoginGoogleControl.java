@@ -54,23 +54,16 @@ public class LoginGoogleControl extends HttpServlet {
                 account = ul.get(0);
             }
 
-            HttpSession session = (HttpSession) request.getSession(false);
+            HttpSession session = request.getSession();
             if (session != null && session.getAttribute("account") != null) {
                 response.sendRedirect(request.getContextPath());
                 return;
             }
             
-            
-            
-            if (account.getRole() == 1) {
                 session = request.getSession();
                 session.setAttribute("account", account);
                 response.sendRedirect("home");
-            } else {
-                session = request.getSession();
-                session.setAttribute("account", account);
-                response.sendRedirect("home");
-            }
+
         }
     }
 

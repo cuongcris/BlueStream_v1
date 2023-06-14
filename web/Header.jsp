@@ -12,19 +12,18 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-7">
+            <div class="col-lg-6">
                 <div class="header__nav">
                     <nav class="header__menu mobile-menu">
-                        <ul>
-                            <!--class="active" n?m trong th? li m?i tab mình ??i qua ?? có background ch? ??nh tab màu ??-->
+                        <ul class="header_details">
                             <li ><a href="home">Homepage</a></li>
                             <li><a href="AllMovie">Anime </span></a>
-                                                                  <ul class="dropdown">
-                                                                        <li><a href="AllMovie">All Anime</a></li>
-                                                                        <li><a href="#">Favorite</a></li>
-                                                                        <li><a href="#">History</a></li>
-                                                                        <li><a href="#">Logout</a></li>
-                                                                    </ul>
+                                <!--                                                                  <ul class="dropdown">
+                                                                                                        <li><a href="AllMovie">All Anime</a></li>
+                                                                                                        <li><a href="#">Favorite</a></li>
+                                                                                                        <li><a href="#">History</a></li>
+                                                                                                        <li><a href="#">Logout</a></li>
+                                                                                                    </ul>-->
                             </li>
                             <li><a href="./Blog.jsp">Our Blog</a></li>
                             <li><a href="#">Contacts</a></li>
@@ -32,10 +31,32 @@
                     </nav>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <div class="header__right" style="text-align: left;">
-                    <span>
-                        <a href="#" class="search-switc h"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    <span class="up_VIP_icon">
+                        <a href="#" class="search-switc h">
+                            <div class="left_icon">
+                                <i class="fa-solid fa-crown fa-fade"></i>
+                            </div>
+
+                            <div class="right_icon">
+                                <span>UPDATE</span>
+                                <span>PREMIUM</span>
+                            </div>
+
+                        </a>
+                    </span>
+                    <span class="donate_icon">
+                        <a href="#" class="search-switc h">
+                            <div class="mid_left_icon">
+                                <i class="fa-solid fa-hand-holding-dollar fa-fade"></i>
+                            </div>
+
+                            <div class="mid_right_icon">
+                                <span>Donate</span>
+                            </div>
+
+                        </a>
                     </span>
                     <c:if test="${account == null}">
                         <span class="infor"> 
@@ -76,14 +97,95 @@
     </div>
 
     <style>
+
+        .col-lg-3{
+            padding: 0;
+        }
+        
+        .header__menu ul li a{
+            font-size: 16px;
+            padding: 24px;
+        }
+
         .infor{
             color: white;
-            margin-left: 30px;
+            margin-left: 5px;
             font-weight: 800;
+            border-left: solid 2px rgb(245 241 241 / 50%);
+            padding: 10px 0 10px 8px;
+        }
+
+        .infor a{
+            font-size: 16px;
         }
         .infor i{
-            margin-right: 10px;
+            margin-right: 3px;
         }
+
+        .donate_icon,
+        .up_VIP_icon {
+            display: inline-block;
+        }
+
+        .donate_icon a,
+        .up_VIP_icon a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .header__right{
+            margin-left: 0;
+        }
+
+        .donate_icon i,
+        .up_VIP_icon i{
+            font-size: 22px;
+        }
+
+        .left_icon {
+            margin-right: 5px;
+            margin-left: 4px;
+        }
+
+        .fa-crown {
+            color: gold;
+        }
+
+        .right_icon span {
+            margin-right: 5px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .right_icon{
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .infor:hover,
+        .donate_icon:hover,
+        .up_VIP_icon:hover{
+            background-color: rgb(99 99 102);
+            border-radius: 5px;
+        }
+
+        .mid_right_icon span{
+            font-size: 14px;
+        }
+
+        .up_VIP_icon,
+        .donate_icon{
+            padding-left: 2px;
+            padding: 7px 0 6px 12px;
+        }
+        .donate_icon{
+            border-left: solid 2px rgb(245 241 241 / 50%);
+        }
+        .mid_left_icon{
+            margin-right: 5px;
+        }
+
     </style>
 </header>
 <!-- Header End -->

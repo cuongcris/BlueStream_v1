@@ -62,12 +62,13 @@ public class CommentDAO {
     }
 
     //set time
-    public long caculDiffDay(Date commentDay) {
+    public String printDiffDay(Date commentDay) {
         LocalDate currentDate = LocalDate.now();
         String dateString = "" + commentDay;
         LocalDate specificDate = LocalDate.parse(dateString);
         long daysDifference = specificDate.until(currentDate, ChronoUnit.DAYS);
-        return daysDifference;
+        if(daysDifference <= 0) return "Today!";
+        else return daysDifference + " day ago!";
     }
 
     public void deleteComment(String id) {

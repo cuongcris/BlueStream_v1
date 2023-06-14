@@ -68,13 +68,13 @@
 
                                                 <li><span>Date aired:</span>${M.releaseDate}</li>
                                                 <li><span>License:</span> ${M.license}</li>
-                                                <li><span>Genre:</span> ${M.category[0]},${M.category[1]}</li>
+                                                <li><span>Genre:</span> ${M.category[0]}, ${M.category[1]}</li>
                                             </ul>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <ul>
 
-                                                <li><span>Duration:</span> 24 min/ep</li>
+                                                <li><span>Author:</span> ${M.author}</li>
                                                 <li><span>Quality:</span> HD</li>
                                                 <li><span>Views:</span> ${format.formatNumber(M.movieView)}</li>
                                             </ul>

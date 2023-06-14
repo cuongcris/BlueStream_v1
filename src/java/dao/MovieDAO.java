@@ -142,7 +142,7 @@ public class MovieDAO {
         ResultSet re;
         try {
             Connection con = DBConnect.makeConnection();
-            String stm1 = "select *from \"tbMovie\" WHERE \"Category\" LIKE '%Live Action'";
+            String stm1 = "select *from \"tbMovie\" WHERE \"Category\" LIKE 'Live Action%'";
             PreparedStatement p1 = con.prepareStatement(stm1);
             re = p1.executeQuery();
             while (re.next()) {

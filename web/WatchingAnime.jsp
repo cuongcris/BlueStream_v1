@@ -28,8 +28,6 @@
                         <div class="breadcrumb__links">
                             <a href="./index.html"><i class="fa fa-home"></i> Home</a>
                             <a href="./categories.html">Categories</a>
-                            <a href="#">Romance</a>
-                            <span>Fate Stay Night: Unlimited Blade</span>
                         </div>
                     </div>
                 </div>
@@ -43,9 +41,37 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="anime__video__player">
+                            <c:if test="${account == null || sessionScope.account.role == 2}">
+                                <c:forEach var="dto" items ="${sessionScope.ads_show}" >
+                                    <c:if test="${dto.type.equals('Video')}">
+                                        <a href="${dto.linkTo}" target="_blank">
+                                            <video id="video1" width="1100" height="620"
+                                                   src="${dto.linkShow}"
+                                                   controls autoplay>
+                                            </video>
+                                        </a>
 
-                            <iframe width="1100" height="620" src="${episode.movieLink}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                        <button id="skip-button" style="display: none;">Skip</button>
+                                        <div id="countdown" style="display: none;"></div>
+                                    </c:if>
+                                </c:forEach>
+                                <iframe id="video2"
+                                        width="1100" height="620" src="${episode.movieLink}" frameborder="0" 
+                                        allow="accelerometer; autoplay; 
+                                        clipboard-write; encrypted-media; gyroscope; 
+                                        picture-in-picture; web-share" 
+                                        allowfullscreen>
+                                </iframe>
+                            </c:if>
 
+                            <c:if test="${account != null || sessionScope.account.role == 0 || sessionScope.account.role == 0}">
+                                <iframe src="${episode.movieLink}"  
+                                        width="1100" height="620" allow="accelerometer; autoplay; 
+                                        clipboard-write; encrypted-media; gyroscope; 
+                                        picture-in-picture; web-share" frameborder="0"
+                                        allowfullscreen>
+                                </iframe>
+                            </c:if>
                         </div>
 
                         <div class="anime__details__episodes">
@@ -96,20 +122,23 @@
                                         <c:choose>
                                             <c:when test="${dto.role == 0}">
                                                 <h6 style="color: red">
-                                                    ${dto.userName} - Admin <span style="color: #b7b7b7" > - ${com.caculDiffDay(dto.time)<=0?"Today":com.caculDiffDay(dto.time)} </span>
+                                                    ${dto.userName} - Admin <span style="color: #b7b7b7" > - 
+                                                        ${com.printDiffDay(dto.time)} </span>
 
                                                 </h6>
                                             </c:when>
 
                                             <c:when test="${dto.role == 1}">
                                                 <h6 style="color: yellow">
-                                                    ${dto.userName} - VIP User <span style="color: #b7b7b7" > - ${com.caculDiffDay(dto.time)<=0?"Today":com.caculDiffDay(dto.time)}</span>
+                                                    ${dto.userName} - VIP User <span style="color: #b7b7b7" > - 
+                                                        ${com.printDiffDay(dto.time)}</span>
                                                 </h6>
                                             </c:when>
 
                                             <c:otherwise>
                                                 <h6>
-                                                    ${dto.userName}  <span > - ${com.caculDiffDay(dto.time)<=0?"Today":com.caculDiffDay(dto.time) }</span>
+                                                    ${dto.userName}  <span > - 
+                                                        ${com.printDiffDay(dto.time)}</span>
                                                 </h6>
                                             </c:otherwise>
                                         </c:choose>
@@ -227,15 +256,67 @@
         <script src="js/jquery.slicknav.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
-        
+
         <script type="text/javascript">
-        function delecteCheck(id) {
-            if (confirm("Are you want to delete this comment")) {
-                window.location.href = 'addComment?del_id=' + id;
+                                function delecteCheck(id) {
+                                    if (confirm("Are you want to delete this comment")) {
+                                        window.location.href = 'addComment?del_id=' + id;
+                                    }
+                                }
+        </script>
+
+
+
+        <script>
+            var video1 = document.getElementById('video1');
+            var video2 = document.getElementById('video2');
+            var skipButton = document.getElementById('skip-button');
+            var countdown = document.getElementById('countdown');
+
+            var countdownDuration = 10;
+            var countdownInterval;
+
+            var timeLeft = countdownDuration;
+            //Start the countdown and hide the original "Skip" button
+            function startCountdown() {
+                countdown.innerHTML = 'Ads are skippable after ' + timeLeft + ' seconds';
+                countdown.style = 'display:block; color: white;  font-weight: 800px;\n\
+                                   position: absolute; bottom: 100px; right: 45px;\n\
+                                    background-color: rgb(49 47 47 / 80%); padding: 5px 21px; border-radius: 10px;'
+                skipButton.style.display = 'none';
+
+                countdownInterval = setInterval(function () {
+                    timeLeft--;
+                    countdown.innerHTML = 'Ads are skippable after ' + timeLeft + ' seconds';
+
+                    if (timeLeft <= 0) {
+                        clearInterval(countdownInterval);
+                        countdown.style.display = 'none';
+                        skipButton.innerHTML = 'Skip ads';
+                        skipButton.style = 'display:block;';
+                    }
+                }, 1000);
             }
-        }
-    </script>
-        
+
+            // When press Skip button
+            skipButton.addEventListener('click', function () {
+                video1.pause();
+                video1.style.display = 'none';
+                skipButton.style.display = 'none';
+                video2.style.display = 'block';
+                video2.play();
+            });
+
+            // Start countdown when click play button
+            video1.addEventListener('play', function () {
+
+                startCountdown();
+
+            });
+
+        </script>
+
+
         <style>
             .anime__review__item__text{
                 position: relative;
@@ -250,6 +331,31 @@
             .delete_button i{
                 color: white;
             }
+
+            .anime__video__player{
+                position: relative;
+            }
+
+            #video2 {
+                display: none;
+
+            }
+
+            #skip-button {
+                position: absolute;
+                bottom:  85px;
+                right: 75px;
+                background: none;
+                border: none;
+                font-size: 16px;
+                cursor: pointer;
+                color: white;
+                background-color: rgb(49 47 47 / 80%);
+                padding: 5px 21px;
+                border-radius: 10px;
+                font-weight: 800px;
+            }
+
         </style>
 
     </body>
