@@ -38,6 +38,7 @@ public class LoginControl extends HttpServlet {
         try {
             String user = request.getParameter("username");
             String pre_endcode_pass = request.getParameter("password");
+            String getRemem = request.getParameter("remem");
 
             AccountDAO loginDAO = new AccountDAO();
 
@@ -55,14 +56,17 @@ public class LoginControl extends HttpServlet {
                 request.setAttribute("error", "Wrong password");
                 request.getRequestDispatcher("Login.jsp").forward(request, response);
             } else {
-                Cookie userCookie = new Cookie("name", user);
-                Cookie passwordCookie = new Cookie("pass", pass);
-                //dat time ton tai
-                userCookie.setMaxAge(60 * 60 * 24);
-                passwordCookie.setMaxAge(60 * 60 * 24);
-                //add browser cua nguoi dung
-                response.addCookie(userCookie);
-                response.addCookie(passwordCookie);
+                
+                if (getRemem != null) {
+                    Cookie userCookie = new Cookie("name", user);
+                    Cookie passwordCookie = new Cookie("pass", pass);
+                    //dat time ton tai
+                    userCookie.setMaxAge(60 * 60 * 24);
+                    passwordCookie.setMaxAge(60 * 60 * 24);
+                    //add browser cua nguoi dung
+                    response.addCookie(userCookie);
+                    response.addCookie(passwordCookie);
+                }
                 
                 HttpSession session = request.getSession();
                 session.setAttribute("account", a);

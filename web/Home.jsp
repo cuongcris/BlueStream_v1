@@ -3,8 +3,11 @@
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <head>
         <%@include file="Head.jsp" %>
-        <title>Blue Stream - Home</title>
+        
+        <%@include file="Header.jsp" %>
         <%@include file="Advertisement.jsp" %>
+        <title>Blue Stream - Home</title>
+
     </head>
 
     <body>
@@ -12,9 +15,6 @@
         <div id="preloder">
             <div class="loader"></div>
         </div>
-
-        <%@include file="Header.jsp" %>
-
         <!-- Hero Section Begin -->
         <section class="hero">
             <div class="container">
@@ -87,7 +87,6 @@
                 <div class="row">
                     <div class="col-lg-8">
 
-
                         <!------------------------trending product-------------------------------------->
                         <div class="trending__product">
                             <div class="row">
@@ -119,7 +118,7 @@
                                                         <li> ${dto.category[0]}</li>
                                                         <li> ${dto.category[1]}</li>
                                                     </ul>
-                                                        <h5 style="color:#79797980;"><a href="DetailAnime?id=${dto.movieId}">${format.nameStandardization(dto.movieName)}</a></h5>
+                                                    <h5 style="color:#79797980;"><a href="DetailAnime?id=${dto.movieId}">${format.nameStandardization(dto.movieName)}</a></h5>
                                                 </div>
                                             </a>
                                         </div>
@@ -269,200 +268,199 @@
                     <!------------------------------------------------top view------------------->
 
                     <div class="col-lg-4 col-md-6 col-sm-8">
-                        
+
                         <c:if test="${account == null || sessionScope.account.role == 2}">
-                                
-                                <c:forEach var="dto" items ="${sessionScope.ads_show}" >
-                                    
-                                    <c:if test="${dto.type.equals('Invisible')}">
-                                        <div id="overlay" onclick="redirectToPage('${dto.linkTo}')"></div>
-                                    </c:if>
-                                        
-                                    <c:if test="${dto.type.equals('Gif')}">
-                                        <div class="product__sidebar__view">
-                                            <a href="${dto.linkTo}" target="_blank"> 
-                                                <img src="${dto.linkShow}" alt="alt"/>
-                                            <a>
-                                        </div>
-                                    </c:if>
-                                </c:forEach>
-                        </c:if>
-                        
-                        <div class="product__sidebar">
-                            <div class="product__sidebar__view">
-                                <div class="section-title">
-                                    <h5>Top Views</h5>
-                                </div>
-                                <ul class="filter__controls">
-                                    <li class="active" data-filter="*">Day</li>
-                                    <li data-filter=".week">Week</li>
-                                    <li data-filter=".month">Month</li>
-                                    <li data-filter=".years">Years</li>
-                                </ul>
-                                <div class="filter__gallery">
-                                    <div class="product__sidebar__view__item set-bg mix day years"
-                                         data-setbg="img/sidebar/tv-1.jpg">
-                                        <div class="ep">18 / ?</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                        <h5><a href="#">Boruto: Naruto next generations</a></h5>
-                                    </div>
-                                    <div class="product__sidebar__view__item set-bg mix month week"
-                                         data-setbg="img/sidebar/tv-2.jpg">
-                                        <div class="ep">18 / ?</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                        <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                                    </div>
-                                    <div class="product__sidebar__view__item set-bg mix week years"
-                                         data-setbg="img/sidebar/tv-3.jpg">
-                                        <div class="ep">18 / ?</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                        <h5><a href="#">Sword art online alicization war of underworld</a></h5>
-                                    </div>
-                                    <div class="product__sidebar__view__item set-bg mix years month"
-                                         data-setbg="img/sidebar/tv-4.jpg">
-                                        <div class="ep">18 / ?</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                        <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
-                                    </div>
-                                    <div class="product__sidebar__view__item set-bg mix day"
-                                         data-setbg="img/sidebar/tv-5.jpg">
-                                        <div class="ep">18 / ?</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                        <h5><a href="#">Fate stay night unlimited blade works</a></h5>
-                                    </div>
-                                </div>
-                            </div>
+                            <c:forEach var="dto" items ="${sessionScope.ads_show}" >
 
-                            <!---------------------recommend--------------------------------------------->
-                            <div class="product__sidebar__comment">
-                                <div class="section-title">
-                                    <h5>New Recommend</h5>
-                                </div>
-                                <c:set var="randomMovie" value ="${requestScope.randomMovie}" />
-                                <c:forEach var="dto" items ="${randomMovie}" begin="0" end="4" >
-                                    <div class="product__sidebar__comment__item" >
-                                        <div style="width: 90px ; height: 130px;" class="product__sidebar__comment__item__pic">
-                                            <img src="${dto.movieBanner}" alt="">
-                                        </div>
-                                        <div class="product__sidebar__comment__item__text">
-                                            <ul>
-                                                <li> ${dto.category[0]}</li>
-                                                <li> ${dto.category[1]}</li>
-                                            </ul>
-                                            <h5><a href="DetailAnime?id=${dto.movieId}">${format.nameStandardization(dto.movieName)}</a></h5>
-
-                                            <span style="font-size:13px;"><i class="fa fa-eye"></i>${format.formatNumber(dto.movieView)} Views</span>
-                                        </div>
-                                    </div>
-                                </c:forEach>
-                                <c:if test="${empty list}">
-                                    <h2>No record is matched!!!</h2>
+                                <c:if test="${dto.type.equals('Invisible')}">
+                                    <div id="overlay" onclick="redirectToPage('${dto.linkTo}')"></div>
                                 </c:if>
-                                <div class="product__sidebar__comment__item">
-                                    <div class="product__sidebar__comment__item__pic">
-                                        <img src="img/sidebar/comment-1.jpg" alt="">
+
+                                <c:if test="${dto.type.equals('Gif')}">
+                                    <div class="product__sidebar__view">
+                                        <a href="${dto.linkTo}" target="_blank"> 
+                                            <img src="${dto.linkShow}" alt="alt"/>
+                                            <a>
+                                                </div>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:if>
+
+                                    <div class="product__sidebar">
+                                        <div class="product__sidebar__view">
+                                            <div class="section-title">
+                                                <h5>Top Views</h5>
+                                            </div>
+                                            <ul class="filter__controls">
+                                                <li class="active" data-filter="*">Day</li>
+                                                <li data-filter=".week">Week</li>
+                                                <li data-filter=".month">Month</li>
+                                                <li data-filter=".years">Years</li>
+                                            </ul>
+                                            <div class="filter__gallery">
+                                                <div class="product__sidebar__view__item set-bg mix day years"
+                                                     data-setbg="img/sidebar/tv-1.jpg">
+                                                    <div class="ep">18 / ?</div>
+                                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                                    <h5><a href="#">Boruto: Naruto next generations</a></h5>
+                                                </div>
+                                                <div class="product__sidebar__view__item set-bg mix month week"
+                                                     data-setbg="img/sidebar/tv-2.jpg">
+                                                    <div class="ep">18 / ?</div>
+                                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                                    <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
+                                                </div>
+                                                <div class="product__sidebar__view__item set-bg mix week years"
+                                                     data-setbg="img/sidebar/tv-3.jpg">
+                                                    <div class="ep">18 / ?</div>
+                                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                                    <h5><a href="#">Sword art online alicization war of underworld</a></h5>
+                                                </div>
+                                                <div class="product__sidebar__view__item set-bg mix years month"
+                                                     data-setbg="img/sidebar/tv-4.jpg">
+                                                    <div class="ep">18 / ?</div>
+                                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                                    <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
+                                                </div>
+                                                <div class="product__sidebar__view__item set-bg mix day"
+                                                     data-setbg="img/sidebar/tv-5.jpg">
+                                                    <div class="ep">18 / ?</div>
+                                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                                    <h5><a href="#">Fate stay night unlimited blade works</a></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!---------------------recommend--------------------------------------------->
+                                        <div class="product__sidebar__comment">
+                                            <div class="section-title">
+                                                <h5>New Recommend</h5>
+                                            </div>
+                                            <c:set var="randomMovie" value ="${requestScope.randomMovie}" />
+                                            <c:forEach var="dto" items ="${randomMovie}" begin="0" end="4" >
+                                                <div class="product__sidebar__comment__item" >
+                                                    <div style="width: 90px ; height: 130px;" class="product__sidebar__comment__item__pic">
+                                                        <img src="${dto.movieBanner}" alt="">
+                                                    </div>
+                                                    <div class="product__sidebar__comment__item__text">
+                                                        <ul>
+                                                            <li> ${dto.category[0]}</li>
+                                                            <li> ${dto.category[1]}</li>
+                                                        </ul>
+                                                        <h5><a href="DetailAnime?id=${dto.movieId}">${format.nameStandardization(dto.movieName)}</a></h5>
+
+                                                        <span style="font-size:13px;"><i class="fa fa-eye"></i>${format.formatNumber(dto.movieView)} Views</span>
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
+                                            <c:if test="${empty list}">
+                                                <h2>No record is matched!!!</h2>
+                                            </c:if>
+                                            <div class="product__sidebar__comment__item">
+                                                <div class="product__sidebar__comment__item__pic">
+                                                    <img src="img/sidebar/comment-1.jpg" alt="">
+                                                </div>
+                                                <div class="product__sidebar__comment__item__text">
+                                                    <ul>
+                                                        <li>Active</li>
+                                                        <li>Movie</li>
+                                                    </ul>
+                                                    <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
+                                                    <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
+                                                </div>
+                                            </div>   
+                                        </div>
                                     </div>
-                                    <div class="product__sidebar__comment__item__text">
-                                        <ul>
-                                            <li>Active</li>
-                                            <li>Movie</li>
-                                        </ul>
-                                        <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                                        <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
                                     </div>
-                                </div>   
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Product Section End -->
+                                    </div>
+                                    </div>
+                                    </section>
+                                    <!-- Product Section End -->
 
-        <!-- Footer Section Begin -->
-        <footer class="footer">
-            <div class="page-up">
-                <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="footer__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="footer__nav">
-                            <ul>
-                                <li class="active"><a href="./index.html">Homepage</a></li>
-                                <li><a href="./categories.html">Categories</a></li>
-                                <li><a href="./blog.html">Our Blog</a></li>
-                                <li><a href="#">Contacts</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                                    <!-- Footer Section Begin -->
+                                    <footer class="footer">
+                                        <div class="page-up">
+                                            <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
+                                        </div>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <div class="footer__logo">
+                                                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="footer__nav">
+                                                        <ul>
+                                                            <li class="active"><a href="./index.html">Homepage</a></li>
+                                                            <li><a href="./categories.html">Categories</a></li>
+                                                            <li><a href="./blog.html">Our Blog</a></li>
+                                                            <li><a href="#">Contacts</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
 
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- Footer Section End -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </footer>
+                                    <!-- Footer Section End -->
 
-        <!-- Search model Begin -->
-        <div class="search-model">
-            <div class="h-100 d-flex align-items-center justify-content-center">
-                <div class="search-close-switch"><i class="icon_close"></i></div>
-                <form class="search-model-form">
-                    <input type="text" id="search-input" placeholder="Search here.....">
-                </form>
-            </div>
-        </div>
-        <!-- Search model end -->
+                                    <!-- Search model Begin -->
+                                    <div class="search-model">
+                                        <div class="h-100 d-flex align-items-center justify-content-center">
+                                            <div class="search-close-switch"><i class="icon_close"></i></div>
+                                            <form class="search-model-form">
+                                                <input type="text" id="search-input" placeholder="Search here.....">
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- Search model end -->
 
-        <!-- Js Plugins -->
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/player.js"></script>
-        <script src="js/jquery.nice-select.min.js"></script>
-        <script src="js/mixitup.min.js"></script>
-        <script src="js/jquery.slicknav.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/main.js"></script>
+                                    <!-- Js Plugins -->
+                                    <script src="js/jquery-3.3.1.min.js"></script>
+                                    <script src="js/bootstrap.min.js"></script>
+                                    <script src="js/player.js"></script>
+                                    <script src="js/jquery.nice-select.min.js"></script>
+                                    <script src="js/mixitup.min.js"></script>
+                                    <script src="js/jquery.slicknav.js"></script>
+                                    <script src="js/owl.carousel.min.js"></script>
+                                    <script src="js/main.js"></script>
 
-        <style>
-        #overlay {
-            position: fixed;
-            top: 15%;
-            left: 0;
-            width: 100%;
-            height: 90%;
-            background-color: rgba(0, 0, 0, 0.00001);
-            z-index: 9998;
-            cursor: pointer;
-        }
-        
-        .hero__text_details{
-            background-color: rgb(86 86 86 / 40%);
-        }
-        
-        .hero__text_details h2,
-        .hero__text_details p{
-            padding-left: 10px;
-        }
-        </style>
-        
-        <script>
-            function redirectToPage(link) {
-                var overlay = document.getElementById("overlay");
-                overlay.style.display = "none";
-                var newTab = window.open(link, "_blank");
-                newTab.focus();
-            }
-        </script>
-    </body>
+                                    <style>
+                                        #overlay {
+                                            position: fixed;
+                                            top: 15%;
+                                            left: 0;
+                                            width: 100%;
+                                            height: 90%;
+                                            background-color: rgba(0, 0, 0, 0.00001);
+                                            z-index: 9998;
+                                            cursor: pointer;
+                                        }
 
-</html>
+                                        .hero__text_details{
+                                            background-color: rgb(86 86 86 / 40%);
+                                        }
+
+                                        .hero__text_details h2,
+                                        .hero__text_details p{
+                                            padding-left: 10px;
+                                        }
+                                    </style>
+
+                                    <script>
+                                                            function redirectToPage(link) {
+                                                                var overlay = document.getElementById("overlay");
+                                                                overlay.style.display = "none";
+                                                                var newTab = window.open(link, "_blank");
+                                                                newTab.focus();
+                                                            }
+                                    </script>
+                                    </body>
+
+                                    </html>

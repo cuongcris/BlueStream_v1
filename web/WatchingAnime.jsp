@@ -45,7 +45,8 @@
                                 <c:forEach var="dto" items ="${sessionScope.ads_show}" >
                                     <c:if test="${dto.type.equals('Video')}">
                                         <a href="${dto.linkTo}" target="_blank">
-                                            <video id="video1" width="1100" height="620"
+                                            <video id="video1" 
+                                                   width="1100" height="620"
                                                    src="${dto.linkShow}"
                                                    controls autoplay>
                                             </video>
@@ -54,17 +55,20 @@
                                         <button id="skip-button" style="display: none;">Skip</button>
                                         <div id="countdown" style="display: none;"></div>
                                     </c:if>
+
+                                    <iframe id="video2"
+                                            width="1100" height="620" 
+                                            src="${episode.movieLink}" 
+                                            frameborder="0" 
+                                            allow="accelerometer; autoplay; 
+                                            clipboard-write; encrypted-media; gyroscope; 
+                                            picture-in-picture; web-share" 
+                                            allowfullscreen>
+                                    </iframe>
                                 </c:forEach>
-                                <iframe id="video2"
-                                        width="1100" height="620" src="${episode.movieLink}" frameborder="0" 
-                                        allow="accelerometer; autoplay; 
-                                        clipboard-write; encrypted-media; gyroscope; 
-                                        picture-in-picture; web-share" 
-                                        allowfullscreen>
-                                </iframe>
                             </c:if>
 
-                            <c:if test="${account != null || sessionScope.account.role == 0 || sessionScope.account.role == 0}">
+                            <c:if test="${account != null && sessionScope.account.role == 1 || account != null && sessionScope.account.role == 0}">
                                 <iframe src="${episode.movieLink}"  
                                         width="1100" height="620" allow="accelerometer; autoplay; 
                                         clipboard-write; encrypted-media; gyroscope; 
@@ -257,7 +261,7 @@
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
 
-        <script type="text/javascript">
+        <script>
                                 function delecteCheck(id) {
                                     if (confirm("Are you want to delete this comment")) {
                                         window.location.href = 'addComment?del_id=' + id;
@@ -338,7 +342,6 @@
 
             #video2 {
                 display: none;
-
             }
 
             #skip-button {

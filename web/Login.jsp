@@ -54,6 +54,11 @@
                                            title="Password must have a character and number." required>
                                     <span class="icon_lock"><i class="fa-solid fa-lock"></i></span>
                                 </div>
+                                
+                                <div class="input_remem">
+                                    <input type="checkbox" id="id" name="remem" value="remem">
+                                    <span>Remember me!</span>
+                                </div>
                                 <button type="submit" class="site-btn">Login Now</button>
                             </form>
                             <a href="#" class="forget_pass">Forgot Your Password?</a>
@@ -150,6 +155,21 @@
         }
         .welcome_mess h2{
             color: #25ff00;
+        }
+        
+        .input_remem{
+            margin-left: 10px;
+        }
+        
+        .input_remem #id{
+            height: 15px;
+            width: 15px;
+        }
+        
+        .input_remem span{
+            color: white;
+            font-size: 16px;
+            margin-left: 10px;
         }
 
     </style>
