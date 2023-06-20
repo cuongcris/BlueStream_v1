@@ -23,7 +23,7 @@ public class AdsDao {
 
     ResultSet re = null;
     Connection con = null;
-    PreparedStatement p1 = null;
+    PreparedStatement pe = null;
 
     public ArrayList<Advertisement> getAllAds() {
 //         con = null;
@@ -31,8 +31,8 @@ public class AdsDao {
         try {
             con = DBConnect.makeConnection();
             String stm1 = "select * from \"tbAdvertisement\"";
-            p1 = con.prepareStatement(stm1);
-            re = p1.executeQuery();
+            pe = con.prepareStatement(stm1);
+            re = pe.executeQuery();
             while (re.next()) {
                 String adsID = re.getString(1);
                 String adsOwnerEmail = re.getString(2);
@@ -53,7 +53,7 @@ public class AdsDao {
             try {
                 re.close();
                 con.close();
-                p1.close();
+                pe.close();
             } catch (SQLException ex) {
                 Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -77,10 +77,10 @@ public class AdsDao {
 
             con = DBConnect.makeConnection();
             String stm1 = "select * from \"tbAdvertisement\" where \"dayStart\" <= ? and \"dayEnd\" >= ?";
-            p1 = con.prepareStatement(stm1);
-            p1.setDate(1, date);
-            p1.setDate(2, date);
-            re = p1.executeQuery();
+            pe = con.prepareStatement(stm1);
+            pe.setDate(1, date);
+            pe.setDate(2, date);
+            re = pe.executeQuery();
             while (re.next()) {
                 String adsID = re.getString(1);
                 String adsOwnerEmail = re.getString(2);
@@ -104,7 +104,7 @@ public class AdsDao {
             try {
                 re.close();
                 con.close();
-                p1.close();
+                pe.close();
             } catch (SQLException ex) {
                 System.out.println(ex);
             }
@@ -112,22 +112,164 @@ public class AdsDao {
         return null;
     }
 
-    public static void main(String[] args) throws ParseException {
-        AdsDao adsDao = new AdsDao();
-        List<Advertisement> list = new ArrayList<>();
-//        list = adsDao.getAllAds();
-        LocalDate lc = LocalDate.now();
+    public boolean addNewAds(Advertisement ads) {
+        try {
+            String query = "insert into \"tbAdvertisement\" ( \"adsOwnerEmail\", "
+                    + "\"adsType\", \"adsPrice\", \"dayStart\", \"dayEnd\""
+                    + ", \"adsLinkTo\", \"adsLinkShow\")\n"
+                    + "values (?,?,?,?,?,?,?)";
 
-        String dateNow = " " + lc;
+            con = new DBConnect().makeConnection();
+            pe = con.prepareStatement(query);
+            pe.setString(1, ads.getOwnerEmail());
+            pe.setString(2, ads.getType());
+            pe.setInt(3, ads.getPrice());
+            pe.setDate(4, (java.sql.Date) ads.getDayStart());
+            pe.setDate(5, (java.sql.Date) ads.getDayEnd());
+            pe.setString(6, ads.getLinkTo());
+            pe.setString(7, ads.getLinkShow());
+            re = pe.executeQuery();
+
+            return true;
+        } catch (Exception e) {
+            if (e.toString().equals("org.postgresql.util.PSQLException: No results were returned by the query.")) {
+                return true;
+            }
+            System.err.println(e);
+        } finally {
+
+            try {
+                if (re != null) {
+                    re.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (pe != null) {
+                    pe.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        return false;
+    }
+
+    public boolean updateAds(Advertisement ads) {
+        try {
+            String query = "update \"tbAdvertisement\"\n"
+                    + "set \"adsOwnerEmail\" = ?,"
+                    + " \"adsType\" = ?,\n"
+                    + "\"adsPrice\" = ?, "
+                    + "\"dayStart\" = ?, "
+                    + "\"dayEnd\" = ?,\n"
+                    + "\"adsLinkTo\" = ?, "
+                    + "\"adsLinkShow\" = ?\n"
+                    + "where \"adsID\" = '"+ ads.getId() +"'";
+
+            con = new DBConnect().makeConnection();
+            pe = con.prepareStatement(query);
+            pe.setString(1, ads.getOwnerEmail());
+            pe.setString(2, ads.getType());
+            pe.setInt(3, ads.getPrice());
+            pe.setDate(4, (java.sql.Date) ads.getDayStart());
+            pe.setDate(5, (java.sql.Date) ads.getDayEnd());
+            pe.setString(6, ads.getLinkTo());
+            pe.setString(7, ads.getLinkShow());
+            
+            pe.executeUpdate();
+
+            return true;
+        } catch (Exception e) {
+            if (e.toString().equals("org.postgresql.util.PSQLException: No results were returned by the query.")) {
+                return true;
+            }
+            System.err.println(e);
+        } finally {
+
+            try {
+                if (re != null) {
+                    re.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (pe != null) {
+                    pe.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        return false;
+    }
+    
+    public void deleteAds(String adsID){
+        try {
+            String query = "delete from \"tbAdvertisement\""
+                    + "where \"adsID\" = '"+ adsID +"'";
+
+            con = new DBConnect().makeConnection();
+            pe = con.prepareStatement(query);
+            
+            pe.executeUpdate();
+
+        } catch (Exception e) {
+
+            System.err.println(e);
+        } finally {
+
+            try {
+                if (re != null) {
+                    re.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (pe != null) {
+                    pe.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }
+
+    public static void main(String[] args) throws ParseException {
+        AdsDao dao = new AdsDao();
+
+        String startDateString = "2040-01-01";
+        String endDateString = "2043-01-01";
+
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date endDateUtil = dateFormat.parse(dateNow);
 
-        Date startDate = new Date(endDateUtil.getTime());
+        try {
 
-        list = adsDao.getAdsByDate();
+            java.util.Date startDateUtil = dateFormat.parse(startDateString);
+            java.util.Date endDateUtil = dateFormat.parse(endDateString);
 
-        System.out.println(list.get(0).toString());
+            Date startDate = new Date(startDateUtil.getTime());
+            Date endDate = new Date(endDateUtil.getTime());
+
+            Advertisement ad = new Advertisement("52e1086f-c8ab-4cbf-b280-ad027e8b643b", "Video", "Video", 13120000, endDateString, endDateString, startDate, endDate);
+            
+            
+//            boolean executed = dao.addNewAds(ad);
+//            if(executed == true){
+//                System.out.println("Khong loi");
+//            }else{
+//                System.out.println("Loi");
+//            }
+
+              dao.deleteAds("8dc6e6a5-93b3-46ca-b706-9a909366bda7");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 
     }
 }

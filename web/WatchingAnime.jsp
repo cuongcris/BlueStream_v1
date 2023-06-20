@@ -48,7 +48,7 @@
                                             <video id="video1" 
                                                    width="1100" height="620"
                                                    src="${dto.linkShow}"
-                                                   controls autoplay>
+                                                   controls >
                                             </video>
                                         </a>
 

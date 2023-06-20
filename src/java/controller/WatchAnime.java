@@ -42,6 +42,9 @@ public class WatchAnime extends HttpServlet {
         //get eps
         Episodes episode = dao.getEpisodes(movieID, epNum);
         req.setAttribute("episode", episode);
+        
+        //increase view
+        dao.increaseView(movieID);
 
         //add Comment
         String commentContent = req.getParameter("content");

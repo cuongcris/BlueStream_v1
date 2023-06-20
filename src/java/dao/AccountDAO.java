@@ -188,6 +188,26 @@ public class AccountDAO {
 
         }
     }
+    
+    public void updatePassByEmail(String email, String password) {
+        try {
+            String query = "UPDATE \"tbAccount\" "
+                    + " SET \"Password\" = ?"
+                    + " WHERE \"Email\" = ?";
+
+            conn = new DBConnect().makeConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, password);
+            ps.setString(2, email);
+
+            rs = ps.executeQuery();
+            conn.close();
+            ps.close();
+            rs.close();
+        } catch (Exception e) {
+
+        }
+    }
     //check login google
 
     public ArrayList checkLogin(String userIDGoogle) {

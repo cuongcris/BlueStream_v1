@@ -52,6 +52,10 @@
         <servlet-name>LoginGoogleControl</servlet-name>
         <servlet-class>google.LoginGoogleControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>forgotPass</servlet-name>
+        <servlet-class>controller.ForgotPassServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>LoginGoogleControl</servlet-name>
         <url-pattern>/login_google</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>forgotPass</servlet-name>
+        <url-pattern>/ForgotPassServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

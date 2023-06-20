@@ -14,12 +14,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author ADMIN
  */
-public class ChangePassServlet extends HttpServlet {
+public class ForgotPassServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +41,10 @@ public class ChangePassServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ChangePassServlet</title>");
+            out.println("<title>Servlet ForgotPassServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ChangePassServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ForgotPassServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -74,50 +77,48 @@ public class ChangePassServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        try {
-            Encode en = new Encode();
-            String cur_pass = en.encode(request.getParameter("cur_pass"));
-            String new_pass = request.getParameter("new_pass");
-            String new_pass1 = request.getParameter("new_pass1");
+        AccountDAO dao = new AccountDAO();
+        Encode en = new Encode();
 
-            Account ac = new Account();
-            HttpSession session = request.getSession();
-            ac = (Account) session.getAttribute("account");
-            String old_pass_sess = ac.getPassword();
-            String username = ac.getUserName();
+        String email_get = request.getParameter("email");
 
-            if (cur_pass.equals(old_pass_sess) == false) {
-                request.setAttribute("error_mess1", "<div class=\"Error\">\n"
-                        + "                                                    <p>Wrong current Password</p>\n"
+        if (dao.checkEmailExist(email_get) == true) {
+            request.setAttribute("error_email", "<div class=\"Error\">\n"
+                    + "                                                    <p>Email are not valid in this system!!</p>\n"
+                    + "                                                </div>");
+            request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
+        } else {
+            String newPass = request.getParameter("newpassword");
+            String newPassConfirm = request.getParameter("pass_confirm");
+
+            if (newPass.equals(newPassConfirm) == false) {
+                request.setAttribute("error_pass", "<div class=\"Error\">\n"
+                        + "                                                    <p>New Password and Confirm Password are different!!</p>\n"
                         + "                                                </div>");
-                request.getRequestDispatcher("ChangePass.jsp").forward(request, response);
+                request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
             } else {
-                if (new_pass.equals(new_pass1) == false) {
-                    request.setAttribute("error_mess", "<div class=\"Error\">\n"
-                            + "                                                    <p>New Password and Confirm Password are different!!</p>\n"
-                            + "                                                </div>");
-                    request.getRequestDispatcher("ChangePass.jsp").forward(request, response);
-                } else {
-                    String email = ac.getEmail();
-
+                try {
                     OTP otp = new OTP();
                     String otp_send = otp.getOTP();
-
+                    
                     SendMail sm = new SendMail();
-                    sm.sendMailOTP(email, otp_send);
-
-                    String pass_encode = en.encode(new_pass);
+                    sm.sendMailOTP(email_get, otp_send);
+                    
+                    HttpSession session = request.getSession();
+                    
                     session.setAttribute("otp_session", otp_send);
-                    session.setAttribute("newPass", pass_encode);
-                    session.setAttribute("username", username);
-
+                    session.setAttribute("email_session", email_get);
+                    session.setAttribute("pass_session", en.encode(newPass));
+                    session.setAttribute("action", "resetPass");
+                    
                     request.getRequestDispatcher("CheckOTP.jsp").forward(request, response);
+                    
+                } catch (NoSuchAlgorithmException ex) {
+                    Logger.getLogger(ForgotPassServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
             }
-        } catch (Exception e) {
-
         }
-
     }
 
     /**

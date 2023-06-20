@@ -392,11 +392,42 @@ public class MovieDAO {
         return trailerLink;
     }
 
+    public void increaseView(String movieID) {
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet re = null;
+
+        try {
+            con = DBConnect.makeConnection();
+            String query = "update \"tbMovie\" \n"
+                    + "set \"View\" = \"View\" + 1\n"
+                    + "where \"MovieID\" = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, movieID);
+            ps.executeUpdate();
+            System.out.println("Increase view successful");
+        } catch (SQLException e) {
+            System.err.println(e.toString());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         MovieDAO dao = new MovieDAO();
-        System.out.println(dao.getTrailerByMovieID("DBS1809"));
-//        System.out.println(m.ge.toString());
-
+        dao.increaseView("OPM231");
     }
 
 }

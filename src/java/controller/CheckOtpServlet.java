@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import dao.AccountDAO;
@@ -21,10 +20,10 @@ import java.security.NoSuchAlgorithmException;
  * @author Admin
  */
 public class CheckOtpServlet extends HttpServlet {
-   
-     @Override
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         PrintWriter pr = response.getWriter();
         String otp1_get = request.getParameter("otp1");
         String otp2_get = request.getParameter("otp2");
@@ -38,30 +37,47 @@ public class CheckOtpServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String otp_send = (String) session.getAttribute("otp_session");
         String email_session = (String) session.getAttribute("email_session");
-        String username_session = (String) session.getAttribute("username_session");
         String pass_session = (String) session.getAttribute("pass_session");
-        
-        if (otp_get.equals(otp_send)) {
-            Encode en = new Encode();
-            try {
-                String encodePass = en.encode(pass_session);
-                Account acc = new Account(username_session, encodePass, email_session, null, null, null, null, 2, null);
-                
-                AccountDAO ac = new AccountDAO();
-                ac.addNewAccount(acc);
-            } catch (NoSuchAlgorithmException ex) {
-                System.out.println(ex);
+
+        AccountDAO ac = new AccountDAO();
+
+        String action = null;
+        action = (String) session.getAttribute("action");
+
+        if (action != null && action.equals("resetPass")) {
+            if (otp_get.equals(otp_send)) {
+                ac.updatePassByEmail(email_session, pass_session);
+                request.setAttribute("regis_sucsess", "<h2>Reset Password Success</h2>");
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
+            } else {
+                request.setAttribute("error_Code", "<div class=\"error-text\">Error!!Wrong OTP code.</div>");
+                request.getRequestDispatcher("CheckOTP.jsp").forward(request, response);
             }
-            session.removeAttribute("otp_session");
-            session.removeAttribute("email_session");
-            session.removeAttribute("username_session");
-            session.removeAttribute("pass_session");
-            
-            request.setAttribute("regis_sucsess", "<h2>Sign Up Success</h2>");
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
-        } else {
-            request.setAttribute("error_Code", "<div class=\"error-text\">Error!!Wrong OTP code.</div>");
-            request.getRequestDispatcher("CheckOTP.jsp").forward(request, response);
+        } else if (action != null && action.equals("signUp")) {
+            String username_session = (String) session.getAttribute("username_session");
+
+            if (otp_get.equals(otp_send)) {
+                Encode en = new Encode();
+                try {
+                    String encodePass = en.encode(pass_session);
+                    Account acc = new Account(username_session, encodePass, email_session, null, null, null, null, 2, null);
+
+                    ac.addNewAccount(acc);
+                } catch (NoSuchAlgorithmException ex) {
+                    System.out.println(ex);
+                }
+                session.removeAttribute("otp_session");
+                session.removeAttribute("email_session");
+                session.removeAttribute("username_session");
+                session.removeAttribute("pass_session");
+
+                request.setAttribute("regis_sucsess", "<h2>Sign Up Success</h2>");
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
+            } else {
+                request.setAttribute("error_Code", "<div class=\"error-text\">Error!!Wrong OTP code.</div>");
+                request.getRequestDispatcher("CheckOTP.jsp").forward(request, response);
+            }
         }
+
     }
 }

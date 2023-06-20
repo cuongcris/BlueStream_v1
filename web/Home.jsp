@@ -3,7 +3,7 @@
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <head>
         <%@include file="Head.jsp" %>
-        
+
         <%@include file="Header.jsp" %>
         <%@include file="Advertisement.jsp" %>
         <title>Blue Stream - Home</title>
@@ -450,6 +450,10 @@
                                         .hero__text_details h2,
                                         .hero__text_details p{
                                             padding-left: 10px;
+                                        }
+
+                                        .product__item:hover{
+                                            transform: scale(1.1);
                                         }
                                     </style>
 
