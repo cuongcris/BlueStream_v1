@@ -6,6 +6,7 @@ package controller;
 
 import dao.AccountDAO;
 import entity.Account;
+import entity.OTP;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -97,14 +98,20 @@ public class ChangePassServlet extends HttpServlet {
                             + "                                                </div>");
                     request.getRequestDispatcher("ChangePass.jsp").forward(request, response);
                 } else {
-                    AccountDAO dao = new AccountDAO();
-                    dao.updatePass(username, en.encode(new_pass1));
+                    String email = ac.getEmail();
 
-                    Account a = dao.CheckLogin(username, en.encode(new_pass1));
+                    OTP otp = new OTP();
+                    String otp_send = otp.getOTP();
 
-                    session.setAttribute("account", a);
+                    SendMail sm = new SendMail();
+                    sm.sendMailOTP(email, otp_send);
 
-                    request.getRequestDispatcher("profile.jsp").forward(request, response);
+                    String pass_encode = en.encode(new_pass);
+                    session.setAttribute("otp_session", otp_send);
+                    session.setAttribute("newPass", pass_encode);
+                    session.setAttribute("username", username);
+
+                    request.getRequestDispatcher("CheckOTPChangePass.jsp").forward(request, response);
                 }
             }
         } catch (Exception e) {
