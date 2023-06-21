@@ -273,15 +273,15 @@ public class AccountDAO {
             }
         }
     }
-    public void InsertPayment(String userID , int money,int type) {
+    public void InsertPayment(String userID , int money,String type) {
         try {
             String query = "insert into \"tbPayment\" (\"UserID\",\"Money\",\"PaymentDate\",\"PaymentType\") values('"+ userID+"',?,now(),?)" ;
 
             conn = new DBConnect().makeConnection();
             ps = conn.prepareStatement(query);
             ps.setInt(1, money);
-            ps.setInt(2, type);
-                        System.out.println("thanh cong");
+            ps.setString(2, type);
+            System.out.println("INSERT THANH CONG ");
 
             ps.executeQuery();
         } catch (Exception e) {
@@ -295,11 +295,9 @@ public class AccountDAO {
             }
         }
     }
+    
     public static void main(String[] args) {
         AccountDAO ac = new AccountDAO();
-
-        
-        ac.updateRoleToVip("17a24030-d261-44b0-82d1-1f7005974a81");
+        ac.InsertPayment("17a24030-d261-44b0-82d1-1f7005974a81",500000,"UpVip");
     }
-
 }

@@ -184,6 +184,15 @@ public class CommentDAO {
 
     return commentCount;
 }
+        //set time
+    public String printDiffDay(Date commentDay) {
+        LocalDate currentDate = LocalDate.now();
+        String dateString = "" + commentDay;
+        LocalDate specificDate = LocalDate.parse(dateString);
+        long daysDifference = specificDate.until(currentDate, ChronoUnit.DAYS);
+        if(daysDifference <= 0) return "Today!";
+        else return daysDifference + " day ago!";
+    }
     public static void main(String[] args) {
         CommentDAO cm = new CommentDAO();
         System.out.println(cm.getCommentCount("DBS1809"));

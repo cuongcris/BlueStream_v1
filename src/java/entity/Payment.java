@@ -15,9 +15,9 @@ public class Payment {
     private String userID;
     private int money;
     private Date paymentDate;
-    private int paymentType;
+    private String paymentType;
 
-    public Payment(String paymentID, String userID, int money, Date paymentDate, int paymentType) {
+    public Payment(String paymentID, String userID, int money, Date paymentDate, String paymentType) {
         this.paymentID = paymentID;
         this.userID = userID;
         this.money = money;
@@ -57,11 +57,11 @@ public class Payment {
         this.paymentDate = paymentDate;
     }
 
-    public int getPaymentType() {
+    public String getPaymentType() {
         return paymentType;
     }
 
-    public void setPaymentType(int paymentType) {
+    public void setPaymentType(String paymentType) {
         this.paymentType = paymentType;
     }
 

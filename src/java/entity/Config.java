@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class Config {
 
     public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    public static String vnp_Returnurl = "http://localhost:8080/BlueFashion/updateVip";
+    public static String vnp_Returnurl = "http://localhost:8080/BlueFashion/UpdateVip";
     public static String vnp_TmnCode = "6908U0K6";
     public static String vnp_HashSecret = "CWGBYYGSYIARCHJFYNZKDKZCULRRDYXW";
     public static String vnp_apiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";

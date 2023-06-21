@@ -12,15 +12,28 @@
       rel="stylesheet">
 <!-- Css Styles -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link href="
-      https://cdn.jsdelivr.net/npm/@icon/elegant-icons@0.0.1-alpha.4/elegant-icons.min.css
-      " rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css"  type="text/css/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css" type="text/css />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/fontawesome.min.js" />
+
+
+
+
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="css/font-awesome.min.css"/>
-<link rel="stylesheet" href="elegant-icons.css" type="text/css"/>
+<link rel="stylesheet" href="css/elegant-icons.css" type="text/css"/>
 <link rel="stylesheet" href="css/plyr.css" type="text/css">
 <link rel="stylesheet" href="css/nice-select.css" type="text/css">
 <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
 <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="css/style.css" type="text/css">
+
+<link href="js/jquery-3.3.1.min.js">
+<link href="js/bootstrap.min.js">
+<link href="js/player.js">
+<link href="js/jquery.nice-select.min.js">
+<link href="js/mixitup.min.js">
+<link href="js/jquery.slicknav.js">
+<link href="js/owl.carousel.min.js">
 
