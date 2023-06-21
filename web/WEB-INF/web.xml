@@ -65,21 +65,26 @@
         <servlet-class>controller.vnPay.vnpayQuery</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>updateVipServlet</servlet-name>
-        <servlet-class>controller.updateVipServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UpdateVipNavigationServlet</servlet-name>
-        <servlet-class>controller.UpdateVipNavigationServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>NavigationDonateServlet</servlet-name>
-        <servlet-class>controller.NavigationDonate</servlet-class>
+        <servlet-class>controller.NavigationDonateServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>NavigationUpdateVipServlet</servlet-name>
         <servlet-class>controller.NavigationUpdateVipServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateVipServlet</servlet-name>
+        <servlet-class>controller.UpdateVipServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HistoryServlet</servlet-name>
+        <servlet-class>controller.HistoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteHistoryServlet</servlet-name>
+        <servlet-class>controller.DeleteHistoryServlet</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -145,14 +150,6 @@
         <url-pattern>/vnpayQuery</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>updateVipServlet</servlet-name>
-        <url-pattern>/updateVip</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UpdateVipNavigationServlet</servlet-name>
-        <url-pattern>/UpdateVipNavigation</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>NavigationDonateServlet</servlet-name>
         <url-pattern>/NavigationDonate</url-pattern>
     </servlet-mapping>
@@ -160,6 +157,19 @@
         <servlet-name>NavigationUpdateVipServlet</servlet-name>
         <url-pattern>/NavigationUpdateVip</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateVipServlet</servlet-name>
+        <url-pattern>/UpdateVip</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HistoryServlet</servlet-name>
+        <url-pattern>/History</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteHistoryServlet</servlet-name>
+        <url-pattern>/DeleteHistory</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

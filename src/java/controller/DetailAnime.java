@@ -6,12 +6,14 @@
 package controller;
 
 import dao.MovieDAO;
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -24,12 +26,14 @@ public class DetailAnime extends HttpServlet {
         MovieDAO dao = new MovieDAO();
         String id = req.getParameter("id");
         
+        
         req.setAttribute("M", dao.getMovieById(id));
         req.setAttribute("totalEp", dao.getEpisodeCountByMovieId(id));
         req.setAttribute("trailerLink", dao.getTrailerByMovieID(id));
         
         req.getRequestDispatcher("DetailAnime.jsp").forward(req, resp);
     }
+    
    
    
    

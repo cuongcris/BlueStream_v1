@@ -4,6 +4,7 @@ package controller;
 import dao.CommentDAO;
 import entity.Comment;
 import dao.MovieDAO;
+import entity.Account;
 import entity.Episodes;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -22,6 +23,7 @@ public class WatchAnime extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, NumberFormatException {
         HttpSession session = req.getSession(true);
+        Account acc = (Account) session.getAttribute("account");
         
         MovieDAO dao = new MovieDAO();
         CommentDAO cmDAO = new CommentDAO();
@@ -33,7 +35,13 @@ public class WatchAnime extends HttpServlet {
         int epNum = Integer.parseInt(epNumString);
         req.setAttribute("epNumShow", epNum);
 
-
+        if(acc != null ){
+            if(dao.checkHistory(acc.getUserID(), movieID)==false)
+                dao.SaveHistory(acc.getUserID(), movieID, epNum);
+            else
+                dao.UpdateHistory(acc.getUserID(), movieID, epNum);
+        }
+        
         //set sesion
         session.setAttribute("epNum", epNum);
         session.setAttribute("movieID", movieID);

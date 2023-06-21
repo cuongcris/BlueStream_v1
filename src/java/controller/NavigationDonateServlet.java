@@ -5,9 +5,8 @@
 
 package controller;
 
-import dao.AccountDAO;
-import entity.Account;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,20 +17,17 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author Admin
  */
-public class updateVipServlet extends HttpServlet {
+public class NavigationDonateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        AccountDAO dao = new AccountDAO();
-//        long amount = Integer.parseInt(req.getParameter("amount"));
-        Account acc = (Account) session.getAttribute("account");
-        dao.updateRoleToVip(acc.getUserID());
-//        dao.InsertPayment(acc.getUserName(),amount,1);
-        Account a = dao.CheckLogin(acc.getUserName(), acc.getPassword());
-        session.setAttribute("account", a);
-        resp.sendRedirect("home");
+         HttpSession session = req.getSession();
+         session.setAttribute("payment", "sDonate");
+         req.setAttribute("value", "");
+        req.setAttribute("readonly", "");
+        req.getRequestDispatcher("vnpay_pay.jsp").forward(req, resp);
     }
    
-    
+  
+
 }

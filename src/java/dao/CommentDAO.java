@@ -26,9 +26,9 @@ import java.util.logging.Logger;
  */
 public class CommentDAO {
 
-    Connection conn = null;
+    Connection con = null;
     PreparedStatement ps = null;
-    ResultSet rs = null;
+    ResultSet re = null;
 
     public List<Comment> GetlistComment(String epID) {
         List<Comment> list = new ArrayList<>();
@@ -37,23 +37,28 @@ public class CommentDAO {
             String query = "select \"CommentID\", a.\"UserID\", \"EpID\", \"CommentContent\", \"time\", \"Image\", \"UserName\", \"Role\"\n"
                     + "from \"tbComment\" a, \"tbAccount\" b \n"
                     + "where a.\"UserID\" = b.\"UserID\" and a.\"EpID\" = '" + epID + "'";
-            conn = new DBConnect().makeConnection();
-            ps = conn.prepareStatement(query);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Comment(rs.getString(1), rs.getString(2), rs.getString(3),
-                        rs.getString(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getInt(8)));
+            con = new DBConnect().makeConnection();
+            ps = con.prepareStatement(query);
+            re = ps.executeQuery();
+            while (re.next()) {
+                list.add(new Comment(re.getString(1), re.getString(2), re.getString(3),
+                        re.getString(4), re.getDate(5), re.getString(6), re.getString(7), re.getInt(8)));
             }
-            
         } catch (Exception e) {
             System.err.println(e);
         } finally {
 
             try {
-                conn.close();
-                ps.close();
-                rs.close();
-            } catch (SQLException ex) {
+                if (re != null) {
+                    re.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            }  catch (SQLException ex) {
                 Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -81,14 +86,21 @@ public class CommentDAO {
             p1.executeUpdate();
 
         } catch (Exception e) {
-            System.out.println("Error: " + e);
-            System.out.println("loi r");
-        } finally {
-            try {
-                con.close();
-                p1.close();
-            } catch (SQLException ex) {
+            System.out.println("Error in delete comment: " + e);
+        }finally {
 
+            try {
+                if (re != null) {
+                    re.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            }  catch (SQLException ex) {
+                Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -110,15 +122,21 @@ public class CommentDAO {
                 epID = re.getString(1);
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e);
-            System.out.println("loi r");
+            System.out.println("Error in getEpsID: " + e);
         } finally {
-            try {
-                con.close();
-                p1.close();
-                re.close();
-            } catch (SQLException ex) {
 
+            try {
+                if (re != null) {
+                    re.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            }  catch (SQLException ex) {
+                Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -134,21 +152,27 @@ public class CommentDAO {
         java.sql.Date sqlDate = java.sql.Date.valueOf(date);
         try {
             String query = "insert into \"tbComment\" (\"UserID\", \"EpID\",\"CommentContent\",\"time\" ) values ('" + useID + "','" + epsID + "'  , ?, ?)";
-            conn = new DBConnect().makeConnection();
-            ps = conn.prepareStatement(query);
+            con = new DBConnect().makeConnection();
+            ps = con.prepareStatement(query);
             ps.setString(1, content);
             ps.setDate(2, sqlDate);
-            rs = ps.executeQuery();
+            re = ps.executeQuery();
 
         } catch (Exception e) {
             System.err.println(e);
         } finally {
 
             try {
-                conn.close();
-                ps.close();
-                rs.close();
-            } catch (SQLException ex) {
+                if (re != null) {
+                    re.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            }  catch (SQLException ex) {
                 Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -162,28 +186,45 @@ public class CommentDAO {
         String query = "SELECT COUNT(\"CommentID\") AS \"CommentCount\" FROM \"tbComment\" " +
                        "INNER JOIN \"tbEpisodes\" ON \"tbComment\".\"EpID\" = \"tbEpisodes\".\"EpID\" " +
                        "WHERE \"tbEpisodes\".\"MovieID\" = ?";
-        conn = new DBConnect().makeConnection();
-        ps = conn.prepareStatement(query);
+        con = new DBConnect().makeConnection();
+        ps = con.prepareStatement(query);
         ps.setString(1, movieID);
-        rs = ps.executeQuery();
+        re = ps.executeQuery();
 
-        if (rs.next()) {
-            commentCount = rs.getInt("CommentCount");
+        if (re.next()) {
+            commentCount = re.getInt("CommentCount");
         }
     } catch (Exception e) {
         System.err.println(e);
     } finally {
-        try {
-            conn.close();
-            ps.close();
-            rs.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+            try {
+                if (re != null) {
+                    re.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            }  catch (SQLException ex) {
+                Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
-    }
 
     return commentCount;
 }
+        //set time
+    public String printDiffDay(Date commentDay) {
+        LocalDate currentDate = LocalDate.now();
+        String dateString = "" + commentDay;
+        LocalDate specificDate = LocalDate.parse(dateString);
+        long daysDifference = specificDate.until(currentDate, ChronoUnit.DAYS);
+        if(daysDifference <= 0) return "Today!";
+        else return daysDifference + " day ago!";
+    }
     public static void main(String[] args) {
         CommentDAO cm = new CommentDAO();
         System.out.println(cm.getCommentCount("DBS1809"));
