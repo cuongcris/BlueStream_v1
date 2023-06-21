@@ -49,16 +49,7 @@
                                     <h3>${M.movieName}</h3>
                                     <span>${M.movieName}</span>
                                 </div>
-                                <!--                            <div class="anime__details__rating">
-                                                                <div class="rating">
-                                                                    <a href="#"><i class="fa fa-star"></i></a>
-                                                                    <a href="#"><i class="fa fa-star"></i></a>
-                                                                    <a href="#"><i class="fa fa-star"></i></a>
-                                                                    <a href="#"><i class="fa fa-star"></i></a>
-                                                                    <a href="#"><i class="fa fa-star-half-o"></i></a>
-                                                                </div>
-                                                                <span>1.029 Votes</span>
-                                                            </div>-->
+
                                 <p>${M.description}</p>
                                 <div class="anime__details__widget">
                                     <div class="row">
@@ -134,7 +125,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button onclick="window.location = 'Blog.jsp'" type="button" class="btn btn-primary">Go to Update</button>
+                                                            <button onclick="window.location = ''" type="button" class="btn btn-primary">Go to Update</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -159,7 +150,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button onclick="window.location = 'Blog.jsp'" type="button" class="btn btn-primary">Go to Update</button>
+                                                            <button onclick="window.location = 'NavigationUpdateVip'" type="button" class="btn btn-primary">Go to Update</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -177,8 +168,7 @@
 
                                     <!--role vip or admin-->
                                     <c:if test="${sessionScope.account != null &&( sessionScope.account.role == 1 ||sessionScope.account.role == 0 )}">
-                                        <a href="#" class="watch-btn"></i> 
-
+                                        <a href="#" onclick="sendFavoriteRequest('${M.movieId}'); return false;"  class="watch-btn"></i> 
                                             <span > Favorite
                                             </span>
                                         </a>
@@ -199,6 +189,15 @@
                     </div>
                 </div>
                 <h3 style="color :white; margin-bottom: 10px;    ">Trailer</h3>
+
+                <div id="success-message" style=" position: fixed;
+                     top: 20px;
+                     right: 20px;
+                     padding: 10px;
+                     background-color: #42b983;
+                     color: #fff;
+                     display: none;" class="notification">Save thành công</div>
+
 
                 <div class="row">
 
@@ -246,8 +245,32 @@
             </div>
         </section>
         <!-- Anime Section End -->
+        <script>
+            function sendFavoriteRequest(movieId) {
+                var form = document.createElement('form');
+                form.method = 'post';
+                form.action = 'DetailAnime';
 
-       <%@include file="Footer.jsp" %>
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'id';
+                input.value = movieId;
+
+                form.appendChild(input);
+                document.body.appendChild(form);
+
+                form.submit();
+                showSuccessMessage();
+            }
+            function showSuccessMessage() {
+                var message = document.getElementById('success-message');
+                message.style.display = 'block';
+                setTimeout(function () {
+                    message.style.display = 'none';
+                }, 3000);
+            }
+        </script>
+        <%@include file="Footer.jsp" %>
 
         <style>
             .anime__details__btn .hover-button {

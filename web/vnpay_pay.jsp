@@ -19,6 +19,8 @@
     </head>
 
     <body>
+        <!-- Page Preloder -->
+        
         <%@include file="Header.jsp" %>
       
         <div class="container-pay" style="margin-top:100px; ">
@@ -32,7 +34,7 @@
                 <form action="ajaxServlet" id="frmCreateOrder" method="post">        
                     <div class="form-group ">
                         <label style="color: white ; margin: 20px 0;" for="amount">Số tiền (VND)</label>
-                        <input ${readonly} class="form-control" data-val="true" data-val-number="The field Amount must be a number." data-val-required="The Amount field is required." id="amount" max="100000000" min="1" name="amount" type="number" value="${value}" />
+                        <input ${readonly} required class="form-control" data-val="true" data-val-number="The field Amount must be a number." data-val-required="The Amount field is required." id="amount" max="100000000" min="1" name="amount" type="number" value="${value}" />
 
                     </div>
                     <h4 style="color: white; margin-bottom: 20px">Chọn phương thức thanh toán</h4>

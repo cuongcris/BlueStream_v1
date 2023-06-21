@@ -3,8 +3,9 @@
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <head>
         <%@include file="Head.jsp" %>
-        <title>Blue Stream - Home</title>
+         <%@include file="Header.jsp" %>
         <%@include file="Advertisement.jsp" %>
+        <title>Blue Stream - Home</title>
     </head>
 
     <body>
@@ -13,7 +14,6 @@
             <div class="loader"></div>
         </div>
 
-        <%@include file="Header.jsp" %>
 
         <!-- Hero Section Begin -->
         <section class="hero">
@@ -98,7 +98,7 @@
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                     <div class="btn__all">
-                                        <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                        <a href="AllMovie" class="primary-btn">View All <span class="arrow_right"></span></a>
                                     </div>
                                 </div>
                             </div>
@@ -110,8 +110,7 @@
                                         <div class="product__item">
                                             <a href="DetailAnime?id=${dto.movieId}">
                                                 <div style="cursor: pointer;" class="product__item__pic set-bg" data-setbg=${dto.movieBanner}>
-                                                    <div class="ep">18 / 18</div>
-                                                    <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                                    <div  class="ep">${dto.movieStatus}</div>
                                                     <div class="view"><i class="fa fa-eye"></i> ${format.formatNumber(dto.movieView)} </div>
                                                 </div>
                                                 <div class="product__item__text">
@@ -142,7 +141,7 @@
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                     <div class="btn__all">
-                                        <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                        <a href="AllMovie" class="primary-btn">View All <span class="arrow_right"></span></a>
                                     </div>
                                 </div>
                             </div>
@@ -154,8 +153,7 @@
                                         <div class="product__item">
                                             <a href="DetailAnime?id=${dto.movieId}">
                                                 <div style="cursor: pointer;" class="product__item__pic set-bg" data-setbg=${dto.movieBanner}>
-                                                    <div class="ep">18 / 18</div>
-                                                    <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                                    <div  class="ep">${dto.movieStatus}</div>
                                                     <div class="view"><i class="fa fa-eye"></i> ${format.formatNumber(dto.movieView)}</div>
                                                 </div>
                                                 <div class="product__item__text">
@@ -187,7 +185,7 @@
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                     <div class="btn__all">
-                                        <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                        <a href="AllMovie" class="primary-btn">View All <span class="arrow_right"></span></a>
                                     </div>
                                 </div>
                             </div>
@@ -199,8 +197,7 @@
                                         <div class="product__item">
                                             <a href="DetailAnime?id=${dto.movieId}">
                                                 <div style="cursor: pointer;" class="product__item__pic set-bg" data-setbg=${dto.movieBanner}>
-                                                    <div class="ep">18 / 18</div>
-                                                    <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                                    <div  class="ep">${dto.movieStatus}</div>
                                                     <div class="view"><i class="fa fa-eye"></i> ${format.formatNumber(dto.movieView)}</div>
                                                 </div>
                                                 <div class="product__item__text">
@@ -230,7 +227,7 @@
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                     <div class="btn__all">
-                                        <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                        <a href="AllMovie" class="primary-btn">View All <span class="arrow_right"></span></a>
                                     </div>
                                 </div>
                             </div>
@@ -242,7 +239,7 @@
                                         <div class="product__item">
                                             <a href="DetailAnime?id=${dto.movieId}">
                                                 <div style="cursor: pointer;" class="product__item__pic set-bg" data-setbg=${dto.movieBanner}>
-                                                    <div class="ep">18 / 18</div>
+                                                    <div  class="ep">${dto.movieStatus}</div>
                                                     <div class="comment"><i class="fa fa-comments"></i> 11</div>
                                                     <div class="view"><i class="fa fa-eye"></i> ${format.formatNumber(dto.movieView)}</div>
                                                 </div>
@@ -302,31 +299,26 @@
                                 <div class="filter__gallery">
                                     <div class="product__sidebar__view__item set-bg mix day years"
                                          data-setbg="img/sidebar/tv-1.jpg">
-                                        <div class="ep">18 / ?</div>
                                         <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                         <h5><a href="#">Boruto: Naruto next generations</a></h5>
                                     </div>
                                     <div class="product__sidebar__view__item set-bg mix month week"
                                          data-setbg="img/sidebar/tv-2.jpg">
-                                        <div class="ep">18 / ?</div>
                                         <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                         <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
                                     </div>
                                     <div class="product__sidebar__view__item set-bg mix week years"
                                          data-setbg="img/sidebar/tv-3.jpg">
-                                        <div class="ep">18 / ?</div>
                                         <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                         <h5><a href="#">Sword art online alicization war of underworld</a></h5>
                                     </div>
                                     <div class="product__sidebar__view__item set-bg mix years month"
                                          data-setbg="img/sidebar/tv-4.jpg">
-                                        <div class="ep">18 / ?</div>
                                         <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                         <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
                                     </div>
                                     <div class="product__sidebar__view__item set-bg mix day"
                                          data-setbg="img/sidebar/tv-5.jpg">
-                                        <div class="ep">18 / ?</div>
                                         <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                         <h5><a href="#">Fate stay night unlimited blade works</a></h5>
                                     </div>
@@ -396,7 +388,9 @@
         .hero__text_details{
             background-color: rgb(86 86 86 / 40%);
         }
-        
+        .product__item:hover{
+            transform: scale(1.01);
+        }
         .hero__text_details h2,
         .hero__text_details p{
             padding-left: 10px;

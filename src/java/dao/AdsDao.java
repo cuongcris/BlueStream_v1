@@ -23,7 +23,7 @@ public class AdsDao {
 
     ResultSet re = null;
     Connection con = null;
-    PreparedStatement p1 = null;
+    PreparedStatement ps = null;
 
     public ArrayList<Advertisement> getAllAds() {
 //         con = null;
@@ -31,8 +31,8 @@ public class AdsDao {
         try {
             con = DBConnect.makeConnection();
             String stm1 = "select * from \"tbAdvertisement\"";
-            p1 = con.prepareStatement(stm1);
-            re = p1.executeQuery();
+            ps = con.prepareStatement(stm1);
+            re = ps.executeQuery();
             while (re.next()) {
                 String adsID = re.getString(1);
                 String adsOwnerEmail = re.getString(2);
@@ -48,15 +48,23 @@ public class AdsDao {
         } catch (SQLException e) {
             System.out.println("Error: " + e);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdsDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
+
             try {
-                re.close();
-                con.close();
-                p1.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+                if (re != null) {
+                    re.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            }  catch (SQLException ex) {
+                Logger.getLogger(AdsDao.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
         return result;
     }
@@ -77,10 +85,10 @@ public class AdsDao {
 
             con = DBConnect.makeConnection();
             String stm1 = "select * from \"tbAdvertisement\" where \"dayStart\" <= ? and \"dayEnd\" >= ?";
-            p1 = con.prepareStatement(stm1);
-            p1.setDate(1, date);
-            p1.setDate(2, date);
-            re = p1.executeQuery();
+            ps = con.prepareStatement(stm1);
+            ps.setDate(1, date);
+            ps.setDate(2, date);
+            re = ps.executeQuery();
             while (re.next()) {
                 String adsID = re.getString(1);
                 String adsOwnerEmail = re.getString(2);
@@ -100,14 +108,22 @@ public class AdsDao {
             System.out.println(ex);
         } catch (ParseException ex) {
             Logger.getLogger(AdsDao.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+        }finally {
+
             try {
-                re.close();
-                con.close();
-                p1.close();
-            } catch (SQLException ex) {
-                System.out.println(ex);
+                if (re != null) {
+                    re.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            }  catch (SQLException ex) {
+                Logger.getLogger(AdsDao.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
         return null;
     }
