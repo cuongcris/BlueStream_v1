@@ -6,7 +6,7 @@ package dao;
 
 import context.DBConnect;
 import entity.Episodes;
-
+import entity.Favorite;
 import entity.History;
 import entity.Movie;
 import java.sql.Connection;
@@ -705,7 +705,7 @@ public class MovieDAO {
             ps.setString(1, movieID);
 
             re = ps.executeQuery();
-
+            
             boolean hasHistory = re.next();
 
             return hasHistory;
@@ -803,9 +803,182 @@ public class MovieDAO {
         }
     }
 
-  
+    //favorite
+    public void SaveFavorite(String userID, String movieID) {
+
+        try {
+            String query = "INSERT INTO \"tbFavorite\" (\"UserID\", \"MovieID\", \"FavDate\") VALUES ('" + userID + "', ?, current_date)";
+
+            con = DBConnect.makeConnection();
+            ps = con.prepareStatement(query);
+            ps.setString(1, movieID);
+            ps.executeUpdate();
+            System.out.println("Save favorite SUCCESS");
+        } catch (ClassNotFoundException | SQLException e) {
+            // Xử lý exception nếu cần
+        } finally {
+            try {
+                if (re != null) {
+                    re.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public List<Favorite> getUserFavorite(String userID) {
+        List<Favorite> result = new ArrayList<>();
+
+        try {
+            con = DBConnect.makeConnection();
+            String stm1 = "SELECT f.*, m.\"Banner\", m.\"MovieName\"\n"
+                    + "FROM \"tbFavorite\" f\n"
+                    + "JOIN \"tbMovie\" m ON f.\"MovieID\" = m.\"MovieID\"\n"
+                    + "WHERE f.\"UserID\" = '" + userID + "'\n"
+                    + "ORDER BY f.\"FavDate\" DESC";
+            ps = con.prepareStatement(stm1);
+            re = ps.executeQuery();
+
+            while (re.next()) {
+                String favoriteID = re.getString("FavoriteID");
+                userID = re.getString("UserID");
+                String movieID = re.getString("MovieID");
+                Date favDate = re.getDate("FavDate");
+                String movieBanner = re.getString("Banner");
+                String movieName = re.getString("MovieName");
+
+                result.add(new Favorite(favoriteID, userID, movieID, movieBanner, movieName, favDate));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
+            try {
+                if (re != null) {
+                    re.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return result;
+    }
+
+    public void deleteFavorite(String userID,String movieID ) {
+
+        try {
+            con = DBConnect.makeConnection();
+            String query = "DELETE FROM \"tbFavorite\" WHERE \"MovieID\" = ? AND \"UserID\" = '"+userID+"'";
+            ps = con.prepareStatement(query);
+            ps.setString(1, movieID);
+            ps.executeUpdate();
+            System.out.println("Delete favorite successful");
+        } catch (SQLException e) {
+            System.err.println(e.toString());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public boolean checkFavorite(String userID, String movieID) {
+
+        try {
+            con = DBConnect.makeConnection();
+            String query = "SELECT * FROM \"tbFavorite\" WHERE \"UserID\" = '"+userID+"' AND \"MovieID\" = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, movieID);
+
+            re = ps.executeQuery();
+
+            boolean hasFavorite = re.next();
+
+            return hasFavorite;
+        } catch (SQLException e) {
+            System.err.println(e.toString());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (re != null) {
+                    re.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
+    }
+    
+    
+    public void increaseView(String movieID) {
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet re = null;
+
+        try {
+            con = DBConnect.makeConnection();
+            String query = "update \"tbMovie\" \n"
+                    + "set \"View\" = \"View\" + 1\n"
+                    + "where \"MovieID\" = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, movieID);
+            ps.executeUpdate();
+            System.out.println("Increase view successful");
+        } catch (SQLException e) {
+            System.err.println(e.toString());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
     public static void main(String[] args) {
-       
+        MovieDAO dao = new MovieDAO();
+        System.out.println(dao.getUserFavorite("c48ca6d8-0e7f-4087-a72f-968c6c82d0fb").toString());
+        dao.deleteFavorite("c48ca6d8-0e7f-4087-a72f-968c6c82d0fb","KYB201");
+        System.out.println(dao.getUserFavorite("c48ca6d8-0e7f-4087-a72f-968c6c82d0fb").toString());
     }
 }
 

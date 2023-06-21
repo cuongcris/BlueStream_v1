@@ -41,7 +41,8 @@ public class WatchAnime extends HttpServlet {
             else
                 dao.UpdateHistory(acc.getUserID(), movieID, epNum);
         }
-        
+        //khi gọi servlet thì view của phim đó ++
+        dao.increaseView(movieID);
         //set sesion
         session.setAttribute("epNum", epNum);
         session.setAttribute("movieID", movieID);

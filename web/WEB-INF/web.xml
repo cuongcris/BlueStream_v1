@@ -84,7 +84,14 @@
         <servlet-name>DeleteHistoryServlet</servlet-name>
         <servlet-class>controller.DeleteHistoryServlet</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>FavoriteServlet</servlet-name>
+        <servlet-class>controller.FavoriteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteFavoriteServlet</servlet-name>
+        <servlet-class>controller.DeleteFavoriteServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -169,7 +176,14 @@
         <servlet-name>DeleteHistoryServlet</servlet-name>
         <url-pattern>/DeleteHistory</url-pattern>
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>FavoriteServlet</servlet-name>
+        <url-pattern>/Favorite</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteFavoriteServlet</servlet-name>
+        <url-pattern>/DeleteFavorite</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

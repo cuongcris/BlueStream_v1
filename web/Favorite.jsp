@@ -10,7 +10,7 @@
 <html>
     <%@include file="Header.jsp" %>
     <head>
-        <title>Blue Stream - History</title>
+        <title>Blue Stream - Favorite</title>
     </head>
     <body>
         <section class="section-products">
@@ -19,27 +19,26 @@
                     <div class="col-md-8 col-lg-6">
                         <div style="background-color: #0b0c2a;" class="header">
                             <h3 >Blue Stream Anime</h3>
-                            <h2>Your History</h2>
+                            <h2>Your Favorite</h2>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <!-- Single Product -->
-                    <c:set var="list" value ="${requestScope.listHistory}" />
-                    <c:forEach var="dto" items ="${list}"  >
+                    <c:set var="list" value ="${requestScope.listFavorite}" />
+                    <c:forEach var="dto" items ="${list}" >
                         <div class="col-md-6 col-lg-4 col-xl-3">
                             <div id="product-1" class="single-product">
                                 <div style="background : url(${dto.movieBanner});border-radius:5%;background-repeat: no-repeat; background-position: center;background-size: cover;border: 2px solid white;transition: all 0.3s;" no-repeat center" class="part-1">
                                     <ul>
-                                        <li><a id="center_icon" href="WatchAnime?id=${dto.movieID}&epNum=${dto.epNum}"><i class="fa-solid fa-film"></i></a></li>
+                                        <li><a id="center_icon" href="DetailAnime?id=${dto.movieID}"><i class="fa-solid fa-film"></i></a></li>
                                         <li><a id="center_icon" class="delete-link" href="#" data-movie-id="${dto.movieID}"><i class="fa-solid fa-trash-can"></i></a></li>
                                         <li><a id="center_icon" href="#"><i class="fa-brands fa-facebook"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="part-2">
                                     <h3 class="product-title">${dto.movieName}</h3>
-                                    <h4 class="product-old-price"> Last watched: Ep ${dto.epNum}</h4>
-                                    <h4 style="color:white;" class="product-price">${dto.lastWatched}</h4>
+                                    <h4 style="color:white;" class="product-price">${dto.favDate}</h4>
                                 </div>
                             </div>
                         </div>
@@ -62,7 +61,7 @@
                         if (confirm("Do you want to delete?")) {
                             var form = document.createElement('form');
                             form.method = 'POST';
-                            form.action = 'DeleteHistory';
+                            form.action = 'DeleteFavorite';
                             var movieIDInput = document.createElement('input');
                             movieIDInput.type = 'hidden';
                             movieIDInput.name = 'movieID';

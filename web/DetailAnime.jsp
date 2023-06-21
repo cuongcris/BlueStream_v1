@@ -125,7 +125,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button onclick="window.location = 'Blog.jsp'" type="button" class="btn btn-primary">Go to Update</button>
+                                                            <button onclick="window.location = ''" type="button" class="btn btn-primary">Go to Update</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -150,7 +150,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button onclick="window.location = 'Blog.jsp'" type="button" class="btn btn-primary">Go to Update</button>
+                                                            <button onclick="window.location = 'NavigationUpdateVip'" type="button" class="btn btn-primary">Go to Update</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -168,8 +168,7 @@
 
                                     <!--role vip or admin-->
                                     <c:if test="${sessionScope.account != null &&( sessionScope.account.role == 1 ||sessionScope.account.role == 0 )}">
-                                        <a href="#" class="watch-btn"></i> 
-
+                                        <a href="#" onclick="sendFavoriteRequest('${M.movieId}'); return false;"  class="watch-btn"></i> 
                                             <span > Favorite
                                             </span>
                                         </a>
@@ -191,6 +190,13 @@
                 </div>
                 <h3 style="color :white; margin-bottom: 10px;    ">Trailer</h3>
 
+                <div id="success-message" style=" position: fixed;
+                     top: 20px;
+                     right: 20px;
+                     padding: 10px;
+                     background-color: #42b983;
+                     color: #fff;
+                     display: none;" class="notification">Save thành công</div>
 
 
                 <div class="row">
@@ -240,7 +246,11 @@
         </section>
         <!-- Anime Section End -->
         <script>
-          
+            function sendFavoriteRequest(movieId) {
+                var form = document.createElement('form');
+                form.method = 'post';
+                form.action = 'DetailAnime';
+
                 var input = document.createElement('input');
                 input.type = 'hidden';
                 input.name = 'id';

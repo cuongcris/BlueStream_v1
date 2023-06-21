@@ -28,6 +28,7 @@
                         <div class="breadcrumb__links">
                             <a href="./index.html"><i class="fa fa-home"></i> Home</a>
                             <a href="./categories.html">Categories</a>
+                            <
                         </div>
                     </div>
                 </div>

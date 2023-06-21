@@ -34,7 +34,25 @@ public class DetailAnime extends HttpServlet {
         req.getRequestDispatcher("DetailAnime.jsp").forward(req, resp);
     }
     
-   
+   @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       MovieDAO dao =new MovieDAO();
+       PrintWriter pw = resp.getWriter();
+       String movieID = req.getParameter("id");
+        HttpSession session = req.getSession();
+        Account acc = (Account) session.getAttribute("account");
+        if(dao.checkFavorite(acc.getUserID(), movieID)==true){
+            pw.print("   <div id=\"success-message\" style=\" position: fixed;\n" +
+"                     top: 20px;\n" +
+"                     right: 20px;\n" +
+"                     padding: 10px;\n" +
+"                     background-color: #42b983;\n" +
+"                     color: #fff;\n" +
+"                     display: none;\" class=\"notification\">You have already save this anime</div>");
+        }else
+            dao.SaveFavorite(acc.getUserID(), movieID);
+        doGet(req, resp);
+    }
    
    
 }

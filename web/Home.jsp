@@ -3,6 +3,7 @@
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <head>
         <%@include file="Head.jsp" %>
+         <%@include file="Header.jsp" %>
         <%@include file="Advertisement.jsp" %>
         <title>Blue Stream - Home</title>
     </head>
@@ -13,7 +14,6 @@
             <div class="loader"></div>
         </div>
 
-        <%@include file="Header.jsp" %>
 
         <!-- Hero Section Begin -->
         <section class="hero">
@@ -388,7 +388,9 @@
         .hero__text_details{
             background-color: rgb(86 86 86 / 40%);
         }
-        
+        .product__item:hover{
+            transform: scale(1.01);
+        }
         .hero__text_details h2,
         .hero__text_details p{
             padding-left: 10px;

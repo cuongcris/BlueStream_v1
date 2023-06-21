@@ -5,6 +5,8 @@
 
 package controller;
 
+import dao.MovieDAO;
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,18 +19,16 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author Admin
  */
-public class NavigationDonateServlet extends HttpServlet {
-
+public class FavoriteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-         HttpSession session = req.getSession();
-         session.setAttribute("payment", "sDonate");
-         req.setAttribute("value", "");
-      
-        req.setAttribute("readonly", "");
-        req.getRequestDispatcher("vnpay_pay.jsp").forward(req, resp);
+        MovieDAO dao =new MovieDAO();
+        HttpSession session = req.getSession();
+        Account acc = (Account) session.getAttribute("account");
+        req.setAttribute("listFavorite", dao.getUserFavorite(acc.getUserID()));
+        req.getRequestDispatcher("Favorite.jsp").forward(req, resp);
     }
-   
-  
 
+    
+    
 }

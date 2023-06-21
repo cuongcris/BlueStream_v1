@@ -109,13 +109,10 @@
                                                 <span>/ <fmt:formatNumber pattern="#" value="${Math.ceil(list.size() / 12)}"/></span>
                                                 <button type="button" class="paging-btn" id="paging-prev" onclick="filter(2)"><i class="fas fa-angle-right"></i></button>
                                             </div>
-                            </div>    
+                                    </div>    
                             </div>
                               
                         </div>
-                               
-                               
-                                
               
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-8">
