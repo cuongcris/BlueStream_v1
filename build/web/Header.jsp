@@ -167,7 +167,7 @@
                                             History
                                         </a>
 
-                                        <a>
+                                        <a href="AdminControl">
                                             <i class="fa-solid fa-screwdriver-wrench"></i>
                                             Admin Panel
                                         </a>

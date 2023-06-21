@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +30,7 @@ public class MovieDAO {
     Connection con = null;
     PreparedStatement ps = null;
     ResultSet re = null;
+
     //-------------------------------movie------------------------------------
     //get all move
     public ArrayList<Movie> getAllMovie() {
@@ -60,7 +62,7 @@ public class MovieDAO {
             System.out.println("Error: " + e);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        } finally {
             try {
                 if (re != null) {
                     re.close();
@@ -84,9 +86,9 @@ public class MovieDAO {
         ArrayList<Movie> result = new ArrayList<>();
         ResultSet re = null;
         try {
-             con = DBConnect.makeConnection();
+            con = DBConnect.makeConnection();
             String stm1 = "select *from \"tbMovie\" ORDER BY \"ReleaseDate\" DESC";
-             ps = con.prepareStatement(stm1);
+            ps = con.prepareStatement(stm1);
             re = ps.executeQuery();
             while (re.next()) {
                 String MovieID = re.getString("MovieID");
@@ -104,12 +106,12 @@ public class MovieDAO {
                 String License = re.getBoolean("License") == true ? "License" : "No License";
                 result.add(new Movie(MovieID, MovieName, movieBanner, MovieDescription, ReleaseDate, strCategory, Author, MovieStatus, MovieSeason, View, License));
             }
-            
+
         } catch (SQLException e) {
             System.out.println("Error: " + e);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        } finally {
             try {
                 if (re != null) {
                     re.close();
@@ -153,12 +155,12 @@ public class MovieDAO {
                 String License = re.getBoolean("License") == true ? "License" : "No License";
                 result.add(new Movie(MovieID, MovieName, movieBanner, MovieDescription, ReleaseDate, strCategory, Author, MovieStatus, MovieSeason, View, License));
             }
-            
+
         } catch (SQLException e) {
             System.out.println("Error: " + e);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        } finally {
             try {
                 if (re != null) {
                     re.close();
@@ -202,12 +204,12 @@ public class MovieDAO {
                 String License = re.getBoolean("License") == true ? "License" : "No License";
                 result.add(new Movie(MovieID, MovieName, movieBanner, MovieDescription, ReleaseDate, strCategory, Author, MovieStatus, MovieSeason, View, License));
             }
-            
+
         } catch (SQLException e) {
             System.out.println("Error: " + e);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        } finally {
             try {
                 if (re != null) {
                     re.close();
@@ -231,9 +233,9 @@ public class MovieDAO {
         ArrayList<Movie> result = new ArrayList<>();
         ResultSet re = null;
         try {
-             con = DBConnect.makeConnection();
+            con = DBConnect.makeConnection();
             String stm1 = "select *from \"tbMovie\" ORDER BY NEWID()";
-             ps = con.prepareStatement(stm1);
+            ps = con.prepareStatement(stm1);
             re = ps.executeQuery();
             while (re.next()) {
                 String MovieID = re.getString("MovieID");
@@ -258,7 +260,7 @@ public class MovieDAO {
             System.out.println("Error: " + e);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        } finally {
             try {
                 if (re != null) {
                     re.close();
@@ -280,9 +282,9 @@ public class MovieDAO {
     public Movie getMovieById(String id) {
         ResultSet re = null;
         try {
-             con = DBConnect.makeConnection();
+            con = DBConnect.makeConnection();
             String stm1 = "select * from \"tbMovie\" where \"MovieID\" = ?";
-             ps = con.prepareStatement(stm1);
+            ps = con.prepareStatement(stm1);
             ps.setString(1, id);
             re = ps.executeQuery();
             while (re.next()) {
@@ -301,11 +303,11 @@ public class MovieDAO {
                 String License = re.getBoolean("License") == true ? "License" : "No License";
                 return new Movie(MovieID, MovieName, movieBanner, MovieDescription, ReleaseDate, strCategory, Author, MovieStatus, MovieSeason, View, License);
             }
-           
+
         } catch (Exception e) {
             System.out.println("Error: " + e);
             System.out.println("loi r");
-        }finally {
+        } finally {
             try {
                 if (re != null) {
                     re.close();
@@ -326,7 +328,7 @@ public class MovieDAO {
     //get list popular movie based view acs
     public ArrayList<Movie> getSearchList(String txtSearch) {
         ArrayList<Movie> result = new ArrayList<>();
-        
+
         try {
             con = DBConnect.makeConnection();
             String stm1 = "SELECT * FROM \"tbMovie\" WHERE LOWER(\"MovieName\") LIKE LOWER(?);";
@@ -418,7 +420,7 @@ public class MovieDAO {
             System.out.println("Error: " + e);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        } finally {
             try {
                 if (re != null) {
                     re.close();
@@ -441,11 +443,11 @@ public class MovieDAO {
 
         int numberOfEpisodes = 0;
         try {
-             con = DBConnect.makeConnection();
+            con = DBConnect.makeConnection();
             String stm1 = "SELECT COUNT(*)\n"
                     + "FROM \"tbEpisodes\" \n"
                     + "WHERE \"movieID\" = ?";
-             ps = con.prepareStatement(stm1);
+            ps = con.prepareStatement(stm1);
             ps.setString(1, id);
             re = ps.executeQuery();
             if (re.next()) {
@@ -455,7 +457,7 @@ public class MovieDAO {
             System.out.println("Error: " + e);
             System.out.println("loi r");
             return -1;
-        }finally {
+        } finally {
             try {
                 if (re != null) {
                     re.close();
@@ -478,9 +480,9 @@ public class MovieDAO {
         Episodes episodes = null;
 
         try {
-             con = DBConnect.makeConnection();
+            con = DBConnect.makeConnection();
             String stm1 = "select * from \"tbEpisodes\" where \"MovieID\" = ?";
-             ps = con.prepareStatement(stm1);
+            ps = con.prepareStatement(stm1);
             ps.setString(1, id);
             re = ps.executeQuery();
             while (re.next()) {
@@ -496,7 +498,7 @@ public class MovieDAO {
             System.out.println("Error: " + e);
             System.out.println("loi r");
 
-        }finally {
+        } finally {
             try {
                 if (re != null) {
                     re.close();
@@ -516,11 +518,11 @@ public class MovieDAO {
     }
 
     public Episodes getEpisodes(String movieID, int epNum) {
-        
+
         try {
-             con = DBConnect.makeConnection();
+            con = DBConnect.makeConnection();
             String stm1 = "select * from \"tbEpisodes\" where \"MovieID\" = ? and \"EpNum\" = ? ";
-             ps = con.prepareStatement(stm1);
+            ps = con.prepareStatement(stm1);
             ps.setString(1, movieID);
             ps.setInt(2, epNum);
             re = ps.executeQuery();
@@ -531,12 +533,12 @@ public class MovieDAO {
                 String movieLink = re.getString("MovieLink");
 
                 // Tạo đối tượng Episode và thêm vào danh sách episodes
-                Episodes episode = new Episodes(epID, movieId, epNum, duration, movieLink);              
+                Episodes episode = new Episodes(epID, movieId, epNum, duration, movieLink);
                 return episode;
             }
         } catch (Exception e) {
             System.out.println("Error: " + e);
-        }finally {
+        } finally {
             try {
                 if (re != null) {
                     re.close();
@@ -558,9 +560,9 @@ public class MovieDAO {
     public int getEpisodeCountByMovieId(String movieId) {
         int episodeCount = 0;
         try {
-             con = DBConnect.makeConnection();
+            con = DBConnect.makeConnection();
             String stm1 = "SELECT COUNT(*) AS \"episodeCount\" FROM \"tbEpisodes\" where  \"MovieID\" = ?";
-             ps = con.prepareStatement(stm1);
+            ps = con.prepareStatement(stm1);
             ps.setString(1, movieId);
             // Thực thi câu truy vấn
             re = ps.executeQuery();
@@ -574,7 +576,7 @@ public class MovieDAO {
             e.printStackTrace();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        } finally {
             try {
                 if (re != null) {
                     re.close();
@@ -659,7 +661,7 @@ public class MovieDAO {
     }
 
     public void UpdateHistory(String userID, String MovieID, int epNum) {
-        
+
         try {
             String query = "update \"tbHistory\"\n"
                     + "SET \"epNum\" = ?, \"LastWatched\" = current_timestamp \n"
@@ -676,7 +678,7 @@ public class MovieDAO {
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println(e.toString());
-        }finally {
+        } finally {
             try {
                 if (re != null) {
                     re.close();
@@ -696,7 +698,6 @@ public class MovieDAO {
     //check history already exist or not 
     public boolean checkHistory(String userID, String movieID) {
 
-        
         String query = "SELECT * FROM \"tbHistory\" WHERE \"UserID\" = '" + userID + "' AND \"MovieID\" = ?";
 
         try {
@@ -705,13 +706,13 @@ public class MovieDAO {
             ps.setString(1, movieID);
 
             re = ps.executeQuery();
-            
+
             boolean hasHistory = re.next();
 
             return hasHistory;
         } catch (Exception e) {
             System.err.println(e.toString());
-        }finally {
+        } finally {
             try {
                 if (re != null) {
                     re.close();
@@ -731,7 +732,6 @@ public class MovieDAO {
 
     public List<History> getUserHistory(String userID) {
         List<History> result = new ArrayList<>();
-        
 
         try {
             con = DBConnect.makeConnection();
@@ -860,7 +860,7 @@ public class MovieDAO {
             System.out.println("Error: " + e);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        } finally {
             try {
                 if (re != null) {
                     re.close();
@@ -879,11 +879,11 @@ public class MovieDAO {
         return result;
     }
 
-    public void deleteFavorite(String userID,String movieID ) {
+    public void deleteFavorite(String userID, String movieID) {
 
         try {
             con = DBConnect.makeConnection();
-            String query = "DELETE FROM \"tbFavorite\" WHERE \"MovieID\" = ? AND \"UserID\" = '"+userID+"'";
+            String query = "DELETE FROM \"tbFavorite\" WHERE \"MovieID\" = ? AND \"UserID\" = '" + userID + "'";
             ps = con.prepareStatement(query);
             ps.setString(1, movieID);
             ps.executeUpdate();
@@ -910,7 +910,7 @@ public class MovieDAO {
 
         try {
             con = DBConnect.makeConnection();
-            String query = "SELECT * FROM \"tbFavorite\" WHERE \"UserID\" = '"+userID+"' AND \"MovieID\" = ?";
+            String query = "SELECT * FROM \"tbFavorite\" WHERE \"UserID\" = '" + userID + "' AND \"MovieID\" = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, movieID);
 
@@ -940,8 +940,7 @@ public class MovieDAO {
         }
         return false;
     }
-    
-    
+
     public void increaseView(String movieID) {
 
         Connection con = null;
@@ -974,11 +973,173 @@ public class MovieDAO {
             }
         }
     }
+
+    //------------------------------ADMIN-----------------------------------------
+    //get movie by id
+    public Movie getMovieByIdAdmin(String id) {
+        ResultSet re;
+        try {
+            con = DBConnect.makeConnection();
+
+            String stm1 = "select * from \"tbMovie\" where \"MovieID\" = ?";
+            PreparedStatement p1 = con.prepareStatement(stm1);
+            p1.setString(1, id);
+            re = p1.executeQuery();
+            while (re.next()) {
+                String MovieID = re.getString("MovieID");
+                String MovieName = re.getString("MovieName");
+                String movieBanner = re.getString("Banner");
+                String MovieDescription = re.getString("Description");
+                Date ReleaseDate = re.getDate("ReleaseDate");
+                String Category = re.getString("Category");
+                String[] strSplit = Category.trim().split(",");
+                ArrayList<String> strCategory = new ArrayList<>(Arrays.asList(strSplit));
+                String Author = re.getString("Author");
+                String MovieStatus = re.getString("MovieStatus");
+                String MovieSeason = re.getString("MovieSeason");
+                int View = re.getInt("ViewCount");
+                String License = re.getString("License");
+                return new Movie(MovieID, MovieName, movieBanner, MovieDescription, ReleaseDate, strCategory, Author, MovieStatus, MovieSeason, View, License);
+            }
+            con.close();
+            p1.close();
+            re.close();
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+            System.out.println("loi r");
+        }
+        return null;
+    }
+
+//    insert Movie
+    public void insertMovie(String movieId, String movieName, String movieBanner, String description, Date releaseDate,
+            List<String> category, String author, Boolean movieStatus, String movieSeason, Boolean license) throws ParseException {
+
+        String query = "insert into \"tbMovie\" (\"MovieID\", \"MovieName\", \"Banner\", \n"
+                + "					\"Description\", \"ReleaseDate\", \n"
+                + "					\"Category\", \"Author\", \"MovieStatus\", \n"
+                + "					\"MovieSeason\", \"License\")\n"
+                + "values(?,?,?,?,?,?,?,?,?,?)";
+        try {
+            con = DBConnect.makeConnection();
+            ps = con.prepareStatement(query);
+            ps.setString(1, movieId);
+            ps.setString(2, movieName);
+            ps.setString(3, movieBanner);
+            ps.setString(4, description);
+            ps.setDate(5, releaseDate);
+            if (category.size() >= 2) {
+                ps.setString(6, category.get(0) + "," + category.get(1));
+            } else if (category.size() == 1) {
+                ps.setString(6, category.get(0));
+            } else {
+                ps.setString(6, "");
+            }
+            ps.setString(7, author);
+            ps.setBoolean(8, movieStatus);
+            ps.setString(9, movieSeason);
+            ps.setBoolean(10, license);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Update Movie
+    public void updateMovie(String movieId, String movieName, String movieBanner, String description, Date releaseDate,
+            List<String> category, String author, boolean movieStatus, String movieSeason, boolean license) throws ParseException {
+
+        String query = "Update \"tbMovie\"\n"
+                + "Set \"MovieName\" = ?,\n"
+                + "\"Banner\" = ?,\n"
+                + "\"Description\" = ?,\n"
+                + "\"ReleaseDate\" = ?,\n"
+                + "\"Category\" = ?,\n"
+                + "\"Author\" = ?,\n"
+                + "\"MovieStatus\" = ?,\n"
+                + "\"MovieSeason\" = ?,\n"
+                + "\"License\" = ?\n"
+                + "where \"MovieID\" = ?";
+        try {
+            con = DBConnect.makeConnection();
+            ps = con.prepareStatement(query);
+            ps.setString(1, movieName);
+            ps.setString(2, movieBanner);
+            ps.setString(3, description);
+            ps.setDate(4, releaseDate);
+            if (category.size() >= 2) {
+                ps.setString(5, category.get(0) + "," + category.get(1));
+            } else if (category.size() == 1) {
+                ps.setString(5, category.get(0));
+            } else {
+                ps.setString(5, "");
+            }
+            ps.setString(6, author);
+            ps.setBoolean(7, movieStatus);
+            ps.setString(8, movieSeason);
+            ps.setBoolean(9, license);
+            ps.setString(10, movieId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Delete Movie
+    public void deleteMovie(String mid) {
+        String query = "delete from \"tbEpisodes\" where \"MovieID\" = ?\n"
+                + "delete from \"tbMovie\" where \"MovieID\" = ?";
+        try {
+            con = DBConnect.makeConnection();
+            ps = con.prepareStatement(query);
+            ps.setString(1, mid);
+            ps.setString(2, mid);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("loi" + e);
+        }
+    }
+
+    //Add Episodes
+    public void insertEpisodes(String movieId, int epNum, int duration, String movieLink) {
+
+        String query = "insert into \"tbEpisodes\"(\"MovieID\", \"EpNum\", \"Duration\",\"MovieLink\") values(?, ?,? ,?)";
+        try {
+            con = DBConnect.makeConnection();
+            ps = con.prepareStatement(query);
+            ps.setString(1, movieId);
+            ps.setInt(2, epNum);
+            ps.setInt(3, duration);
+            ps.setString(4, movieLink);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
+    //Edit Episodes
+    public void updateEpisodes(String movieId, int epNum, int duration, String movieLink) {
+        String query = "update \"tbEpisodes\"\n"
+                + "set \"Duration\" = ?,\n"
+                + "\"MovieLink\" = ?\n"
+                + "where \"MovieID\" = ? and \"EpNum\" = ?";
+        
+        try {
+            con = DBConnect.makeConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, duration);
+            ps.setString(2, movieLink);
+            ps.setString(3, movieId);
+            ps.setInt(4, epNum);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         MovieDAO dao = new MovieDAO();
-        System.out.println(dao.getUserFavorite("c48ca6d8-0e7f-4087-a72f-968c6c82d0fb").toString());
-        dao.deleteFavorite("c48ca6d8-0e7f-4087-a72f-968c6c82d0fb","KYB201");
-        System.out.println(dao.getUserFavorite("c48ca6d8-0e7f-4087-a72f-968c6c82d0fb").toString());
+//        System.out.println(dao.getUserFavorite("c48ca6d8-0e7f-4087-a72f-968c6c82d0fb").toString());
+//        dao.deleteFavorite("c48ca6d8-0e7f-4087-a72f-968c6c82d0fb", "KYB201");
+//        System.out.println(dao.getUserFavorite("c48ca6d8-0e7f-4087-a72f-968c6c82d0fb").toString());
+        dao.updateEpisodes("test", 3, 12, "chuong test");
     }
 }
-

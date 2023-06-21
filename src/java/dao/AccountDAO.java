@@ -8,6 +8,7 @@ import context.DBConnect;
 import controller.Encode;
 import entity.Account;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -437,6 +438,44 @@ public class AccountDAO {
             }  catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+   
+    //-----------------------Account Manager---------------------------
+    public ArrayList<Account> getAllAccount(){
+        
+        ArrayList<Account> list = new ArrayList<>();
+        String query = "select * from \"tbAccount\" ";
+        
+        try {
+            con = new DBConnect().makeConnection();
+            ps = con.prepareStatement(query);
+            re = ps.executeQuery();
+            while(re.next()){
+                String UserID = re.getString("UserID");
+                String UserName = re.getString("UserName");
+                String Password = re.getString("PassWord");
+                String Email = re.getString("Email");
+                String FullName = re.getString("FullName");
+                String yearOfBirth = re.getString("YearOfBirth");
+                String Phone = re.getString("Phone");
+                String img = re.getString("Image");
+                int Role = re.getInt("Role");
+                String user_id_google = re.getString("user_id_google");
+                list.add(new Account(UserID, UserName, Password, Email, FullName, yearOfBirth, Phone, img, Role, user_id_google));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    public void deleteAccount(String userID) {
+        String query = "delete from \"tbAccount\" where \"UserID\" = '"+ userID+"'";
+        try {
+            con = DBConnect.makeConnection();
+            ps = con.prepareStatement(query);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("loi" + e);
         }
     }
     
