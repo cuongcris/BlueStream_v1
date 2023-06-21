@@ -43,7 +43,7 @@
                     <div class="col-lg-6">
                         <div class="login__form">
                             <h3>Login</h3>
-                                <h3 style="color: red">${requestScope.error}</h3>
+                            <h3 style="color: red">${requestScope.error}</h3>
                             <form action="login" method="post">
                                 <div class="input__item">
                                     <input type="text" name="username" placeholder="User Name">
@@ -53,6 +53,11 @@
                                     <input type="password" name="password" placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$"
                                            title="Password must have a character and number." required>
                                     <span class="icon_lock"><i class="fa-solid fa-lock"></i></span>
+                                </div>
+                                
+                                <div class="input_remem">
+                                    <input type="checkbox" id="id" name="remem" value="remem">
+                                    <span>Remember me!</span>
                                 </div>
                                 <button type="submit" class="site-btn">Login Now</button>
                             </form>
@@ -74,7 +79,10 @@
                                 <ul>
                                     <li><a href="#" class="facebook"><i class="fa fa-facebook"></i> Sign in With
                                             Facebook</a></li>
-                                    <li><a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/BlueFashion/login-google&response_type=code&client_id=1085960907273-f5tpll8a3qh7i9mg1pv9oq1djo4iqelk.apps.googleusercontent.com&approval_prompt=force" class="google"><i class="fa fa-google"></i> Sign in With Google</a></li>                                </li>
+                                    <li>
+                                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/BlueFashion/login_google&response_type=code&client_id=1085960907273-f5tpll8a3qh7i9mg1pv9oq1djo4iqelk.apps.googleusercontent.com&approval_prompt=force" class="google">
+                                            <i class="fa fa-google"></i> Sign in With Google</a></li>                               
+                                    </li>            
                                 </ul>
                             </div>
                         </div>
@@ -147,6 +155,21 @@
         }
         .welcome_mess h2{
             color: #25ff00;
+        }
+        
+        .input_remem{
+            margin-left: 10px;
+        }
+        
+        .input_remem #id{
+            height: 15px;
+            width: 15px;
+        }
+        
+        .input_remem span{
+            color: white;
+            font-size: 16px;
+            margin-left: 10px;
         }
 
     </style>
