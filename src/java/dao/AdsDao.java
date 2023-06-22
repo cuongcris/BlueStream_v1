@@ -112,6 +112,44 @@ public class AdsDao {
         return null;
     }
 
+    public Advertisement getAdsByID(String adsID) {
+
+        try {
+
+            con = DBConnect.makeConnection();
+            String stm1 = "select * from \"tbAdvertisement\" where \"adsID\" = '" + adsID + "'";
+            pe = con.prepareStatement(stm1);
+
+            re = pe.executeQuery();
+            while (re.next()) {
+                String adsID_get = re.getString(1);
+                String adsOwnerEmail = re.getString(2);
+                String adsType = re.getString(3);
+                int adsPrice = re.getInt(4);
+                String adsLinkTo = re.getString("adsLinkTo");
+                String adsLinkShow = re.getString("adsLinkShow");
+                Date dayStart = re.getDate("dayStart");
+                Date dayEnd = re.getDate("dayEnd");
+
+                Advertisement ads = new Advertisement(adsID, adsOwnerEmail, adsType, adsPrice, adsLinkTo, adsLinkShow, dayStart, dayEnd);
+                return ads;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+        } finally {
+            try {
+                re.close();
+                con.close();
+                pe.close();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        }
+        return null;
+    }
+
     public boolean addNewAds(Advertisement ads) {
         try {
             String query = "insert into \"tbAdvertisement\" ( \"adsOwnerEmail\", "
@@ -166,7 +204,7 @@ public class AdsDao {
                     + "\"dayEnd\" = ?,\n"
                     + "\"adsLinkTo\" = ?, "
                     + "\"adsLinkShow\" = ?\n"
-                    + "where \"adsID\" = '"+ ads.getId() +"'";
+                    + "where \"adsID\" = '" + ads.getId() + "'";
 
             con = new DBConnect().makeConnection();
             pe = con.prepareStatement(query);
@@ -176,8 +214,12 @@ public class AdsDao {
             pe.setDate(4, (java.sql.Date) ads.getDayStart());
             pe.setDate(5, (java.sql.Date) ads.getDayEnd());
             pe.setString(6, ads.getLinkTo());
-            pe.setString(7, ads.getLinkShow());
-            
+            if (ads.getType().equals("Invisible")) {
+                pe.setString(7, "");
+            } else {
+                 pe.setString(7, ads.getLinkShow());
+            }
+
             pe.executeUpdate();
 
             return true;
@@ -205,15 +247,15 @@ public class AdsDao {
         }
         return false;
     }
-    
-    public void deleteAds(String adsID){
+
+    public void deleteAds(String adsID) {
         try {
             String query = "delete from \"tbAdvertisement\""
-                    + "where \"adsID\" = '"+ adsID +"'";
+                    + "where \"adsID\" = '" + adsID + "'";
 
             con = new DBConnect().makeConnection();
             pe = con.prepareStatement(query);
-            
+
             pe.executeUpdate();
 
         } catch (Exception e) {
@@ -240,10 +282,10 @@ public class AdsDao {
 
     public static void main(String[] args) throws ParseException {
         AdsDao dao = new AdsDao();
+        System.out.println(dao.getAllAds().toString());
 
         String startDateString = "2040-01-01";
         String endDateString = "2043-01-01";
-
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -255,21 +297,16 @@ public class AdsDao {
             Date startDate = new Date(startDateUtil.getTime());
             Date endDate = new Date(endDateUtil.getTime());
 
-            Advertisement ad = new Advertisement("52e1086f-c8ab-4cbf-b280-ad027e8b643b", "Video", "Video", 13120000, endDateString, endDateString, startDate, endDate);
-            
-            
-//            boolean executed = dao.addNewAds(ad);
-//            if(executed == true){
-//                System.out.println("Khong loi");
-//            }else{
-//                System.out.println("Loi");
-//            }
-
-              dao.deleteAds("8dc6e6a5-93b3-46ca-b706-9a909366bda7");
+            Advertisement ad = new Advertisement("4a0ac725-e258-42a3-a513-460551664a97", "Video", "Video", 13120000, endDateString, "", startDate, endDate);
+            boolean executed = dao.updateAds(ad);
+            if(executed == true){
+                System.out.println("Khong loi");
+            }else{
+                System.out.println("Loi");
+            }
+            System.out.println(dao.getAdsByID("37a009ea-c247-498d-b523-015ee2614bb1").toString());
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
     }
 }

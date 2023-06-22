@@ -56,6 +56,26 @@
         <servlet-name>forgotPass</servlet-name>
         <servlet-class>controller.ForgotPassServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddAdsServlet</servlet-name>
+        <servlet-class>controller.AddAdsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdsListServlet</servlet-name>
+        <servlet-class>controller.AdsListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteAdsServlet</servlet-name>
+        <servlet-class>controller.DeleteAdsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateAdsServlet</servlet-name>
+        <servlet-class>controller.UpdateAdsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminDashBoard</servlet-name>
+        <servlet-class>controller.AdminDashBoard</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -111,6 +131,26 @@
     <servlet-mapping>
         <servlet-name>forgotPass</servlet-name>
         <url-pattern>/ForgotPassServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddAdsServlet</servlet-name>
+        <url-pattern>/add_ads</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdsListServlet</servlet-name>
+        <url-pattern>/adsList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteAdsServlet</servlet-name>
+        <url-pattern>/deleteAds</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateAdsServlet</servlet-name>
+        <url-pattern>/updateADS</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminDashBoard</servlet-name>
+        <url-pattern>/adminDashBoard</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
