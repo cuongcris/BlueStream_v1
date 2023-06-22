@@ -44,6 +44,7 @@
                         <div class="login__form">
                             <h3>Login</h3>
                             <h3 style="color: red">${requestScope.error}</h3>
+                            <h3 style="color: red">${requestScope.ms}</h3>
                             <form action="login" method="post">
                                 <div class="input__item">
                                     <input type="text" name="username" placeholder="User Name">

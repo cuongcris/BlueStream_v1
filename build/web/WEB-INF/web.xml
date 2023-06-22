@@ -1,5 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>Filter.AdminFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>AuthorFilter</filter-name>
+        <filter-class>Filter.AuthorFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthorFilter</filter-name>
+        <url-pattern>/NavigationDonate</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthorFilter</filter-name>
+        <url-pattern>/NavigationUpdateVip</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthorFilter</filter-name>
+        <url-pattern>/UpdateVip</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthorFilter</filter-name>
+        <url-pattern>/ajaxServlet</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthorFilter</filter-name>
+        <url-pattern>/vnpayQuery</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthorFilter</filter-name>
+        <url-pattern>/History</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthorFilter</filter-name>
+        <url-pattern>/DeleteHistory</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthorFilter</filter-name>
+        <url-pattern>/Favorite</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthorFilter</filter-name>
+        <url-pattern>/DeleteFavorite</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/admin</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/AccountManagement</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/AddAds</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/AddEpisodes</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/AddMovie</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/AdminControl</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/AdsList</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/DeleteAccount</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/DeleteAds</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/DeleteMovie</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/EditAccount</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/EditEpisodes</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/EditMovie</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/MovieManagement</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/UpdateAds</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>controller.HomeServlet</servlet-class>
@@ -148,6 +252,10 @@
         <servlet-name>AdsListServlet</servlet-name>
         <servlet-class>admin.AdsListServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ErrorControlServlet</servlet-name>
+        <servlet-class>controller.ErrorControlServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -295,6 +403,10 @@
     <servlet-mapping>
         <servlet-name>AdsListServlet</servlet-name>
         <url-pattern>/AdsList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ErrorControlServlet</servlet-name>
+        <url-pattern>/ErrorControl</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
