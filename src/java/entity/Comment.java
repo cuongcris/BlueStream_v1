@@ -12,18 +12,24 @@ public class Comment {
     private String epID;
     private String commentContent;
     private Date time;
-    
+    private String avatar;
+    private String userName;
+    private int role;
+
     public Comment() {
     }
 
-    public Comment(String commentID, String useID, String epID, String commentContent, Date time) {
+    public Comment(String commentID, String useID, String epID, String commentContent, Date time, String avatar, String userName, int role) {
         this.commentID = commentID;
         this.useID = useID;
         this.epID = epID;
         this.commentContent = commentContent;
         this.time = time;
+        this.avatar = avatar;
+        this.userName = userName;
+        this.role = role;
     }
-    
+
     public String getCommentID() {
         return commentID;
     }
@@ -64,10 +70,38 @@ public class Comment {
         this.time = time;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
-        return "Comment{" + "commentID=" + commentID + ", useID=" + useID + ", epID=" + epID + ", commentContent=" + commentContent + ", time=" + time + '}';
+        return "Comment{" + "commentID=" + commentID + ", useID=" + useID + ", epID=" + epID + ", commentContent=" + commentContent + ", time=" + time + ", avatar=" + avatar + ", userName=" + userName + ", role=" + role + '}';
     }
+
+    
+    
+    
     
     
 }

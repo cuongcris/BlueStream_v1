@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>Filter.AdminFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>controller.HomeServlet</servlet-class>
@@ -15,10 +23,6 @@
     <servlet>
         <servlet-name>LoginControl</servlet-name>
         <servlet-class>controller.LoginControl</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>LoginGoogleServlet</servlet-name>
-        <servlet-class>controller.LoginGoogleServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SignUpServlet</servlet-name>
@@ -45,8 +49,60 @@
         <servlet-class>controller.CheckOTPChangePass</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>addCommentServlet</servlet-name>
-        <servlet-class>controller.addCommentServlet</servlet-class>
+        <servlet-name>AllMovie</servlet-name>
+        <servlet-class>controller.AllMovie</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddCommentServlet</servlet-name>
+        <servlet-class>controller.AddCommentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginGoogleControl</servlet-name>
+        <servlet-class>google.LoginGoogleControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>controller.SearchServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ajaxServlet</servlet-name>
+        <servlet-class>controller.vnPay.ajaxServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>vnpayQuery</servlet-name>
+        <servlet-class>controller.vnPay.vnpayQuery</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NavigationDonateServlet</servlet-name>
+        <servlet-class>controller.NavigationDonateServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NavigationUpdateVipServlet</servlet-name>
+        <servlet-class>controller.NavigationUpdateVipServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateVipServlet</servlet-name>
+        <servlet-class>controller.UpdateVipServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HistoryServlet</servlet-name>
+        <servlet-class>controller.HistoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteHistoryServlet</servlet-name>
+        <servlet-class>controller.DeleteHistoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FavoriteServlet</servlet-name>
+        <servlet-class>controller.FavoriteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteFavoriteServlet</servlet-name>
+        <servlet-class>controller.DeleteFavoriteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminDashBoardServlet</servlet-name>
+        <servlet-class>controller.AdminDashBoardServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -63,10 +119,6 @@
     <servlet-mapping>
         <servlet-name>LoginControl</servlet-name>
         <url-pattern>/login</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>LoginGoogleServlet</servlet-name>
-        <url-pattern>/login-google</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SignUpServlet</servlet-name>
@@ -93,8 +145,60 @@
         <url-pattern>/checkotpchangepass</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>addCommentServlet</servlet-name>
+        <servlet-name>AllMovie</servlet-name>
+        <url-pattern>/AllMovie</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCommentServlet</servlet-name>
         <url-pattern>/addComment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginGoogleControl</servlet-name>
+        <url-pattern>/login_google</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/Search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ajaxServlet</servlet-name>
+        <url-pattern>/ajaxServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>vnpayQuery</servlet-name>
+        <url-pattern>/vnpayQuery</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NavigationDonateServlet</servlet-name>
+        <url-pattern>/NavigationDonate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NavigationUpdateVipServlet</servlet-name>
+        <url-pattern>/NavigationUpdateVip</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateVipServlet</servlet-name>
+        <url-pattern>/UpdateVip</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HistoryServlet</servlet-name>
+        <url-pattern>/History</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteHistoryServlet</servlet-name>
+        <url-pattern>/DeleteHistory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FavoriteServlet</servlet-name>
+        <url-pattern>/Favorite</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteFavoriteServlet</servlet-name>
+        <url-pattern>/DeleteFavorite</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminDashBoardServlet</servlet-name>
+        <url-pattern>/AdminDashBoardServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -316,10 +316,11 @@
 
     &:hover {
       color: #ffffff;
+      font-weight: 900;
     }
 
     &.current-page {
-      border: 1px solid #ffffff;
+      border: 2px solid #ffffff;
     }
 
     i {

@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-
 package controller;
 
 import dao.CommentDAO;
@@ -23,23 +18,32 @@ import java.util.ArrayList;
  *
  * @author ADMIN
  */
-public class addCommentServlet extends HttpServlet {
+public class AddCommentServlet extends HttpServlet {
+
+    String movieID = null;
+    int epNum;
+    
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String comment_id = req.getParameter("del_id");
+        CommentDAO cmd = new CommentDAO();
+        cmd.deleteComment(comment_id);
+        
+        resp.sendRedirect("WatchAnime?id="+movieID+"&epNum="+epNum+"#");
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession(true);
-        
+
         MovieDAO dao = new MovieDAO();
         CommentDAO cmDAO = new CommentDAO();
         //get param
-        String movieID = req.getParameter("id");
+        movieID = req.getParameter("id");
         String epNumString = req.getParameter("epNum");
-        
-        
-        int epNum = Integer.parseInt(epNumString);
-        req.setAttribute("epNumShow", epNum);
 
+        epNum = Integer.parseInt(epNumString);
+        req.setAttribute("epNumShow", epNum);
 
         //set sesion
         session.setAttribute("epNum", epNum);
@@ -64,16 +68,12 @@ public class addCommentServlet extends HttpServlet {
             cmDAO.addcomment(epID, accountID, commentContent);
 
         }
-        
+
         req.setAttribute("commentList", cmDAO.GetlistComment(epID));
 
         req.setAttribute("totalEp", dao.getEpisodeCountByMovieId(movieID));
-        req.getRequestDispatcher("WatchingAnime.jsp").forward(req, resp);
         
-        
-        //Xin chao
+        doGet(req, resp);
+        //Xin chao  
     }
-   
-   
-
 }

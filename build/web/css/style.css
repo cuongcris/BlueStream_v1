@@ -930,10 +930,11 @@ ol {
 
 .product__pagination a:hover {
 	color: #ffffff;
+        font-weight: 900;
 }
 
 .product__pagination a.current-page {
-	border: 1px solid #ffffff;
+	border: 2px solid #ffffff;
 }
 
 .product__pagination a i {
