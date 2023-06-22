@@ -40,7 +40,7 @@ public class AccountDAO {
             }
         } catch (Exception e) {
             System.out.println("error in checkuser");
-        }finally {
+        } finally {
 
             try {
                 if (re != null) {
@@ -52,7 +52,7 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -90,7 +90,7 @@ public class AccountDAO {
             }
         } catch (Exception e) {
             System.out.println("eror check login");
-        }finally {
+        } finally {
 
             try {
                 if (re != null) {
@@ -102,7 +102,7 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -123,7 +123,7 @@ public class AccountDAO {
             }
         } catch (Exception e) {
             System.out.println("error checkacount exist");
-        }finally {
+        } finally {
 
             try {
                 if (re != null) {
@@ -135,7 +135,7 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -160,7 +160,7 @@ public class AccountDAO {
             re = ps.executeQuery();
         } catch (Exception e) {
             System.err.println(e);
-        }finally {
+        } finally {
 
             try {
                 if (re != null) {
@@ -172,9 +172,29 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+        }
+    }
+
+    public void updatePassByEmail(String email, String password) {
+        try {
+            String query = "UPDATE \"tbAccount\" "
+                    + " SET \"Password\" = ?"
+                    + " WHERE \"Email\" = ?";
+
+            con = new DBConnect().makeConnection();
+            ps = con.prepareStatement(query);
+            ps.setString(1, password);
+            ps.setString(2, email);
+
+            re = ps.executeQuery();
+            con.close();
+            ps.close();
+            re.close();
+        } catch (Exception e) {
 
         }
     }
@@ -191,7 +211,7 @@ public class AccountDAO {
             }
         } catch (Exception e) {
             System.err.println(e);
-        }finally {
+        } finally {
 
             try {
                 if (re != null) {
@@ -203,7 +223,7 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -229,10 +249,10 @@ public class AccountDAO {
             ps.setString(5, userName);
 
             re = ps.executeQuery();
-            
+
         } catch (Exception e) {
             System.out.println("error updateInfo");
-        }finally {
+        } finally {
 
             try {
                 if (re != null) {
@@ -244,7 +264,7 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -265,7 +285,7 @@ public class AccountDAO {
             re = ps.executeQuery();
         } catch (Exception e) {
 
-        }finally {
+        } finally {
 
             try {
                 if (re != null) {
@@ -277,7 +297,7 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -309,7 +329,7 @@ public class AccountDAO {
             }
         } catch (Exception e) {
             System.out.println("Error user: " + e.getMessage());
-        }finally {
+        } finally {
 
             try {
                 if (re != null) {
@@ -321,7 +341,7 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -359,7 +379,7 @@ public class AccountDAO {
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        } finally {
 
             try {
                 if (re != null) {
@@ -371,7 +391,7 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -382,16 +402,16 @@ public class AccountDAO {
         try {
             String query = "UPDATE \"tbAccount\"\n"
                     + "SET \"Role\" = 1 \n"
-                    + "WHERE \"UserID\" = '"+ userID+"'";
+                    + "WHERE \"UserID\" = '" + userID + "'";
 
             con = new DBConnect().makeConnection();
             ps = con.prepareStatement(query);
             ps.executeUpdate();
             System.out.println("thanh cong");
-             
+
         } catch (Exception e) {
-                System.out.println(e);
-        }finally {
+            System.out.println(e);
+        } finally {
 
             try {
                 if (re != null) {
@@ -403,15 +423,16 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
     }
-    public void InsertPayment(String userID , int money,String type) {
+
+    public void InsertPayment(String userID, int money, String type) {
         try {
-            String query = "insert into \"tbPayment\" (\"UserID\",\"Money\",\"PaymentDate\",\"PaymentType\") values('"+ userID+"',?,current_timestamp,?)" ;
+            String query = "insert into \"tbPayment\" (\"UserID\",\"Money\",\"PaymentDate\",\"PaymentType\") values('" + userID + "',?,current_timestamp,?)";
 
             con = new DBConnect().makeConnection();
             ps = con.prepareStatement(query);
@@ -421,8 +442,8 @@ public class AccountDAO {
 
             ps.executeQuery();
         } catch (Exception e) {
-               
-        }finally {
+
+        } finally {
 
             try {
                 if (re != null) {
@@ -434,14 +455,14 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
-    
+
     public static void main(String[] args) {
         AccountDAO ac = new AccountDAO();
-        ac.InsertPayment("17a24030-d261-44b0-82d1-1f7005974a81",500000,"UpVip");
+        ac.InsertPayment("17a24030-d261-44b0-82d1-1f7005974a81", 500000, "UpVip");
     }
 }

@@ -80,6 +80,14 @@
         <servlet-name>FavoriteServlet</servlet-name>
         <servlet-class>controller.FavoriteServlet</servlet-class>
     </servlet>
+     <servlet>
+        <servlet-name>forgotPass</servlet-name>
+        <servlet-class>controller.ForgotPassServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>forgotPass</servlet-name>
+        <url-pattern>/ForgotPassServlet</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>DeleteFavoriteServlet</servlet-name>
         <servlet-class>controller.DeleteFavoriteServlet</servlet-class>

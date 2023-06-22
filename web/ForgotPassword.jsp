@@ -1,11 +1,10 @@
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zxx">
 
     <head>
+
+        <title>Blue Stream | Sign Up</title>
         <%@include file="Head.jsp" %>
-        <title>Blue Stream | Login</title>
     </head>
 
     <body>
@@ -22,75 +21,65 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <div class="normal__breadcrumb__text">
-                            <h2>Login</h2>
-                            <p>Welcome to the official AnimeÂ blog.</p>
+                            <h2>Forgot Password</h2>
+                            <p>Welcome to the official Anime blog.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         <!-- Normal Breadcrumb End -->
-        <div class="welcome_mess">
-            <center>
-                ${regis_sucsess}
-            </center>
-        </div>
-        <!-- Login Section Begin -->
-        <section class="login spad">
 
+        <!-- Signup Section Begin -->
+        <section class="signup spad">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="login__form">
-                            <h3>Login</h3>
-                            <h3 style="color: red">${requestScope.error}</h3>
-                            <form action="login" method="post">
+                            <h3>Forgot Password</h3>
+                            <form action="ForgotPassServlet" method="Post">
                                 <div class="input__item">
-                                    <input type="text" name="username" placeholder="User Name">
-                                    <span class="icon_lock"><i class="fa-regular fa-user"></i></span>
+                                    <input type="email" name="email" placeholder="Email address"  required>
+                                    <span class="icon_lock"><i class="fa-regular fa-envelope"></i></span>
+
                                 </div>
+
+                                ${error_email}  
                                 <div class="input__item">
-                                    <input type="password" name="password" placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$"
+                                    <input type="password" name="newpassword" placeholder="New Password" 
+                                           pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$"
                                            title="Password must have a character and number." required>
                                     <span class="icon_lock"><i class="fa-solid fa-lock"></i></span>
                                 </div>
-                                
-                                <div class="input_remem">
-                                    <input type="checkbox" id="id" name="remem" value="remem">
-                                    <span>Remember me!</span>
+                                <div class="input__item">
+                                    <input type="password" name="pass_confirm" placeholder="Confirm Password"   
+                                           pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$"
+                                           title="Password must have a character and number." required>
+                                    <span class="icon_lock"><i class="fa-solid fa-key"></i></span>
+
                                 </div>
-                                <button type="submit" class="site-btn">Login Now</button>
+                                ${error_pass}
+                                <button type="submit" class="site-btn">Reset Now</button>
                             </form>
-                            <a href="ForgotPassword.jsp" class="forget_pass">Forgot Your Password?</a>
+                            <h5>Already have an account? <a href="Login.jsp">Log In!</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="login__register">
-                            <h3>Dont't Have An Account?</h3>
-                            <a href="SignUp.jsp" class="primary-btn">Register Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="login__social">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-lg-6">
-                            <div class="login__social__links">
-                                <span>or</span>
-                                <ul>
-                                    <li><a href="#" class="facebook"><i class="fa fa-facebook"></i> Sign in With
-                                            Facebook</a></li>
-                                    <li>
-                                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/BlueFashion/login_google&response_type=code&client_id=1085960907273-f5tpll8a3qh7i9mg1pv9oq1djo4iqelk.apps.googleusercontent.com&approval_prompt=force" class="google">
-                                            <i class="fa fa-google"></i> Sign in With Google</a></li>                               
-                                    </li>            
-                                </ul>
-                            </div>
+                        <div class="login__social__links">
+                            <h3>Login With:</h3>
+                            <ul>
+                                <li><a href="#" class="facebook"><i class="fa fa-facebook"></i> Sign in With Facebook</a>
+                                </li>
+                                <li>
+                                    <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/BlueFashion/login_google&response_type=code&client_id=1085960907273-f5tpll8a3qh7i9mg1pv9oq1djo4iqelk.apps.googleusercontent.com&approval_prompt=force" class="google">
+                                        <i class="fa fa-google"></i> Sign in With Google</a></li>  
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Login Section End -->
+        <!-- Signup Section End -->
 
         <!-- Footer Section Begin -->
         <footer class="footer">
@@ -146,32 +135,21 @@
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
 
-
     </body>
-    <style>
 
-        .welcome_mess{
-            margin-top: 30px;
-        }
-        .welcome_mess h2{
-            color: #25ff00;
-        }
-        
-        .input_remem{
-            margin-left: 10px;
-        }
-        
-        .input_remem #id{
-            height: 15px;
-            width: 15px;
-        }
-        
-        .input_remem span{
-            color: white;
-            font-size: 16px;
-            margin-left: 10px;
-        }
-
-    </style>
 </html>
 
+<style>
+    .Error{
+        margin-top: 15px;
+        background-color: #f34242;
+        border-radius: 3px;
+        text-align: center;
+        width: 90%;
+    }
+
+    .Error p{
+        color: white;
+    }
+
+</style>
