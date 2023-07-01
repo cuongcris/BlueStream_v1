@@ -40,26 +40,26 @@
                             <form action="signUp" method="Post">
                                 <div class="input__item">
                                     <input type="email" name="email" placeholder="Email address"  value="${email_input}" required>
-                                    <span class="icon_lock"><i class="fa-regular fa-envelope"></i></span>
+                                    <span ><i class="fa-regular fa-envelope"></i></span>
 
                                 </div>
                                 ${error_email}
                                 <div class="input__item">
                                     <input type="text" name="username" placeholder="UserName" value="${user_input}" required>
-                                    <span class="icon_lock"><i class="fa-regular fa-user"></i></span>
+                                    <span ><i class="fa-regular fa-user"></i></span>
                                 </div>
                                 ${error_username}  
                                 <div class="input__item">
                                     <input type="password" name="password" placeholder="Password" 
                                            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$"
                                            title="Password must have a character and number." required>
-                                    <span class="icon_lock"><i class="fa-solid fa-lock"></i></span>
+                                    <span ><i class="fa-solid fa-lock"></i></span>
                                 </div>
                                 <div class="input__item">
                                     <input type="password" name="pass_confirm" placeholder="Confirm Password"   
                                            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$"
                                            title="Password must have a character and number." required>
-                                    <span class="icon_lock"><i class="fa-solid fa-key"></i></span>
+                                    <span ><i class="fa-solid fa-key"></i></span>
 
                                 </div>
                                 ${error_pass}

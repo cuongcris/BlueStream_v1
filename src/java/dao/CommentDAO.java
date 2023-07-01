@@ -65,6 +65,34 @@ public class CommentDAO {
         }
         return list;
     }
+    
+     public List<Comment> GetlistAllComment() {
+        List<Comment> list = new ArrayList<>();
+        try {
+
+            String query = "select * from \"tbComment\"";
+            con = new DBConnect().makeConnection();
+            ps = con.prepareStatement(query);
+            re = ps.executeQuery();
+            while (re.next()) {
+                list.add(new Comment(re.getString(1), re.getString(2), re.getString(3), re.getString(4), re.getDate(5)));
+            }
+
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+
+            try {
+                con.close();
+                ps.close();
+                re.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        return list;
+    }
 
     //set time
     public long caculDiffDay(Date commentDay) {

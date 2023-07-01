@@ -8,6 +8,7 @@ import context.DBConnect;
 import controller.Encode;
 import entity.Account;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,7 +41,7 @@ public class AccountDAO {
             }
         } catch (Exception e) {
             System.out.println("error in checkuser");
-        }finally {
+        } finally {
 
             try {
                 if (re != null) {
@@ -52,7 +53,7 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -90,7 +91,7 @@ public class AccountDAO {
             }
         } catch (Exception e) {
             System.out.println("eror check login");
-        }finally {
+        } finally {
 
             try {
                 if (re != null) {
@@ -102,7 +103,7 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -123,7 +124,7 @@ public class AccountDAO {
             }
         } catch (Exception e) {
             System.out.println("error checkacount exist");
-        }finally {
+        } finally {
 
             try {
                 if (re != null) {
@@ -135,7 +136,7 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -160,7 +161,7 @@ public class AccountDAO {
             re = ps.executeQuery();
         } catch (Exception e) {
             System.err.println(e);
-        }finally {
+        } finally {
 
             try {
                 if (re != null) {
@@ -172,7 +173,7 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -191,7 +192,7 @@ public class AccountDAO {
             }
         } catch (Exception e) {
             System.err.println(e);
-        }finally {
+        } finally {
 
             try {
                 if (re != null) {
@@ -203,7 +204,7 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -229,10 +230,10 @@ public class AccountDAO {
             ps.setString(5, userName);
 
             re = ps.executeQuery();
-            
+
         } catch (Exception e) {
             System.out.println("error updateInfo");
-        }finally {
+        } finally {
 
             try {
                 if (re != null) {
@@ -244,7 +245,7 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -265,7 +266,7 @@ public class AccountDAO {
             re = ps.executeQuery();
         } catch (Exception e) {
 
-        }finally {
+        } finally {
 
             try {
                 if (re != null) {
@@ -277,7 +278,7 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -309,7 +310,7 @@ public class AccountDAO {
             }
         } catch (Exception e) {
             System.out.println("Error user: " + e.getMessage());
-        }finally {
+        } finally {
 
             try {
                 if (re != null) {
@@ -321,7 +322,7 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -345,7 +346,7 @@ public class AccountDAO {
 
             List<String> listUserName = Arrays.asList(a.getEmail().split("@"));
             String email = listUserName.get(0);
-            String userName1 = email.substring(0, Math.min(email.length(), 10));
+            String userName1 = email.substring(0, Math.min(email.length(), 8));
 //            String email = a.getEmail();
 //            String userName = email.substring(0, Math.min(email.length(), 5));
 
@@ -359,7 +360,7 @@ public class AccountDAO {
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        } finally {
 
             try {
                 if (re != null) {
@@ -371,7 +372,7 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -382,15 +383,83 @@ public class AccountDAO {
         try {
             String query = "UPDATE \"tbAccount\"\n"
                     + "SET \"Role\" = 1 \n"
-                    + "WHERE \"UserID\" = '"+ userID+"'";
+                    + "WHERE \"UserID\" = '" + userID + "'";
 
             con = new DBConnect().makeConnection();
             ps = con.prepareStatement(query);
             ps.executeUpdate();
             System.out.println("thanh cong");
-             
+
         } catch (Exception e) {
-                System.out.println(e);
+            System.out.println(e);
+        } finally {
+
+            try {
+                if (re != null) {
+                    re.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }
+
+    public void updateRole(String userID, int role) {
+        try {
+            String query = "update \"tbAccount\" \n"
+                    + "set \"Role\" = "+role+"\n"
+                    + "where \"UserID\" = '"+userID+"'";
+
+            con = new DBConnect().makeConnection();
+            ps = con.prepareStatement(query);
+            ps.executeUpdate();
+            System.out.println("thanh cong");
+
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+
+            try {
+                if (re != null) {
+                    re.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }
+    
+    public void updatePassByEmail(String email, String password) {
+        try {
+            String query = "UPDATE \"tbAccount\" "
+                    + " SET \"Password\" = ?"
+                    + " WHERE \"Email\" = ?";
+
+            con = new DBConnect().makeConnection();
+            ps = con.prepareStatement(query);
+            ps.setString(1, password);
+            ps.setString(2, email);
+
+            re = ps.executeQuery();
+            con.close();
+            ps.close();
+            re.close();
+        } catch (Exception e) {
+
         }finally {
 
             try {
@@ -403,15 +472,16 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
     }
-    public void InsertPayment(String userID , int money,String type) {
+
+    public void InsertPayment(String userID, int money, String type) {
         try {
-            String query = "insert into \"tbPayment\" (\"UserID\",\"Money\",\"PaymentDate\",\"PaymentType\") values('"+ userID+"',?,current_timestamp,?)" ;
+            String query = "insert into \"tbPayment\" (\"UserID\",\"Money\",\"PaymentDate\",\"PaymentType\") values('" + userID + "',?,current_timestamp,?)";
 
             con = new DBConnect().makeConnection();
             ps = con.prepareStatement(query);
@@ -421,8 +491,8 @@ public class AccountDAO {
 
             ps.executeQuery();
         } catch (Exception e) {
-               
-        }finally {
+
+        } finally {
 
             try {
                 if (re != null) {
@@ -434,14 +504,125 @@ public class AccountDAO {
                 if (ps != null) {
                     ps.close();
                 }
-            }  catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
-    
+
+    //-----------------------Account Manager---------------------------
+    public ArrayList<Account> getAllAccount() {
+
+        ArrayList<Account> list = new ArrayList<>();
+        String query = "select * from \"tbAccount\" ";
+
+        try {
+            con = new DBConnect().makeConnection();
+            ps = con.prepareStatement(query);
+            re = ps.executeQuery();
+            while (re.next()) {
+                String UserID = re.getString("UserID");
+                String UserName = re.getString("UserName");
+                String Password = re.getString("PassWord");
+                String Email = re.getString("Email");
+                String FullName = re.getString("FullName");
+                String yearOfBirth = re.getString("YearOfBirth");
+                String Phone = re.getString("Phone");
+                String img = re.getString("Image");
+                int Role = re.getInt("Role");
+                String user_id_google = re.getString("user_id_google");
+                list.add(new Account(UserID, UserName, Password, Email, FullName, yearOfBirth, Phone, img, Role, user_id_google));
+            }
+        } catch (Exception e) {
+        } finally {
+
+            try {
+                if (re != null) {
+                    re.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return list;
+    }
+
+    public Account getAccountByID(String id) {
+
+        String query = "select * from \"tbAccount\" where \"UserID\" = '" + id + "'";
+
+        try {
+            con = new DBConnect().makeConnection();
+            ps = con.prepareStatement(query);
+            re = ps.executeQuery();
+            while (re.next()) {
+                String UserID = re.getString("UserID");
+                String UserName = re.getString("UserName");
+                String Password = re.getString("PassWord");
+                String Email = re.getString("Email");
+                String FullName = re.getString("FullName");
+                String yearOfBirth = re.getString("YearOfBirth");
+                String Phone = re.getString("Phone");
+                String img = re.getString("Image");
+                int Role = re.getInt("Role");
+                String user_id_google = re.getString("user_id_google");
+                Account a = new Account(UserID, UserName, Password, Email, FullName, yearOfBirth, Phone, img, Role, user_id_google);
+                return a;
+            }
+        } catch (Exception e) {
+        } finally {
+
+            try {
+                if (re != null) {
+                    re.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return null;
+    }
+
+    public void deleteAccount(String userID) {
+        String query = "delete from \"tbAccount\" where \"UserID\" = '" + userID + "'";
+        try {
+            con = DBConnect.makeConnection();
+            ps = con.prepareStatement(query);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("loi" + e);
+        } finally {
+
+            try {
+                if (re != null) {
+                    re.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         AccountDAO ac = new AccountDAO();
-        ac.InsertPayment("17a24030-d261-44b0-82d1-1f7005974a81",500000,"UpVip");
+        System.out.println(ac.getAccountByID("e0457766-39cd-4bda-b7b8-1d2cb3bae9d0").toString());
     }
 }

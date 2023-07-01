@@ -167,7 +167,7 @@
                                             History
                                         </a>
 
-                                        <a>
+                                        <a href="adminPanelServlet">
                                             <i class="fa-solid fa-screwdriver-wrench"></i>
                                             Admin Panel
                                         </a>
