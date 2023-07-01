@@ -19,6 +19,14 @@ public class Comment {
     public Comment() {
     }
 
+     public Comment(String commentID, String useID, String epID, String commentContent, Date time) {
+        this.commentID = commentID;
+        this.useID = useID;
+        this.epID = epID;
+        this.commentContent = commentContent;
+        this.time = time;
+
+    }
     public Comment(String commentID, String useID, String epID, String commentContent, Date time, String avatar, String userName, int role) {
         this.commentID = commentID;
         this.useID = useID;

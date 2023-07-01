@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -406,6 +408,6 @@ button[type="submit"]:focus {
 	line-height: 26px;
 }
 
-    }
+    
 </style>
 </html>

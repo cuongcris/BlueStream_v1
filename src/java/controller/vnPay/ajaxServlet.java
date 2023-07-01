@@ -29,13 +29,19 @@ import java.util.TimeZone;
  */
 public class ajaxServlet extends HttpServlet {
 
-   
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
+
+    
      @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
        String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
-        String orderType = req.getParameter("ordertype");
+//        String orderType = req.getParameter("ordertype");
+        String orderType = "ordertype";
         long amount = Integer.parseInt(req.getParameter("amount"))*100;
         String bankCode = req.getParameter("bankCode");
         

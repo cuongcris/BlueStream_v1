@@ -60,6 +60,7 @@ public class SignUpServlet extends HttpServlet {
                 session.setAttribute("email_session", email);
                 session.setAttribute("username_session", userName);
                 session.setAttribute("pass_session", pass);
+                session.setAttribute("action", "signUp");
                 request.getRequestDispatcher("CheckOTP.jsp").forward(request, response);
             }
         }
